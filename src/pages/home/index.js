@@ -23,12 +23,7 @@ class HomePage extends Component {
 			})
 	}
 
-	componentDidMount() {
-		this.handleFetch()
-	}
-
 	handleComment(expenseId) {
-		console.log('test')
 		fetch(`http://localhost:3000/expenses/${expenseId}`, {
 			method: 'POST',
 			headers: {
@@ -43,14 +38,14 @@ class HomePage extends Component {
 		})
 	}
 
+	componentDidMount() {
+		this.handleFetch()
+	}
+
 	render() {
 		const { expenses } = this.state
-		console.log(this.state.expenses)
-
 		return (
 			<PageTemplate pageHead="Home Page">
-				{/* <p>Some text goes here</p> */}
-
 				<div className="expenses-list">
 					{expenses.map((expense, index) => {
 						return (
