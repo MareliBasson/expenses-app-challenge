@@ -9,10 +9,13 @@ class HomePage extends Component {
 		this.state = {
 			expenses: []
 		}
+
+		this.handleFetch = this.handleFetch.bind(this)
+		this.handleComment = this.handleComment.bind(this)
 	}
 
-	componentDidMount() {
-		fetch('http://localhost:3000/expenses')
+	handleFetch() {
+		fetch('http://localhost:3000/expenses?limit=200')
 			.then(response => response.json())
 			.then(expenses => this.setState({ expenses: expenses.expenses }))
 			.catch(err => {
@@ -20,12 +23,51 @@ class HomePage extends Component {
 			})
 	}
 
+	componentDidMount() {
+		this.handleFetch()
+	}
+
+	handleComment(expenseId) {
+		console.log('test')
+		fetch(`http://localhost:3000/expenses/${expenseId}`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				comment: `testing ${expenseId}`
+			})
+		}).then(() => {
+			this.handleFetch()
+		})
+	}
+
 	render() {
+		const { expenses } = this.state
 		console.log(this.state.expenses)
 
 		return (
 			<PageTemplate pageHead="Home Page">
-				<p>Some text goes here</p>
+				{/* <p>Some text goes here</p> */}
+
+				<div className="expenses-list">
+					{expenses.map((expense, index) => {
+						return (
+							<div
+								className="expense"
+								key={`expense-${index}`}
+								onClick={() => {
+									this.handleComment(expense.id)
+								}}
+							>
+								{expense.merchant}
+								<p>{expense.comment ? expense.comment : 'no comment'}</p>
+								<hr />
+							</div>
+						)
+					})}
+				</div>
 			</PageTemplate>
 		)
 	}
