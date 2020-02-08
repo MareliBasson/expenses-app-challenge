@@ -7,7 +7,7 @@ class Menu extends Component {
 		return (
 			<div className="menu">
 				<NavLink activeClassName="active" exact to="/">
-					Home
+					Expenses
 				</NavLink>
 				<NavLink activeClassName="active" to="/settings">
 					Settings
