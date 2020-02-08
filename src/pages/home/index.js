@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PageTemplate from 'components/page-template'
+import DefaultLayout from 'components/default-layout'
 import './home.css'
 
 class HomePage extends Component {
@@ -63,7 +63,7 @@ class HomePage extends Component {
 		const { expenses, total } = this.state
 
 		return (
-			<PageTemplate title="Home Page">
+			<div className="home">
 				<div className="expenses-list">
 					<b>Number of entries:</b> {expenses.length}/{total}
 					<button
@@ -90,7 +90,7 @@ class HomePage extends Component {
 						)
 					})}
 				</div>
-			</PageTemplate>
+			</div>
 		)
 	}
 }
