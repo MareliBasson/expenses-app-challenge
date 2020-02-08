@@ -64,15 +64,17 @@ class ExpensesPage extends Component {
 
 		return (
 			<div className="home">
-				<b>Number of entries:</b> {expenses.length}/{total}
-				<button
-					onClick={() => {
-						this.getAllEntries()
-					}}
-				>
-					Show All
-				</button>
-				<ExpensesList expenses={expenses} />
+				<div className="actions">
+					<b>Number of entries:</b> {expenses.length}/{total}
+					<button
+						onClick={() => {
+							this.getAllEntries()
+						}}
+					>
+						Show All
+					</button>
+				</div>
+				<ExpensesList expenses={expenses} handleComment={this.handleComment} />
 			</div>
 		)
 	}

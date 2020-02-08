@@ -4,7 +4,7 @@ import './expenses-list.css'
 
 class ExpensesList extends Component {
 	render() {
-		const { expenses } = this.props
+		const { expenses, handleComment } = this.props
 
 		return (
 			<div className="expenses-list">
@@ -14,13 +14,12 @@ class ExpensesList extends Component {
 							className="expense"
 							key={`expense-${index}`}
 							onClick={() => {
-								this.handleComment(expense.id)
+								handleComment(expense.id)
 							}}
 						>
-							{expense.merchant}
-							<p>{expense.comment ? expense.comment : 'no comment'}</p>
+							<div className="merchant">{expense.merchant}</div>
 
-							<hr />
+							<div className="comment">{expense.comment ? expense.comment : 'no comment'}</div>
 						</div>
 					)
 				})}
