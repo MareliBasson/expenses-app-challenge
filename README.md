@@ -1,9 +1,16 @@
-# react-boilerplate-site
+# Expenses app challenge
 
-Are you a React beginner who just wants to quickly build a simple website using ReactJS, Sass and some basic page navigation?
+This project makes use of this [API](https://github.com/pleo-io/frontend-challenge/tree/master/api).
 
-**Then this project will get you started quickly.**
+## To run this project
 
-* This is a project that's been created using Create-React-App and CSS Preprocessing(Sass) has already been setup for ease of use.
-* A few components and pages have been added to start building with.
-* React Router(v4) has been added to help with site navigation - a menu component with a couple of links have been added as a starting point.
+-   Clone both this repo and the repo for the [API](https://github.com/pleo-io/frontend-challenge/tree/master/api)
+-   Start the API locally - instructions can be foun in it's [README](https://github.com/pleo-io/frontend-challenge/tree/master/api))
+-   Make a copy of the .env-example file found in the root of this repo and rename it to .env
+-   Run `npm install`
+-   Run `npm start`
+
+## Notes on this project:
+
+-   I started this project using a [basic react boilerplate](https://github.com/MareliBasson/react-boilerplate-site) I've created before and updated as required.
+-   Setting up the API functionality is something I haven't done on my own before.

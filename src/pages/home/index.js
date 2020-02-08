@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DefaultLayout from 'components/default-layout'
 import './home.css'
 
 class HomePage extends Component {
