@@ -9,6 +9,7 @@ $colorWarning: #f95738;
 $colorSuccess: #4daa57;
 $textDark: #201921;
 $textLight: $colorBg;
+$colorDivider: lighten($textDark, 80%);
 
 $fontPrimary: 'Lato', sans-serif;
 

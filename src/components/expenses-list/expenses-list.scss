@@ -1,13 +1,14 @@
 @import './styles/variables';
 
 .expenses-list {
+	padding-bottom: 80px;
 	.expense {
 		font-size: 1em;
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid lighten($textDark, 80%);
+		border-bottom: 1px solid $colorDivider;
 		padding: 10px 20px;
 		transition: background-color 0.3s ease;
 
