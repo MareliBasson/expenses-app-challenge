@@ -17,7 +17,7 @@ class HomePage extends Component {
 	}
 
 	initialFetch() {
-		fetch('http://localhost:3000/expenses?limit=200')
+		fetch('http://localhost:3000/expenses')
 			.then(response => response.json())
 			.then(expenses => this.setState({ expenses: expenses.expenses, total: expenses.total }))
 			.catch(err => {
@@ -26,7 +26,6 @@ class HomePage extends Component {
 	}
 
 	getAllEntries() {
-		console.log('getting all entries')
 		fetch(`http://localhost:3000/expenses?limit=${this.state.total}`)
 			.then(response => response.json())
 			.then(expenses => this.setState({ expenses: expenses.expenses }))
@@ -50,22 +49,30 @@ class HomePage extends Component {
 		})
 	}
 
+	componentDidUpdate() {
+		// if (this.state.total !== this.state.expenses.length) {
+		// 	this.getAllEntries()
+		// }
+	}
+
 	componentDidMount() {
 		this.initialFetch()
-
-		if (this.state.total === 0) {
-			this.getAllEntries()
-		}
 	}
 
 	render() {
 		const { expenses, total } = this.state
-		console.log(total)
-		console.log(expenses)
 
 		return (
 			<PageTemplate title="Home Page">
 				<div className="expenses-list">
+					<b>Number of entries:</b> {expenses.length}/{total}
+					<button
+						onClick={() => {
+							this.getAllEntries()
+						}}
+					>
+						Show All
+					</button>
 					{expenses.map((expense, index) => {
 						return (
 							<div
