@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ExpensesList from 'components/expenses-list'
 import './home.css'
 
 class ExpensesPage extends Component {
@@ -63,32 +64,15 @@ class ExpensesPage extends Component {
 
 		return (
 			<div className="home">
-				<div className="expenses-list">
-					<b>Number of entries:</b> {expenses.length}/{total}
-					<button
-						onClick={() => {
-							this.getAllEntries()
-						}}
-					>
-						Show All
-					</button>
-					{expenses.map((expense, index) => {
-						return (
-							<div
-								className="expense"
-								key={`expense-${index}`}
-								onClick={() => {
-									this.handleComment(expense.id)
-								}}
-							>
-								{expense.merchant}
-								<p>{expense.comment ? expense.comment : 'no comment'}</p>
-
-								<hr />
-							</div>
-						)
-					})}
-				</div>
+				<b>Number of entries:</b> {expenses.length}/{total}
+				<button
+					onClick={() => {
+						this.getAllEntries()
+					}}
+				>
+					Show All
+				</button>
+				<ExpensesList expenses={expenses} />
 			</div>
 		)
 	}
