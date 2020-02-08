@@ -1,4 +1,10 @@
-.page {
-	min-height: 100%;
-	// background-color: red;
+@import './styles/variables';
+
+.layout {
+	height: 100%;
+
+	.page-body {
+		background-color: $colorBg;
+		padding-left: $sidebarWidth;
+	}
 }

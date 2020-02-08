@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import Menu from 'components/menu';
-import './header.css';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import sitemap from 'data/sitemap'
+import './header.css'
 
 class Header extends Component {
-    render() {
-        return (
-            <div className="header">
-                <div className="container">
-                    <div className="header__container">
-                        <div className="header__logo">Page Logo</div>
-                        <Menu />
-                    </div>
-                </div>
-            </div>
-        );
-    }
+	render() {
+		const { location } = this.props
+
+		return (
+			<div className="header">
+				<h2>{sitemap[location.pathname]}</h2>
+			</div>
+		)
+	}
 }
 
-export default Header;
+export default withRouter(Header)

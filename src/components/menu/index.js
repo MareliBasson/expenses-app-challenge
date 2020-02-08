@@ -9,8 +9,8 @@ class Menu extends Component {
 				<NavLink activeClassName="active" exact to="/">
 					Home
 				</NavLink>
-				<NavLink activeClassName="active" to="/page1">
-					Page 1
+				<NavLink activeClassName="active" to="/settings">
+					Settings
 				</NavLink>
 			</div>
 		)

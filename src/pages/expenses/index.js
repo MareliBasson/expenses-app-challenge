@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './home.css'
 
-class HomePage extends Component {
+class ExpensesPage extends Component {
 	constructor(props) {
 		super(props)
 
@@ -94,4 +94,4 @@ class HomePage extends Component {
 	}
 }
 
-export default HomePage
+export default ExpensesPage
