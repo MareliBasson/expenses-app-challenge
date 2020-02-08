@@ -7,15 +7,27 @@ class HomePage extends Component {
 		super(props)
 
 		this.state = {
-			expenses: []
+			expenses: [],
+			total: 0
 		}
 
-		this.handleFetch = this.handleFetch.bind(this)
+		this.getAllEntries = this.getAllEntries.bind(this)
+		this.initialFetch = this.initialFetch.bind(this)
 		this.handleComment = this.handleComment.bind(this)
 	}
 
-	handleFetch() {
+	initialFetch() {
 		fetch('http://localhost:3000/expenses?limit=200')
+			.then(response => response.json())
+			.then(expenses => this.setState({ expenses: expenses.expenses, total: expenses.total }))
+			.catch(err => {
+				console.log(err)
+			})
+	}
+
+	getAllEntries() {
+		console.log('getting all entries')
+		fetch(`http://localhost:3000/expenses?limit=${this.state.total}`)
 			.then(response => response.json())
 			.then(expenses => this.setState({ expenses: expenses.expenses }))
 			.catch(err => {
@@ -34,18 +46,25 @@ class HomePage extends Component {
 				comment: `testing ${expenseId}`
 			})
 		}).then(() => {
-			this.handleFetch()
+			this.initialFetch()
 		})
 	}
 
 	componentDidMount() {
-		this.handleFetch()
+		this.initialFetch()
+
+		if (this.state.total === 0) {
+			this.getAllEntries()
+		}
 	}
 
 	render() {
-		const { expenses } = this.state
+		const { expenses, total } = this.state
+		console.log(total)
+		console.log(expenses)
+
 		return (
-			<PageTemplate pageHead="Home Page">
+			<PageTemplate title="Home Page">
 				<div className="expenses-list">
 					{expenses.map((expense, index) => {
 						return (
@@ -58,6 +77,7 @@ class HomePage extends Component {
 							>
 								{expense.merchant}
 								<p>{expense.comment ? expense.comment : 'no comment'}</p>
+
 								<hr />
 							</div>
 						)
