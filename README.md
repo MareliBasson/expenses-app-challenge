@@ -30,3 +30,10 @@ A list of links or people I consulted while building the project, either
 -   Leon van Niekerk - partner/rubber duck
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
+
+## Packages used
+
+-   Lodash - to speed up development by providing some handy methods for dealing with objects and arrays
+-   FontAwesome - icons for the UI (might replace with IcoMoon if time allows)
+-   Moment - for easy date formatting
+-   Currency convertor - TBD
