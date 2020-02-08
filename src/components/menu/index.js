@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign, faCog } from '@fortawesome/free-solid-svg-icons'
 import './menu.css'
 
 class Menu extends Component {
@@ -7,9 +10,15 @@ class Menu extends Component {
 		return (
 			<div className="menu">
 				<NavLink activeClassName="active" exact to="/">
+					<span>
+						<FontAwesomeIcon icon={faDollarSign} />
+					</span>
 					Expenses
 				</NavLink>
 				<NavLink activeClassName="active" to="/settings">
+					<span>
+						<FontAwesomeIcon icon={faCog} />
+					</span>
 					Settings
 				</NavLink>
 			</div>

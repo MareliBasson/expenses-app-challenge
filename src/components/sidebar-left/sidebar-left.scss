@@ -10,8 +10,28 @@
 
 	.logo {
 		padding: 20px;
+		position: relative;
+
 		img {
 			max-width: 100px;
+		}
+
+		&:before {
+			content: '';
+			background-color: $colorSecondary;
+			width: 0px;
+			height: 2px;
+			position: absolute;
+			bottom: 22px;
+			right: 0;
+			transition: width 0.4s ease-out;
+		}
+
+		&:hover {
+			&:before {
+				transition: width 0.3s ease-in;
+				width: 170px;
+			}
 		}
 	}
 
