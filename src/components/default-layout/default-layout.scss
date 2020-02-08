@@ -4,6 +4,7 @@
 	height: 100%;
 
 	.page-body {
+		min-height: 100%;
 		background-color: $colorBg;
 		padding-left: $sidebarWidth;
 	}

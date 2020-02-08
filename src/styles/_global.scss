@@ -5,8 +5,10 @@ html,
 body,
 #root {
 	height: 100%;
-	font-family: $fontPrimary;
-	font-weight: 300;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 html {
@@ -17,7 +19,9 @@ body {
 	overflow: scroll;
 	margin: 0;
 	padding: 0;
-	font-family: sans-serif;
+	font-family: $fontPrimary;
+	font-weight: 300;
+	font-size: 14px;
 }
 
 .container {
@@ -31,6 +35,14 @@ body {
 	@media (min-width: 1200px) {
 		width: 1170px;
 	}
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 1.3rem;
 }
 
 a {

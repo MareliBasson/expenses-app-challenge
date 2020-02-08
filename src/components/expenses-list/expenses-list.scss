@@ -1,18 +1,19 @@
-.header {
-	height: 80px;
-	padding: 0 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+@import './styles/variables';
 
-.header__container {
-	height: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+.expenses-list {
+	.expense {
+		font-size: 1em;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid lighten($textDark, 80%);
+		padding: 10px 20px;
+		transition: background-color 0.3s ease;
 
-.header__logo {
-	height: 60px;
+		&:hover {
+			background-color: darken($colorBg, 5%);
+			transition: background-color 0.2s ease;
+		}
+	}
 }
