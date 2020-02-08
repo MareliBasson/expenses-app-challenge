@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ExpensesList from 'components/expenses-list'
-import './home.css'
+import './expenses.css'
 
 class ExpensesPage extends Component {
 	constructor(props) {
@@ -19,7 +19,7 @@ class ExpensesPage extends Component {
 	initialFetch() {
 		fetch('http://localhost:3000/expenses')
 			.then(response => response.json())
-			.then(expenses => this.setState({ expenses: expenses.expenses, total: expenses.total }))
+			.then(expenses => this.setState({ expenses: expenses.expenses, total: expenses.total, visibleEntries: 25 }))
 			.catch(err => {
 				console.log(err)
 			})
@@ -28,7 +28,7 @@ class ExpensesPage extends Component {
 	getAllEntries() {
 		fetch(`http://localhost:3000/expenses?limit=${this.state.total}`)
 			.then(response => response.json())
-			.then(expenses => this.setState({ expenses: expenses.expenses }))
+			.then(expenses => this.setState({ expenses: expenses.expenses, visibleEntries: expenses.total }))
 			.catch(err => {
 				console.log(err)
 			})
@@ -60,19 +60,33 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { expenses, total } = this.state
+		const { expenses, total, visibleEntries } = this.state
 
 		return (
-			<div className="home">
+			<div className="expenses-page">
 				<div className="actions">
-					<b>Number of entries:</b> {expenses.length}/{total}
-					<button
-						onClick={() => {
-							this.getAllEntries()
-						}}
-					>
-						Show All
-					</button>
+					<div className="number-of-entries">
+						Show:
+						<button
+							onClick={() => {
+								this.initialFetch()
+							}}
+							className={`btn ${visibleEntries === 25 ? 'btn-primary' : 'btn-outline'}`}
+						>
+							25
+						</button>
+						<button
+							onClick={() => {
+								this.getAllEntries()
+							}}
+							className={`btn ${visibleEntries === total ? 'btn-primary' : 'btn-outline'}`}
+						>
+							All
+						</button>
+					</div>
+					<div className="entries-visible">
+						{expenses.length}/<strong>{total}</strong>
+					</div>
 				</div>
 				<ExpensesList expenses={expenses} handleComment={this.handleComment} />
 			</div>

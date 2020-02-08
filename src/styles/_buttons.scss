@@ -1,0 +1,22 @@
+.btn {
+	border: 2px solid white;
+	border-radius: 3px;
+	outline: none;
+
+	&.btn-primary {
+		background-color: $colorPrimary;
+		border-color: $colorPrimary;
+		color: white;
+	}
+
+	&.btn-secondary {
+		background-color: $colorSecondary;
+		border-color: $colorSecondary;
+		color: white;
+	}
+
+	&.btn-outline {
+		border-color: 2px solid $colorPrimary;
+		background-color: white;
+	}
+}

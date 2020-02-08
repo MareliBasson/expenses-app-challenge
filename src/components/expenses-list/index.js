@@ -17,9 +17,16 @@ class ExpensesList extends Component {
 								handleComment(expense.id)
 							}}
 						>
+							<div className="user">
+								{expense.user.first} {expense.user.last}
+							</div>
 							<div className="merchant">{expense.merchant}</div>
 
-							<div className="comment">{expense.comment ? expense.comment : 'no comment'}</div>
+							<div className="date">{expense.date}</div>
+
+							{/* <div className="comment">{expense.comment ? expense.comment : 'no comment'}</div> */}
+
+							<div className="amount">{expense.amount.value}</div>
 						</div>
 					)
 				})}

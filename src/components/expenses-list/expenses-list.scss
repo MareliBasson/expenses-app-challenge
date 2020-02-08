@@ -15,5 +15,13 @@
 			background-color: darken($colorBg, 5%);
 			transition: background-color 0.2s ease;
 		}
+
+		> * {
+			flex: 1;
+		}
+
+		*:last-child {
+			text-align: right;
+		}
 	}
 }

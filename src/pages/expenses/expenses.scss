@@ -1,1 +1,17 @@
-// Add styling for the Home page here
+@import './styles/variables';
+
+.expenses-page {
+	.actions {
+		background-color: darken($colorBg, 10%);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 6px 20px;
+		font-size: 0.7rem;
+		margin-bottom: 10px;
+
+		.btn {
+			margin-left: 10px;
+		}
+	}
+}
