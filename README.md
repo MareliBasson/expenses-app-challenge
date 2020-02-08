@@ -14,3 +14,5 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 -   I started this project using a [basic react boilerplate](https://github.com/MareliBasson/react-boilerplate-site) I've created before and updated as required.
 -   Setting up the API functionality is something I haven't done on my own before.
+-   Part of my boilerplate is using absolute paths - I find it a lot neater to navigate but also much easier to update if a component's location changes.
+-   I used my favourite budget app as a guideline for the UI: [22Seven](https://www.22seven.com/)

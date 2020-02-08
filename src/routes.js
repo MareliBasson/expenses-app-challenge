@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomePage from 'pages/home'
-import PageOne from 'pages/page1'
+import SettingsPage from 'pages/settings'
 import DefaultLayout from 'components/default-layout'
 
 const Routes = () => {
@@ -9,7 +9,7 @@ const Routes = () => {
 		<Router>
 			<DefaultLayout>
 				<Route exact path="/" component={HomePage} />
-				<Route path="/page1" component={PageOne} />
+				<Route path="/settings" component={SettingsPage} />
 			</DefaultLayout>
 		</Router>
 	)
