@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import Moment from 'react-moment'
 import ExpenseModal from 'components/expense-modal'
 import './expenses-list.css'
 
@@ -54,7 +55,9 @@ class ExpensesList extends Component {
 							</div>
 							<div className="merchant">{expense.merchant}</div>
 
-							<div className="date">{expense.date}</div>
+							<div className="date">
+								<Moment format="DD MMM YYYY">{expense.date}</Moment>
+							</div>
 
 							{/* <div className="comment">{expense.comment ? expense.comment : 'no comment'}</div> */}
 

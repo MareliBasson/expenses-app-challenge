@@ -42,9 +42,6 @@ class ImageUpload extends Component {
 
 		const { preview } = this.props
 
-		console.log('Preview')
-		console.log(preview)
-
 		return (
 			<div className="info-item">
 				<div className="info-label">Receipt</div>
@@ -57,23 +54,11 @@ class ImageUpload extends Component {
 					<button onClick={this.saveImages} className="btn btn-primary btn-feature">
 						Upload
 					</button>
-
-					{/* <button onClick={this.handleUpload} className="waves-effect waves-light btn">
-					Upload <progress value={this.state.progress} max="100" className="progress" />
-				</button>
-				<div className="image-preview">
-					<img
-						src={this.state.url || 'https://via.placeholder.com/400x300'}
-						width="200"
-						alt="Uploaded Images"
-					/>
-				</div> */}
 				</div>
 
 				<div className="previews">
 					{preview &&
 						preview.map(img => {
-							console.log(img.url)
 							return (
 								<div className="preview-img">
 									<img src={`http://localhost:3000${img.url}`} alt="" width="100" />

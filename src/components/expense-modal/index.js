@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'react-moment'
 import CommentForm from 'components/comment-form'
 import ImageUpload from 'components/image-upload'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -57,14 +58,16 @@ class ExpenseModal extends Component {
 									<div className="col">
 										<div className="info-item amount">
 											<div className="info-label">Date</div>
-											<div className="info-value">{expense.date}</div>
+											<div className="info-value">
+												<Moment format="DD MMM YYYY">{expense.date}</Moment>
+											</div>
 										</div>
 									</div>
 								</div>
 
 								<CommentForm id={expense.id} comment={expense.comment} modalActive={modalActive} />
 
-								<ImageUpload id={expense.id} />
+								<ImageUpload id={expense.id} preview={expense && expense.receipts} />
 							</Fragment>
 						)}
 					</div>

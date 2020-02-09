@@ -21,9 +21,10 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 A list of links or people I consulted while building the project on topics i'm not as familiar with, either
 
--   Ralf Kistner - question about strange build behaviour: without default port builds fine, with default port sometimes returns blank page, but fine on refresh
+-   Ralf Kistner
+    -   question about strange build behaviour: without default port builds fine, with default port sometimes returns blank page, but fine on refresh
+    -   help with debugging the image upload 500 error
 -   Leon van Niekerk - partner/rubber duck
--   Simon de la Rouviere - help with debugging the image upload 500 error
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
 -   Image Loader
@@ -38,9 +39,9 @@ A list of links or people I consulted while building the project on topics i'm n
 
 ## Packages used
 
--   Lodash - to speed up development by providing some handy methods for dealing with objects and arrays
--   FontAwesome - icons for the UI (might replace with IcoMoon if time allows)
--   Moment - for easy date formatting
+-   [Lodash](https://www.npmjs.com/package/lodash) - to speed up development by providing some handy methods for dealing with objects and arrays
+-   [FontAwesome](https://github.com/FortAwesome/react-fontawesome) - icons for the UI (might replace with IcoMoon if time allows)
+-   [Moment](https://www.npmjs.com/package/react-moment#formatting) - for easy date formatting
 -   Currency convertor - TBD
 
 ## Thoughts

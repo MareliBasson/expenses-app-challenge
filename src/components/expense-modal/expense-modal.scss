@@ -46,7 +46,7 @@
 			.row {
 				display: flex;
 				justify-content: space-between;
-				align-items: start;
+				align-items: flex-start;
 
 				.col {
 					&:last-child {
