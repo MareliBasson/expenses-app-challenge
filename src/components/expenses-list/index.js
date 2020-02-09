@@ -32,7 +32,7 @@ class ExpensesList extends Component {
 			},
 			() => {
 				if (!this.state.modalActive) {
-					return fetchData
+					fetchData()
 				}
 			}
 		)

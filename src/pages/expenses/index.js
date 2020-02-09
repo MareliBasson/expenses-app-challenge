@@ -29,12 +29,14 @@ class ExpensesPage extends Component {
 			})
 	}
 
-	fetchData(pageModifier) {
+	fetchData(pageNrModifier) {
 		const { entriesTotal, limit, page } = this.state
 
 		const howManyEntries = limit === 'all' ? entriesTotal : parseInt(limit)
 		const onWhichPage =
-			limit === 'all' ? '' : `&offset=${parseInt(limit) * (pageModifier ? page - 1 + pageModifier : page - 1)}`
+			limit === 'all'
+				? ''
+				: `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
 
 		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${onWhichPage}}`)
 			.then(response => response.json())
@@ -107,7 +109,7 @@ class ExpensesPage extends Component {
 						</button>
 						<button
 							onClick={() => {
-								this.setState({ limit: 'all' }, () => {
+								this.setState({ limit: 'all', page: 1 }, () => {
 									this.fetchData()
 								})
 							}}
@@ -138,7 +140,7 @@ class ExpensesPage extends Component {
 				<ExpensesList
 					expenses={expenses}
 					fetchData={() => {
-						this.fetchData(page)
+						this.fetchData()
 					}}
 				/>
 			</div>
