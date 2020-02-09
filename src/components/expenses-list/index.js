@@ -59,6 +59,7 @@ class ExpensesList extends Component {
 							{/* <div className="comment">{expense.comment ? expense.comment : 'no comment'}</div> */}
 
 							<div className="amount">{expense.amount.value}</div>
+							<div className="currency">{expense.amount.currency}</div>
 						</div>
 					)
 				})}
