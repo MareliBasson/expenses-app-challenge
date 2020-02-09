@@ -58,9 +58,9 @@ class ImageUpload extends Component {
 
 				<div className="previews">
 					{preview &&
-						preview.map(img => {
+						preview.map((img, index) => {
 							return (
-								<div className="preview-img">
+								<div className="preview-img" key={`image-preview-${index}`}>
 									<img src={`http://localhost:3000${img.url}`} alt="" width="100" />
 								</div>
 							)

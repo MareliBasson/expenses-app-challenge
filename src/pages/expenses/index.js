@@ -8,13 +8,13 @@ class ExpensesPage extends Component {
 
 		this.state = {
 			expenses: [],
-			total: 0,
-			view: '25'
+			entriesTotal: 0,
+			limit: '25',
+			page: 1
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
-		this.getAllEntries = this.getAllEntries.bind(this)
-		this.refreshData = this.refreshData.bind(this)
+		this.fetchData = this.fetchData.bind(this)
 		this.handleComment = this.handleComment.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
@@ -23,35 +23,27 @@ class ExpensesPage extends Component {
 	initialFetch() {
 		fetch('http://localhost:3000/expenses')
 			.then(response => response.json())
-			.then(expenses => this.setState({ expenses: expenses.expenses, total: expenses.total, visibleEntries: 25 }))
+			.then(expenses => this.setState({ expenses: expenses.expenses, entriesTotal: expenses.total }))
 			.catch(err => {
 				console.log(err)
 			})
 	}
 
-	getAllEntries() {
-		fetch(`http://localhost:3000/expenses?limit=${this.state.total}`)
+	fetchData(pageModifier) {
+		const { entriesTotal, limit, page } = this.state
+
+		const howManyEntries = limit === 'all' ? entriesTotal : parseInt(limit)
+		const onWhichPage =
+			limit === 'all' ? '' : `&offset=${parseInt(limit) * (pageModifier ? page - 1 + pageModifier : page - 1)}`
+
+		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${onWhichPage}}`)
 			.then(response => response.json())
-			.then(expenses => this.setState({ expenses: expenses.expenses, visibleEntries: expenses.total }))
-			.catch(err => {
-				console.log(err)
-			})
-	}
-
-	refreshData() {
-		const { view } = this.state
-
-		let query
-
-		if (view === 'all') {
-			query = this.state.total
-		} else if (view === '25') {
-			query = 25
-		}
-
-		fetch(`http://localhost:3000/expenses?limit=${query}`)
-			.then(response => response.json())
-			.then(expenses => this.setState({ expenses: expenses.expenses, visibleEntries: query }))
+			.then(expenses =>
+				this.setState({
+					expenses: expenses.expenses,
+					visibleEntries: limit === 'all' ? expenses.entriesTotal : parseInt(limit)
+				})
+			)
 			.catch(err => {
 				console.log(err)
 			})
@@ -72,16 +64,22 @@ class ExpensesPage extends Component {
 		})
 	}
 
-	goToNext() {
-		console.log('next')
+	goToPrev() {
+		this.setState({
+			page: this.state.page - 1
+		})
+		this.fetchData(-1)
 	}
 
-	goToPrev() {
-		console.log('prev')
+	goToNext() {
+		this.setState({
+			page: this.state.page + 1
+		})
+		this.fetchData(1)
 	}
 
 	componentDidUpdate() {
-		// if (this.state.total !== this.state.expenses.length) {
+		// if (this.state.entriesTotal !== this.state.expenses.length) {
 		// 	this.getAllEntries()
 		// }
 	}
@@ -91,43 +89,58 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { expenses, total, visibleEntries } = this.state
+		const { expenses, entriesTotal, page, limit } = this.state
 
 		return (
 			<div className="expenses-page">
-				<div className="pagination">
-					<button onClick={this.goToNext}>Next</button>
-					<div className="page-count">Page:{Math.ceil(total / expenses.length)}</div>
-					<button onClick={this.goToPrev}>Prev</button>
-				</div>
 				<div className="actions">
 					<div className="number-of-entries">
 						Show:
 						<button
 							onClick={() => {
 								this.initialFetch()
-								this.setState({ view: '25' })
+								this.setState({ limit: '25' })
 							}}
-							className={`btn ${visibleEntries === 25 ? 'btn-primary' : 'btn-outline'}`}
+							className={`btn ${limit === '25' ? 'btn-primary' : 'btn-outline'}`}
 						>
 							25
 						</button>
 						<button
 							onClick={() => {
-								this.getAllEntries()
-								this.setState({ view: 'all' })
+								this.setState({ limit: 'all' }, () => {
+									this.fetchData()
+								})
 							}}
-							className={`btn ${visibleEntries === total ? 'btn-primary' : 'btn-outline'}`}
+							className={`btn ${limit === 'all' ? 'btn-primary' : 'btn-outline'}`}
 						>
 							All
 						</button>
 					</div>
-					<div className="entries-visible">
-						{expenses.length}/<strong>{total}</strong>
-					</div>
+					{limit === 'all' ? (
+						<div className="entries-visible">
+							<strong>{expenses.length}</strong>&nbsp; entries
+						</div>
+					) : (
+						<div className="pagination">
+							<button onClick={this.goToPrev} disabled={page === 1}>
+								Prev
+							</button>
+							<div className="page-count">
+								{page}/{Math.ceil(entriesTotal / limit)}
+							</div>
+							<button onClick={this.goToNext} disabled={page === Math.ceil(entriesTotal / limit)}>
+								Next
+							</button>
+						</div>
+					)}
 				</div>
 
-				<ExpensesList expenses={expenses} refreshData={this.refreshData} />
+				<ExpensesList
+					expenses={expenses}
+					fetchData={() => {
+						this.fetchData(page)
+					}}
+				/>
 			</div>
 		)
 	}

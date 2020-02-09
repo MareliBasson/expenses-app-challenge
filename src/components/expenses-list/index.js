@@ -24,12 +24,16 @@ class ExpensesList extends Component {
 	}
 
 	toggleExpenseModal() {
+		const { fetchData } = this.props
+
 		this.setState(
 			{
 				modalActive: !this.state.modalActive
 			},
 			() => {
-				this.props.refreshData()
+				if (!this.state.modalActive) {
+					return fetchData
+				}
 			}
 		)
 	}
@@ -58,8 +62,6 @@ class ExpensesList extends Component {
 							<div className="date">
 								<Moment format="DD MMM YYYY">{expense.date}</Moment>
 							</div>
-
-							{/* <div className="comment">{expense.comment ? expense.comment : 'no comment'}</div> */}
 
 							<div className="amount">{expense.amount.value}</div>
 							<div className="currency">{expense.amount.currency}</div>
