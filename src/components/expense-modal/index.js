@@ -1,38 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import CommentForm from 'components/comment-form'
 import ImageUpload from 'components/image-upload'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import './expense-modal.css'
 
 class ExpenseModal extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			comment: ''
-		}
-
-		this.handleComment = this.handleComment.bind(this)
-		this.saveComment = this.saveComment.bind(this)
-	}
-
-	handleComment(event) {
-		this.setState({
-			comment: event.target.value
-		})
-	}
-
-	saveComment(event) {
-		event.preventDefault()
-
-		fetch(`http://localhost:3000/expenses/${this.props.expense.id}`, {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				comment: this.state.comment
-			})
-		})
+		this.state = {}
 	}
 
 	render() {
@@ -45,27 +22,33 @@ class ExpenseModal extends Component {
 					<div className="modal-header">
 						<h2>Expense Information</h2>
 						<button className="btn btn-primary" onClick={toggleModal}>
-							Close
+							<FontAwesomeIcon icon={faTimes} />
 						</button>
 					</div>
 
 					<div className="modal-content">
 						{expense && (
 							<Fragment>
-								<div className="amount">{expense.amount.value}</div>
-								<div className="user">
-									{expense.user.first} {expense.user.last}
+								<div className="info-item amount">
+									<div className="info-label">Amount</div>
+									<div className="info-value">
+										{expense.amount.value} ({expense.amount.currency}}
+									</div>
 								</div>
-								<div className="comment">{expense.comment}</div>
-								<form onSubmit={this.saveComment}>
-									<input
-										type="text"
-										placeholder="Add a comment about this expense"
-										onChange={this.handleComment}
-										value={expense.comment}
-									/>
-									<button type="submit">Save Comment</button>
-								</form>
+
+								<div className="info-item merchant">
+									<div className="info-label">Merchant</div>
+									<div className="info-value">{expense.merchant}</div>
+								</div>
+
+								<div className="info-item user">
+									<div className="info-label">User</div>
+									<div className="info-value">
+										{expense.user.first} {expense.user.last}
+									</div>
+								</div>
+
+								<CommentForm id={expense.id} comment={expense.comment} modalActive={modalActive} />
 
 								<ImageUpload id={expense.id} />
 							</Fragment>

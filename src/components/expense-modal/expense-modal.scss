@@ -26,7 +26,7 @@
 	}
 
 	.modal-container {
-		width: 600px;
+		width: 400px;
 		background-color: $colorBg;
 		padding: 20px;
 		z-index: 2;
@@ -42,6 +42,16 @@
 
 		.modal-content {
 			padding: 20px 0;
+
+			.info-item {
+				padding: 10px 0px;
+
+				.info-label {
+					font-size: 0.8rem;
+					margin-bottom: 5px;
+					font-weight: 400;
+				}
+			}
 		}
 	}
 }

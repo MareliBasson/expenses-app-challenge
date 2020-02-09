@@ -8,7 +8,8 @@ class ExpensesPage extends Component {
 
 		this.state = {
 			expenses: [],
-			total: 0
+			total: 0,
+			view: '25'
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -36,7 +37,22 @@ class ExpensesPage extends Component {
 	}
 
 	refreshData() {
-		// console.log('refresh data')
+		const { view } = this.state
+
+		let query
+
+		if (view === 'all') {
+			query = this.state.total
+		} else if (view === '25') {
+			query = 25
+		}
+
+		fetch(`http://localhost:3000/expenses?limit=${query}`)
+			.then(response => response.json())
+			.then(expenses => this.setState({ expenses: expenses.expenses, visibleEntries: query }))
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	handleComment(expenseId) {
@@ -75,6 +91,7 @@ class ExpensesPage extends Component {
 						<button
 							onClick={() => {
 								this.initialFetch()
+								this.setState({ view: '25' })
 							}}
 							className={`btn ${visibleEntries === 25 ? 'btn-primary' : 'btn-outline'}`}
 						>
@@ -83,6 +100,7 @@ class ExpensesPage extends Component {
 						<button
 							onClick={() => {
 								this.getAllEntries()
+								this.setState({ view: 'all' })
 							}}
 							className={`btn ${visibleEntries === total ? 'btn-primary' : 'btn-outline'}`}
 						>
@@ -93,7 +111,13 @@ class ExpensesPage extends Component {
 						{expenses.length}/<strong>{total}</strong>
 					</div>
 				</div>
+
 				<ExpensesList expenses={expenses} refreshData={this.refreshData} />
+				<div className="pagination">
+					<button>Next</button>
+					<div className="page-count">Page:{total / expenses.length}</div>
+					<button>Prev</button>
+				</div>
 			</div>
 		)
 	}

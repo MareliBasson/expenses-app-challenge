@@ -40,8 +40,6 @@ class ImageUpload extends Component {
 	}
 
 	render() {
-		console.log(this.state.image)
-
 		return (
 			<div className="center">
 				<div className="file-field input-field">
