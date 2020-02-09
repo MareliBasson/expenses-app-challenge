@@ -20,8 +20,8 @@ class ExpenseModal extends Component {
 				<div className="modal-overlay" onClick={toggleModal}></div>
 				<div className="modal-container">
 					<div className="modal-header">
-						<h2>Expense Information</h2>
-						<button className="btn btn-primary" onClick={toggleModal}>
+						<h3>Expense Information</h3>
+						<button className="btn btn-primary btn-icon" onClick={toggleModal}>
 							<FontAwesomeIcon icon={faTimes} />
 						</button>
 					</div>
@@ -29,22 +29,36 @@ class ExpenseModal extends Component {
 					<div className="modal-content">
 						{expense && (
 							<Fragment>
-								<div className="info-item amount">
-									<div className="info-label">Amount</div>
-									<div className="info-value">
-										{expense.amount.value} ({expense.amount.currency}}
+								<div className="row">
+									<div className="col">
+										<div className="info-item merchant">
+											<div className="info-label">Merchant</div>
+											<div className="info-value">{expense.merchant}</div>
+										</div>
+									</div>
+									<div className="col">
+										<div className="info-item amount">
+											<div className="info-label">Amount</div>
+											<div className="info-value">
+												{expense.amount.value} ({expense.amount.currency})
+											</div>
+										</div>
 									</div>
 								</div>
-
-								<div className="info-item merchant">
-									<div className="info-label">Merchant</div>
-									<div className="info-value">{expense.merchant}</div>
-								</div>
-
-								<div className="info-item user">
-									<div className="info-label">User</div>
-									<div className="info-value">
-										{expense.user.first} {expense.user.last}
+								<div className="row">
+									<div className="col">
+										<div className="info-item user">
+											<div className="info-label">User</div>
+											<div className="info-value">
+												{expense.user.first} {expense.user.last}
+											</div>
+										</div>
+									</div>
+									<div className="col">
+										<div className="info-item amount">
+											<div className="info-label">Date</div>
+											<div className="info-value">{expense.date}</div>
+										</div>
 									</div>
 								</div>
 

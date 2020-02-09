@@ -33,15 +33,27 @@
 		position: relative;
 
 		.modal-header {
-			border-bottom: 1px solid $colorDivider;
-			padding-bottom: 20px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			border-bottom: 1px solid $colorDivider;
+			padding-bottom: 20px;
 		}
 
 		.modal-content {
-			padding: 20px 0;
+			padding: 10px 0 20px;
+
+			.row {
+				display: flex;
+				justify-content: space-between;
+				align-items: start;
+
+				.col {
+					&:last-child {
+						text-align: right;
+					}
+				}
+			}
 
 			.info-item {
 				padding: 10px 0px;

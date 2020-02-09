@@ -41,14 +41,17 @@ class ImageUpload extends Component {
 	}
 
 	render() {
+		const { image } = this.state
+		console.log(image)
+
 		return (
 			<div className="info-item">
-				<div className="info-label">Receipts</div>
+				<div className="info-label">Receipt</div>
 
 				<div className="image-upload">
 					<label htmlFor="upload" className="file">
 						<input type="file" id="upload" onChange={this.handleChange} />
-						<div className="file-custom">Choose a file...</div>
+						<div className="file-custom">{image && image[0] ? image[0].name : 'Choose a file...'}</div>
 					</label>
 					<button onClick={this.saveImages} className="btn btn-primary btn-feature">
 						Upload

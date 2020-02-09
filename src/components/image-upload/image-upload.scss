@@ -25,9 +25,13 @@
 		z-index: 5;
 		padding: 10px;
 		background-color: white;
-		border: 1px solid #ddd;
+		border: 1px solid $colorDivider;
 		border-radius: 3px;
 		user-select: none;
+		font-size: 0.8rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	/* Focus */

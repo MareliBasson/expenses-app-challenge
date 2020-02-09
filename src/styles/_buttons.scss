@@ -2,6 +2,9 @@
 	border: 2px solid white;
 	border-radius: 3px;
 	outline: none;
+	cursor: pointer;
+	padding: 1px 4px;
+	text-align: center;
 
 	&.btn-primary {
 		background-color: $colorPrimary;
@@ -21,8 +24,15 @@
 	}
 
 	&.btn-feature {
-		padding: 8px 20px;
+		height: 35px;
+		padding: 0px 20px;
 		font-size: 0.8rem;
+	}
+
+	&.btn-icon {
+		width: 26px;
+		height: 26px;
+		font-size: 1rem;
 	}
 }
 

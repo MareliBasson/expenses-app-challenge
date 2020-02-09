@@ -58,7 +58,7 @@ class CommentForm extends Component {
 				<form onSubmit={this.saveComment} className="comment-form">
 					<textarea
 						type="text"
-						placeholder="Add a comment about this expense"
+						placeholder="Add a comment about this expense..."
 						onChange={this.handleComment}
 						value={comment ? comment : ''}
 					/>
