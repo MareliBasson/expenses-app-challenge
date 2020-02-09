@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import ImageUpload from 'components/image-upload'
 import './expense-modal.css'
 
 class ExpenseModal extends Component {
@@ -65,6 +66,8 @@ class ExpenseModal extends Component {
 									/>
 									<button type="submit">Save Comment</button>
 								</form>
+
+								<ImageUpload />
 							</Fragment>
 						)}
 					</div>

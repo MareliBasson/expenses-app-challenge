@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import storage from '/Firebase/index'
+import storage from 'firebase/index.js'
 
 class ImageUpload extends Component {
 	constructor(props) {
@@ -45,6 +45,8 @@ class ImageUpload extends Component {
 		)
 	}
 	render() {
+		console.log(this.state.url)
+
 		return (
 			<div className="center">
 				<br />
