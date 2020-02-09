@@ -67,7 +67,7 @@ class ExpenseModal extends Component {
 									<button type="submit">Save Comment</button>
 								</form>
 
-								<ImageUpload />
+								<ImageUpload id={expense.id} />
 							</Fragment>
 						)}
 					</div>
