@@ -13,7 +13,7 @@ class ImageUpload extends Component {
 	}
 
 	handleChange = e => {
-		this.setState({ image: e.target.files })
+		this.setState({ image: e.target.files[0] })
 	}
 
 	saveImages(event) {
@@ -24,9 +24,6 @@ class ImageUpload extends Component {
 
 		fetch(`http://localhost:3000/expenses/${this.props.id}/receipts`, {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'multipart/form-data'
-			},
 			body: formData
 		})
 			.then(res => {
@@ -42,7 +39,11 @@ class ImageUpload extends Component {
 
 	render() {
 		const { image } = this.state
-		console.log(image)
+
+		const { preview } = this.props
+
+		console.log('Preview')
+		console.log(preview)
 
 		return (
 			<div className="info-item">
@@ -51,7 +52,7 @@ class ImageUpload extends Component {
 				<div className="image-upload">
 					<label htmlFor="upload" className="file">
 						<input type="file" id="upload" onChange={this.handleChange} />
-						<div className="file-custom">{image && image[0] ? image[0].name : 'Choose a file...'}</div>
+						<div className="file-custom">{image ? image.name : 'Choose a file...'}</div>
 					</label>
 					<button onClick={this.saveImages} className="btn btn-primary btn-feature">
 						Upload
@@ -67,6 +68,18 @@ class ImageUpload extends Component {
 						alt="Uploaded Images"
 					/>
 				</div> */}
+				</div>
+
+				<div className="previews">
+					{preview &&
+						preview.map(img => {
+							console.log(img.url)
+							return (
+								<div className="preview-img">
+									<img src={`http://localhost:3000${img.url}`} alt="" width="100" />
+								</div>
+							)
+						})}
 				</div>
 			</div>
 		)
