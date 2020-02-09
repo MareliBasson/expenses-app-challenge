@@ -9,6 +9,8 @@ class ImageUpload extends Component {
 			url: '',
 			progress: 0
 		}
+
+		this.saveImages = this.saveImages.bind(this)
 	}
 
 	handleChange = e => {
@@ -44,41 +46,40 @@ class ImageUpload extends Component {
 			}
 		)
 	}
+
+	saveImages(event) {
+		event.preventDefault()
+
+		fetch(`http://localhost:3000/expenses/${this.props.expense.id}/receipts`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				receipts: this.state.url
+			})
+		})
+	}
+
 	render() {
 		console.log(this.state.url)
 
 		return (
 			<div className="center">
-				<br />
-				<h2 className="green-text">React Firebase Image Uploader</h2>
-				<br />
-				<br />
-				<div className="row">
-					<progress value={this.state.progress} max="100" className="progress" />
-				</div>
-				<br />
-				<br />
-				<br />
 				<div className="file-field input-field">
 					<div className="btn">
-						<span>File</span>
 						<input type="file" onChange={this.handleChange} />
-					</div>
-					<div className="file-path-wrapper">
-						<input className="file-path validate" type="text" />
 					</div>
 				</div>
 				<button onClick={this.handleUpload} className="waves-effect waves-light btn">
-					Upload
+					Upload <progress value={this.state.progress} max="100" className="progress" />
 				</button>
-				<br />
-				<br />
-				<img
-					src={this.state.url || 'https://via.placeholder.com/400x300'}
-					alt="Uploaded Images"
-					height="300"
-					width="400"
-				/>
+				<div className="image-preview">
+					<img src={this.state.url || 'https://via.placeholder.com/400x300'} alt="Uploaded Images" />
+				</div>
+
+				<button onClick={this.saveImages}>Save Receipts</button>
 			</div>
 		)
 	}
