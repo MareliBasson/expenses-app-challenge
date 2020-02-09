@@ -15,3 +15,15 @@
 		}
 	}
 }
+
+.pagination {
+	background-color: darken($colorBg, 10%);
+	padding: 10px 20px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	.page-count {
+		padding: 0 10px;
+	}
+}

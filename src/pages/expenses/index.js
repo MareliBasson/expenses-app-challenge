@@ -16,6 +16,8 @@ class ExpensesPage extends Component {
 		this.getAllEntries = this.getAllEntries.bind(this)
 		this.refreshData = this.refreshData.bind(this)
 		this.handleComment = this.handleComment.bind(this)
+		this.goToNext = this.goToNext.bind(this)
+		this.goToPrev = this.goToPrev.bind(this)
 	}
 
 	initialFetch() {
@@ -70,6 +72,14 @@ class ExpensesPage extends Component {
 		})
 	}
 
+	goToNext() {
+		console.log('next')
+	}
+
+	goToPrev() {
+		console.log('prev')
+	}
+
 	componentDidUpdate() {
 		// if (this.state.total !== this.state.expenses.length) {
 		// 	this.getAllEntries()
@@ -85,6 +95,11 @@ class ExpensesPage extends Component {
 
 		return (
 			<div className="expenses-page">
+				<div className="pagination">
+					<button onClick={this.goToNext}>Next</button>
+					<div className="page-count">Page:{Math.ceil(total / expenses.length)}</div>
+					<button onClick={this.goToPrev}>Prev</button>
+				</div>
 				<div className="actions">
 					<div className="number-of-entries">
 						Show:
@@ -113,12 +128,6 @@ class ExpensesPage extends Component {
 				</div>
 
 				<ExpensesList expenses={expenses} refreshData={this.refreshData} />
-
-				<div className="pagination">
-					<button>Next</button>
-					<div className="page-count">Page:{total / expenses.length}</div>
-					<button>Prev</button>
-				</div>
 			</div>
 		)
 	}
