@@ -19,6 +19,11 @@
 		border-color: 2px solid $colorPrimary;
 		background-color: white;
 	}
+
+	&.btn-feature {
+		padding: 8px 20px;
+		font-size: 0.8rem;
+	}
 }
 
 .btn-wrap-right {

@@ -113,6 +113,7 @@ class ExpensesPage extends Component {
 				</div>
 
 				<ExpensesList expenses={expenses} refreshData={this.refreshData} />
+
 				<div className="pagination">
 					<button>Next</button>
 					<div className="page-count">Page:{total / expenses.length}</div>

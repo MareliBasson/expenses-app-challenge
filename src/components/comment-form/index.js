@@ -53,19 +53,22 @@ class CommentForm extends Component {
 		const { comment } = this.state
 
 		return (
-			<form onSubmit={this.saveComment} className="comment-form">
-				<textarea
-					type="text"
-					placeholder="Add a comment about this expense"
-					onChange={this.handleComment}
-					value={comment ? comment : ''}
-				/>
-				<div className="btn-wrap-center">
-					<button type="submit" className="btn btn-primary">
-						Save Comment
-					</button>
-				</div>
-			</form>
+			<div className="info-item">
+				<div className="info-label">Comment</div>
+				<form onSubmit={this.saveComment} className="comment-form">
+					<textarea
+						type="text"
+						placeholder="Add a comment about this expense"
+						onChange={this.handleComment}
+						value={comment ? comment : ''}
+					/>
+					<div className="btn-wrap-center">
+						<button type="submit" className="btn btn-primary btn-feature">
+							Save Comment
+						</button>
+					</div>
+				</form>
+			</div>
 		)
 	}
 }

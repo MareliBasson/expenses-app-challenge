@@ -1,0 +1,37 @@
+@import './styles/variables';
+
+.image-upload {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.file {
+		position: relative;
+		display: block;
+		cursor: pointer;
+		height: 35px;
+	}
+
+	.file input {
+		min-width: 14rem;
+		opacity: 0;
+	}
+
+	.file-custom {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 5;
+		padding: 10px;
+		background-color: white;
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		user-select: none;
+	}
+
+	/* Focus */
+	.file input:focus ~ .file-custom {
+		box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem $colorSecondary;
+	}
+}

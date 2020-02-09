@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './image-upload.css'
 
 class ImageUpload extends Component {
 	constructor(props) {
@@ -41,15 +42,19 @@ class ImageUpload extends Component {
 
 	render() {
 		return (
-			<div className="center">
-				<div className="file-field input-field">
-					<div className="btn">
-						<input type="file" onChange={this.handleChange} />
-					</div>
-				</div>
-				<button onClick={this.saveImages}>Upload</button>
+			<div className="info-item">
+				<div className="info-label">Receipts</div>
 
-				{/* <button onClick={this.handleUpload} className="waves-effect waves-light btn">
+				<div className="image-upload">
+					<label htmlFor="upload" className="file">
+						<input type="file" id="upload" onChange={this.handleChange} />
+						<div className="file-custom">Choose a file...</div>
+					</label>
+					<button onClick={this.saveImages} className="btn btn-primary btn-feature">
+						Upload
+					</button>
+
+					{/* <button onClick={this.handleUpload} className="waves-effect waves-light btn">
 					Upload <progress value={this.state.progress} max="100" className="progress" />
 				</button>
 				<div className="image-preview">
@@ -59,6 +64,7 @@ class ImageUpload extends Component {
 						alt="Uploaded Images"
 					/>
 				</div> */}
+				</div>
 			</div>
 		)
 	}
