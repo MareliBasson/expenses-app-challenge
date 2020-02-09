@@ -5,51 +5,18 @@ class ImageUpload extends Component {
 		super(props)
 		this.state = {
 			image: null
-			// url: '',
-			// progress: 0
 		}
 
 		this.handleChange = this.handleChange.bind(this)
 		this.saveImages = this.saveImages.bind(this)
 	}
 
-	// handleUpload = () => {
-	// 	const { image } = this.state
-	// 	const uploadTask = storage.ref(`images/${image.name}`).put(image)
-	// 	uploadTask.on(
-	// 		'state_changed',
-	// 		snapshot => {
-	// 			// progress function ...
-	// 			const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-	// 			this.setState({ progress })
-	// 		},
-	// 		error => {
-	// 			// Error function ...
-	// 			console.log(error)
-	// 		},
-	// 		() => {
-	// 			// complete function ...
-	// 			storage
-	// 				.ref('images')
-	// 				.child(image.name)
-	// 				.getDownloadURL()
-	// 				.then(url => {
-	// 					this.setState({ url })
-	// 				})
-	// 		}
-	// 	)
-	// }
-
 	handleChange = e => {
-		// if (e.target.files[0]) {
-		this.setState({ image: e.target.files[0] })
-		// }
+		this.setState({ image: e.target.files })
 	}
 
 	saveImages(event) {
 		event.preventDefault()
-
-		console.log('saving image')
 
 		let formData = new FormData()
 		formData.append('receipt', this.state.image)
