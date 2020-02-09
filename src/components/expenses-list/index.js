@@ -23,9 +23,14 @@ class ExpensesList extends Component {
 	}
 
 	toggleExpenseModal() {
-		this.setState({
-			modalActive: !this.state.modalActive
-		})
+		this.setState(
+			{
+				modalActive: !this.state.modalActive
+			},
+			() => {
+				this.props.refreshData()
+			}
+		)
 	}
 
 	render() {

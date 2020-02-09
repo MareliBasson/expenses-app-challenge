@@ -3,10 +3,39 @@ import PropTypes from 'prop-types'
 import './expense-modal.css'
 
 class ExpenseModal extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			comment: ''
+		}
+
+		this.handleComment = this.handleComment.bind(this)
+		this.saveComment = this.saveComment.bind(this)
+	}
+
+	handleComment(event) {
+		this.setState({
+			comment: event.target.value
+		})
+	}
+
+	saveComment(event) {
+		event.preventDefault()
+
+		fetch(`http://localhost:3000/expenses/${this.props.expense.id}`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				comment: this.state.comment
+			})
+		})
+	}
+
 	render() {
 		const { expense, toggleModal, modalActive } = this.props
-
-		console.log(expense)
 
 		return (
 			<div className={`expense-modal ${modalActive && 'active'}`}>
@@ -26,6 +55,15 @@ class ExpenseModal extends Component {
 								<div className="user">
 									{expense.user.first} {expense.user.last}
 								</div>
+								<form onSubmit={this.saveComment}>
+									<input
+										type="text"
+										placeholder="Add a comment about this expense"
+										onChange={this.handleComment}
+										value={expense.comment}
+									/>
+									<button type="submit">Save Comment</button>
+								</form>
 							</Fragment>
 						)}
 					</div>

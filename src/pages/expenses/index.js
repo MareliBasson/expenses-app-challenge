@@ -11,8 +11,9 @@ class ExpensesPage extends Component {
 			total: 0
 		}
 
-		this.getAllEntries = this.getAllEntries.bind(this)
 		this.initialFetch = this.initialFetch.bind(this)
+		this.getAllEntries = this.getAllEntries.bind(this)
+		this.refreshData = this.refreshData.bind(this)
 		this.handleComment = this.handleComment.bind(this)
 	}
 
@@ -32,6 +33,10 @@ class ExpensesPage extends Component {
 			.catch(err => {
 				console.log(err)
 			})
+	}
+
+	refreshData() {
+		console.log('refresh data')
 	}
 
 	handleComment(expenseId) {
@@ -88,7 +93,7 @@ class ExpensesPage extends Component {
 						{expenses.length}/<strong>{total}</strong>
 					</div>
 				</div>
-				<ExpensesList expenses={expenses} handleComment={this.handleComment} />
+				<ExpensesList expenses={expenses} refreshData={this.refreshData} />
 			</div>
 		)
 	}
