@@ -36,7 +36,7 @@ class ExpensesPage extends Component {
 	}
 
 	refreshData() {
-		console.log('refresh data')
+		// console.log('refresh data')
 	}
 
 	handleComment(expenseId) {
