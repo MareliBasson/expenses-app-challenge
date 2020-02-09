@@ -24,12 +24,14 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 ## Resources
 
-A list of links or people I consulted while building the project, either
+A list of links or people I consulted while building the project on topics i'm not as familiar with, either
 
 -   Ralf Kistner - question about strange build behaviour: without default port builds fine, with default port sometimes returns blank page, but fine on refresh
 -   Leon van Niekerk - partner/rubber duck
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
+-   Image Loader
+    -   https://codeburst.io/react-image-upload-with-kittens-cc96430eaece
 
 ## Packages used
 

@@ -55,6 +55,7 @@ class ExpenseModal extends Component {
 								<div className="user">
 									{expense.user.first} {expense.user.last}
 								</div>
+								<div className="comment">{expense.comment}</div>
 								<form onSubmit={this.saveComment}>
 									<input
 										type="text"
