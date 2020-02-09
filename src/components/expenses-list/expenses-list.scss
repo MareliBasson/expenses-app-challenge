@@ -21,8 +21,14 @@
 			flex: 1;
 		}
 
-		*:last-child {
+		*:last-child,
+		*:nth-last-child(2) {
 			text-align: right;
+		}
+
+		.currency {
+			flex: 0;
+			min-width: 50px;
 		}
 	}
 }
