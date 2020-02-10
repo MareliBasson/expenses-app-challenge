@@ -27,6 +27,7 @@ A list of links or people I consulted while building the project on topics i'm n
 -   Leon van Niekerk - partner/rubber duck
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
+    -   https://muffinman.io/uploading-files-using-fetch-multipart-form-data/
 -   Image Loader
     -   https://codeburst.io/react-image-upload-with-kittens-cc96430eaece
 
@@ -34,7 +35,8 @@ A list of links or people I consulted while building the project on topics i'm n
 
 -   Handling API calls, specifically POST and especially the receipt update calls
 -   How to setup a image uploader using Firebase (my first attempt at image uploading before I realised the API includes an Express server)
--   Debugging an Internal Server Error
+-   Debugging an Internal Server Error - the cause was the content-type header I'd set on the form-data call for receipts
+-   How to add new properties to an array of nested objects using this.setState and prevState - I used this to create a userName property and then confirm there were no repeat usernames with \_.uniqBy - the idea was to allow users to filter by username, but since all the usernames were unique I abandoned this feature.
 -
 
 ## Packages used

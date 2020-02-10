@@ -92,7 +92,11 @@ class ExpensesPage extends Component {
 			},
 			() => {
 				this.fetchData(0, () => {
-					console.log(this.state.expenses)
+					// console.log(this.state.expenses)
+					// this.state.expenses.forEach(expense => {
+					// 	expense.userName = `${expense.user.first} ${expense.user.last}`
+					// })
+					// console.log(this.state.expenses)
 				})
 			}
 		)
@@ -106,7 +110,19 @@ class ExpensesPage extends Component {
 			},
 			() => {
 				this.fetchData(0, () => {
-					console.log(_.uniqBy(this.state.expenses, 'merchant'))
+					console.log('original expenses')
+					console.log(this.state.expenses)
+
+					this.setState(prevState => ({
+						expenses: prevState.expenses.map(expense => ({
+							...expense,
+							userName: `${expense.user.first} ${expense.user.last}`
+						}))
+					}))
+
+					// console.log(this.state.expenses)
+					console.log('unique by')
+					console.log(_.uniqBy(this.state.expenses, 'userName'))
 				})
 			}
 		)
@@ -118,9 +134,9 @@ class ExpensesPage extends Component {
 		const limits = ['25', '50', 'All']
 
 		return (
-			<div className='expenses-page'>
-				<div className='actions'>
-					<div className='number-of-entries'>
+			<div className="expenses-page">
+				<div className="actions">
+					<div className="number-of-entries">
 						Show:
 						{limits.map((limit, index) => {
 							return (
@@ -139,16 +155,22 @@ class ExpensesPage extends Component {
 						})}
 					</div>
 
-					<div className='filter'>
+					<div className="filter">
 						Filter by user: <button onClick={this.filterByUser}>test</button>
 					</div>
 
 					{limit === 'All' ? (
-						<div className='entries-visible'>
+						<div className="entries-visible">
 							<strong>{expenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<Pagination page={page} total={entriesTotal} limit={limit} handleNext={this.goToNext} handlePrev={this.goToPrev} />
+						<Pagination
+							page={page}
+							total={entriesTotal}
+							limit={limit}
+							handleNext={this.goToNext}
+							handlePrev={this.goToPrev}
+						/>
 					)}
 				</div>
 
