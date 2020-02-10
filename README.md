@@ -51,3 +51,4 @@ A list of links or people I consulted while building the project on topics i'm n
     -   First option seems the most reliable to me, but if you have a slow connection this can considerably slow down the apps responsiveness, also I then need to keep track of what view the user was on to make sure they don't loose their context - whether on a specific page or filtered view.
     -   Second option seems better for providing a seamless UI experience but I worry about keeping the API and the local dataset synched with each other.
     -   Currently settling on option one as it speaks to my aversion for potential data loss.
+-   I've noticed that the API doesn't update a comment if it sends a blank string ("") through.

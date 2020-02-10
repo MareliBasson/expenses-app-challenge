@@ -67,16 +67,24 @@ class ExpensesList extends Component {
 							</div>
 
 							<div className='comment'>
-								<span>{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}</span>
-								<div className='info-tip'>{expense.comment}</div>
+								{expense.comment !== '' && (
+									<Fragment>
+										<span>{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}</span>
+										<div className='info-tip'>
+											<div>{expense.comment}</div>
+										</div>
+									</Fragment>
+								)}
 							</div>
 
 							<div className='images'>
-								{expense.receipts && (
+								{expense.receipts.length > 0 && (
 									<Fragment>
 										<span>{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}</span>
 										<div className='info-tip'>
-											{expense.receipts.length} image{expense.receipts.length > 1 && 's'}
+											<div>
+												{expense.receipts.length} image{expense.receipts.length > 1 && 's'}
+											</div>
 										</div>
 									</Fragment>
 								)}

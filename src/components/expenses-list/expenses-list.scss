@@ -10,7 +10,8 @@
 		justify-content: space-between;
 		align-items: center;
 		border-bottom: 1px solid $colorDivider;
-		padding: 10px 20px;
+		padding: 0px 20px;
+		height: 34px;
 		transition: background-color 0.3s ease;
 
 		&:hover {
@@ -52,21 +53,79 @@
 			font-size: 14px;
 			min-width: 40px;
 			text-align: center;
-			color: $colorSecondary;
 			position: relative;
+
+			span {
+				color: $colorSecondary;
+			}
 
 			.info-tip {
 				display: none;
 				position: absolute;
 				top: calc(100% + 10px);
-				left: 5px;
 				background-color: white;
 				padding: 10px;
+				box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2);
+				border: 2px solid lighten($colorTextDark, 70%);
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: -8px;
+					left: 50%;
+					transform: translateX(-50%);
+					width: 0;
+					height: 0;
+					border-left: 8px solid transparent;
+					border-right: 8px solid transparent;
+					border-bottom: 8px solid lighten($colorTextDark, 70%);
+				}
+
+				> div {
+					position: relative;
+					overflow: hidden;
+				}
 			}
 
 			&:hover {
 				.info-tip {
 					display: block;
+				}
+			}
+		}
+
+		.comment {
+			.info-tip {
+				width: 200px;
+				left: -80px;
+
+				> div {
+					$infoTipHeight: 160px;
+					$fadeHeight: 100px;
+
+					max-height: $infoTipHeight;
+					text-align: left;
+
+					&:after {
+						content: '';
+						width: 100%;
+						height: $fadeHeight;
+						background: linear-gradient(rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 90%);
+						position: absolute;
+						top: calc(#{$infoTipHeight} - #{$fadeHeight});
+						left: 0;
+					}
+				}
+			}
+		}
+
+		.images {
+			.info-tip {
+				width: 80px;
+				left: -20px;
+
+				> div {
+					text-align: center;
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ExpensesList from 'components/expenses-list'
+import Pagination from 'components/pagination'
 import './expenses.css'
 
 class ExpensesPage extends Component {
@@ -28,19 +29,19 @@ class ExpensesPage extends Component {
 			})
 	}
 
-	// Used to refresh data after the user makes changes - it uses values from state to make sure view context is maintained (limit and page number)
+	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number)
 	fetchData(pageNrModifier) {
 		const { entriesTotal, limit, page } = this.state
 
-		const howManyEntries = limit === 'all' ? entriesTotal : parseInt(limit)
-		const onWhichPage = limit === 'all' ? '' : `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
+		const howManyEntries = limit === 'All' ? entriesTotal : parseInt(limit)
+		const onWhichPage = limit === 'All' ? '' : `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
 
 		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${onWhichPage}}`)
 			.then(response => response.json())
 			.then(expenses =>
 				this.setState({
 					expenses: expenses.expenses,
-					visibleEntries: limit === 'all' ? expenses.entriesTotal : parseInt(limit)
+					visibleEntries: limit === 'All' ? expenses.entriesTotal : parseInt(limit)
 				})
 			)
 			.catch(err => {
@@ -62,12 +63,6 @@ class ExpensesPage extends Component {
 		this.fetchData(1)
 	}
 
-	componentDidUpdate() {
-		// if (this.state.entriesTotal !== this.state.expenses.length) {
-		// 	this.getAllEntries()
-		// }
-	}
-
 	componentDidMount() {
 		this.initialFetch()
 	}
@@ -75,47 +70,35 @@ class ExpensesPage extends Component {
 	render() {
 		const { expenses, entriesTotal, page, limit } = this.state
 
+		const limits = ['25', '50', 'All']
+
 		return (
 			<div className='expenses-page'>
 				<div className='actions'>
 					<div className='number-of-entries'>
 						Show:
-						<button
-							onClick={() => {
-								this.initialFetch()
-								this.setState({ limit: '25' })
-							}}
-							className={`btn ${limit === '25' ? 'btn-primary' : 'btn-outline'}`}
-						>
-							25
-						</button>
-						<button
-							onClick={() => {
-								this.setState({ limit: 'all', page: 1 }, () => {
-									this.fetchData()
-								})
-							}}
-							className={`btn ${limit === 'all' ? 'btn-primary' : 'btn-outline'}`}
-						>
-							All
-						</button>
+						{limits.map((limit, index) => {
+							return (
+								<button
+									onClick={() => {
+										this.setState({ limit: limit, page: 1 }, () => {
+											this.fetchData()
+										})
+									}}
+									className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
+								>
+									{limit}
+								</button>
+							)
+						})}
 					</div>
-					{limit === 'all' ? (
+
+					{limit === 'All' ? (
 						<div className='entries-visible'>
 							<strong>{expenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<div className='pagination'>
-							<button onClick={this.goToPrev} disabled={page === 1}>
-								Prev
-							</button>
-							<div className='page-count'>
-								{page}/{Math.ceil(entriesTotal / limit)}
-							</div>
-							<button onClick={this.goToNext} disabled={page === Math.ceil(entriesTotal / limit)}>
-								Next
-							</button>
-						</div>
+						<Pagination page={page} total={entriesTotal} limit={limit} handleNext={this.goToNext} handlePrev={this.goToPrev} />
 					)}
 				</div>
 

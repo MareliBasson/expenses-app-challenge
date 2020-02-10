@@ -5,9 +5,10 @@ $colorSecondary: #55d6be;
 $colorBg: #f9f2e8;
 $colorWarning: #f95738;
 $colorSuccess: #4daa57;
-$textDark: #201921;
-$textLight: $colorBg;
-$colorDivider: lighten($textDark, 80%);
+
+$colorTextDark: #201921;
+$colorTextLight: $colorBg;
+$colorDivider: lighten($colorTextDark, 80%);
 
 // Text/Font Styles
 
