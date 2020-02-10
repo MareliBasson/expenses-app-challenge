@@ -43,39 +43,41 @@ class ExpensesList extends Component {
 		const { expenses } = this.props
 
 		return (
-			<div className="expenses-list">
+			<div className='expenses-list'>
 				{expenses.map((expense, index) => {
 					return (
 						<div
-							className="expense"
+							className='expense'
 							key={`expense-${index}`}
 							onClick={() => {
 								this.selectExpense(expense.id)
 								this.toggleExpenseModal()
 							}}
 						>
-							<div className="user">
+							<div className='user'>
 								{expense.user.first} {expense.user.last}
 							</div>
-							<div className="merchant">{expense.merchant}</div>
+							<div className='merchant'>{expense.merchant}</div>
 
-							<div className="date">
-								<Moment format="DD MMM YYYY">{expense.date}</Moment>
+							<div className='date'>
+								<Moment format='DD MMM YYYY'>{expense.date}</Moment>
 							</div>
 
-							<div className="amount">{expense.amount.value}</div>
-							<div className="currency">{expense.amount.currency}</div>
+							<div className='amount'>{expense.amount.value}</div>
+							<div className='currency'>{expense.amount.currency}</div>
 						</div>
 					)
 				})}
 
-				<ExpenseModal
-					expense={_.find(expenses, expense => {
-						return expense.id === selectedExpense
-					})}
-					toggleModal={this.toggleExpenseModal}
-					modalActive={modalActive}
-				/>
+				{modalActive && (
+					<ExpenseModal
+						expense={_.find(expenses, expense => {
+							return expense.id === selectedExpense
+						})}
+						toggleModal={this.toggleExpenseModal}
+						modalActive={modalActive}
+					/>
+				)}
 			</div>
 		)
 	}
