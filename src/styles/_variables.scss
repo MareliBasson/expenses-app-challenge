@@ -1,5 +1,3 @@
-// Add variables here
-
 // Colors
 
 $colorPrimary: #38072b;
@@ -11,6 +9,15 @@ $textDark: #201921;
 $textLight: $colorBg;
 $colorDivider: lighten($textDark, 80%);
 
+// Text/Font Styles
+
 $fontPrimary: 'Lato', sans-serif;
 
+// Layout sizing
+
 $sidebarWidth: 200px;
+$sidebarWidthMobile: 150px;
+
+// Breakpoints
+$bp-mobile: 768px;
+$bp-desktop: 1024px;

@@ -2,6 +2,7 @@
 
 .expenses-list {
 	padding-bottom: 80px;
+
 	.expense {
 		font-size: 1em;
 		width: 100%;
@@ -17,18 +18,57 @@
 			transition: background-color 0.2s ease;
 		}
 
-		> * {
-			flex: 1;
-		}
-
 		*:last-child,
 		*:nth-last-child(2) {
 			text-align: right;
 		}
 
-		.currency {
+		> * {
+			flex: 1;
+		}
+
+		.currency,
+		.comment,
+		.images,
+		.date,
+		.amount {
 			flex: 0;
+		}
+
+		.date {
+			min-width: 100px;
+		}
+
+		.currency {
 			min-width: 50px;
+		}
+
+		.amount {
+			min-width: 100px;
+		}
+
+		.comment,
+		.images {
+			font-size: 14px;
+			min-width: 40px;
+			text-align: center;
+			color: $colorSecondary;
+			position: relative;
+
+			.info-tip {
+				display: none;
+				position: absolute;
+				top: calc(100% + 10px);
+				left: 5px;
+				background-color: white;
+				padding: 10px;
+			}
+
+			&:hover {
+				.info-tip {
+					display: block;
+				}
+			}
 		}
 	}
 }

@@ -15,7 +15,6 @@ class ExpensesPage extends Component {
 
 		this.initialFetch = this.initialFetch.bind(this)
 		this.fetchData = this.fetchData.bind(this)
-		this.handleComment = this.handleComment.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
 	}
@@ -29,14 +28,12 @@ class ExpensesPage extends Component {
 			})
 	}
 
+	// Used to refresh data after the user makes changes - it uses values from state to make sure view context is maintained (limit and page number)
 	fetchData(pageNrModifier) {
 		const { entriesTotal, limit, page } = this.state
 
 		const howManyEntries = limit === 'all' ? entriesTotal : parseInt(limit)
-		const onWhichPage =
-			limit === 'all'
-				? ''
-				: `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
+		const onWhichPage = limit === 'all' ? '' : `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
 
 		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${onWhichPage}}`)
 			.then(response => response.json())
@@ -49,21 +46,6 @@ class ExpensesPage extends Component {
 			.catch(err => {
 				console.log(err)
 			})
-	}
-
-	handleComment(expenseId) {
-		fetch(`http://localhost:3000/expenses/${expenseId}`, {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				comment: `testing ${expenseId}`
-			})
-		}).then(() => {
-			this.initialFetch()
-		})
 	}
 
 	goToPrev() {
@@ -94,9 +76,9 @@ class ExpensesPage extends Component {
 		const { expenses, entriesTotal, page, limit } = this.state
 
 		return (
-			<div className="expenses-page">
-				<div className="actions">
-					<div className="number-of-entries">
+			<div className='expenses-page'>
+				<div className='actions'>
+					<div className='number-of-entries'>
 						Show:
 						<button
 							onClick={() => {
@@ -119,15 +101,15 @@ class ExpensesPage extends Component {
 						</button>
 					</div>
 					{limit === 'all' ? (
-						<div className="entries-visible">
+						<div className='entries-visible'>
 							<strong>{expenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<div className="pagination">
+						<div className='pagination'>
 							<button onClick={this.goToPrev} disabled={page === 1}>
 								Prev
 							</button>
-							<div className="page-count">
+							<div className='page-count'>
 								{page}/{Math.ceil(entriesTotal / limit)}
 							</div>
 							<button onClick={this.goToNext} disabled={page === Math.ceil(entriesTotal / limit)}>
