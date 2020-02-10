@@ -1,69 +1,25 @@
 @import './styles/variables';
 
 .expense-modal {
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-
-	&.active {
+	.row {
 		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+		justify-content: space-between;
+		align-items: flex-start;
 
-	.modal-overlay {
-		position: fixed;
-		z-index: 1;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.4);
-	}
-
-	.modal-container {
-		width: 400px;
-		background-color: $colorBg;
-		padding: 20px;
-		z-index: 2;
-		position: relative;
-
-		.modal-header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			border-bottom: 1px solid $colorDivider;
-			padding-bottom: 20px;
+		.col {
+			&:last-child {
+				text-align: right;
+			}
 		}
+	}
 
-		.modal-content {
-			padding: 10px 0 20px;
+	.info-item {
+		padding: 10px 0px;
 
-			.row {
-				display: flex;
-				justify-content: space-between;
-				align-items: flex-start;
-
-				.col {
-					&:last-child {
-						text-align: right;
-					}
-				}
-			}
-
-			.info-item {
-				padding: 10px 0px;
-
-				.info-label {
-					font-size: 0.8rem;
-					margin-bottom: 8px;
-					font-weight: 400;
-				}
-			}
+		.info-label {
+			font-size: 0.8rem;
+			margin-bottom: 8px;
+			font-weight: 400;
 		}
 	}
 }
