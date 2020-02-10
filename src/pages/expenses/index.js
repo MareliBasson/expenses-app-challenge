@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import ExpensesList from 'components/expenses-list'
 import Pagination from 'components/pagination'
 import './expenses.css'
@@ -11,13 +12,15 @@ class ExpensesPage extends Component {
 			expenses: [],
 			entriesTotal: 0,
 			limit: '25',
-			page: 1
+			page: 1,
+			filter: 'user'
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
 		this.fetchData = this.fetchData.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
+		this.filterByUser = this.filterByUser.bind(this)
 	}
 
 	initialFetch() {
@@ -30,13 +33,26 @@ class ExpensesPage extends Component {
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number)
-	fetchData(pageNrModifier) {
+	fetchData(pageNrModifier, cb) {
 		const { entriesTotal, limit, page } = this.state
 
-		const howManyEntries = limit === 'All' ? entriesTotal : parseInt(limit)
-		const onWhichPage = limit === 'All' ? '' : `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
+		const howManyEntries = () => {
+			if (limit === 'All') {
+				return entriesTotal
+			} else {
+				return parseInt(limit)
+			}
+		}
 
-		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${onWhichPage}}`)
+		const onWhichPage = () => {
+			if (limit === 'All') {
+				return ''
+			} else {
+				return `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
+			}
+		}
+
+		fetch(`http://localhost:3000/expenses?limit=${howManyEntries()}${onWhichPage()}}`)
 			.then(response => response.json())
 			.then(expenses =>
 				this.setState({
@@ -44,6 +60,7 @@ class ExpensesPage extends Component {
 					visibleEntries: limit === 'All' ? expenses.entriesTotal : parseInt(limit)
 				})
 			)
+			.then(cb)
 			.catch(err => {
 				console.log(err)
 			})
@@ -67,6 +84,34 @@ class ExpensesPage extends Component {
 		this.initialFetch()
 	}
 
+	setUserFilter() {
+		this.setState(
+			{
+				limit: 'All',
+				page: 1
+			},
+			() => {
+				this.fetchData(0, () => {
+					console.log(this.state.expenses)
+				})
+			}
+		)
+	}
+
+	filterByUser() {
+		this.setState(
+			{
+				limit: 'All',
+				page: 1
+			},
+			() => {
+				this.fetchData(0, () => {
+					console.log(_.uniqBy(this.state.expenses, 'merchant'))
+				})
+			}
+		)
+	}
+
 	render() {
 		const { expenses, entriesTotal, page, limit } = this.state
 
@@ -80,6 +125,7 @@ class ExpensesPage extends Component {
 						{limits.map((limit, index) => {
 							return (
 								<button
+									key={`limit-${index}`}
 									onClick={() => {
 										this.setState({ limit: limit, page: 1 }, () => {
 											this.fetchData()
@@ -91,6 +137,10 @@ class ExpensesPage extends Component {
 								</button>
 							)
 						})}
+					</div>
+
+					<div className='filter'>
+						Filter by user: <button onClick={this.filterByUser}>test</button>
 					</div>
 
 					{limit === 'All' ? (
