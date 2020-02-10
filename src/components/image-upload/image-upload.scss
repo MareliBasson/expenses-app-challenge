@@ -1,42 +1,73 @@
 @import './styles/variables';
 
 .image-upload {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	.input-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
 
-	.file {
-		position: relative;
-		display: block;
-		cursor: pointer;
-		height: 35px;
+		.file {
+			position: relative;
+			display: block;
+			cursor: pointer;
+			height: 35px;
+		}
+
+		.file input {
+			min-width: 14rem;
+			opacity: 0;
+		}
+
+		.file-custom {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: 5;
+			padding: 10px;
+			background-color: white;
+			border: 1px solid $colorDivider;
+			border-radius: 3px;
+			user-select: none;
+			font-size: 0.8rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			cursor: pointer;
+		}
+
+		/* Focus */
+		.file input:focus ~ .file-custom {
+			box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem $colorSecondary;
+		}
 	}
 
-	.file input {
-		min-width: 14rem;
-		opacity: 0;
-	}
+	.previews {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
 
-	.file-custom {
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		z-index: 5;
-		padding: 10px;
-		background-color: white;
-		border: 1px solid $colorDivider;
-		border-radius: 3px;
-		user-select: none;
-		font-size: 0.8rem;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		cursor: pointer;
-	}
+		.preview-img {
+			min-width: 32%;
+			border: 1px solid $colorDivider;
+			background-color: white;
+			border-radius: 3px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100px;
+			padding: 5px;
 
-	/* Focus */
-	.file input:focus ~ .file-custom {
-		box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem $colorSecondary;
+			&:nth-child(3n + 2) {
+				margin: 0 2% 5px;
+			}
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
 	}
 }

@@ -13,7 +13,7 @@ class ImageUpload extends Component {
 	}
 
 	handleChange = e => {
-		this.setState({ image: e.target.files[0] })
+		this.setState({ image: e.target.files[0], uploadSuccess: false })
 	}
 
 	saveImages(event) {
@@ -29,7 +29,9 @@ class ImageUpload extends Component {
 			.then(res => {
 				if (res.ok) {
 					console.log(res.data)
-					alert('File uploaded successfully.')
+					this.setState({
+						uploadSuccess: true
+					})
 				}
 			})
 			.catch(err => {
@@ -38,23 +40,26 @@ class ImageUpload extends Component {
 	}
 
 	render() {
-		const { image } = this.state
+		const { image, uploadSuccess } = this.state
 
 		const { preview } = this.props
 
 		return (
-			<div className="info-item">
+			<div className="info-item image-upload">
 				<div className="info-label">Receipt</div>
 
-				<div className="image-upload">
+				<div className="input-wrapper">
 					<label htmlFor="upload" className="file">
 						<input type="file" id="upload" onChange={this.handleChange} />
 						<div className="file-custom">{image ? image.name : 'Choose a file...'}</div>
 					</label>
-					<button onClick={this.saveImages} className="btn btn-primary btn-feature">
-						Upload
-					</button>
+					<div className="upload-btn">
+						<button onClick={this.saveImages} className="btn btn-primary btn-feature">
+							Upload
+						</button>
+					</div>
 				</div>
+				{uploadSuccess && <div className="text-right">Image uploaded successfully</div>}
 
 				<div className="previews">
 					{preview &&

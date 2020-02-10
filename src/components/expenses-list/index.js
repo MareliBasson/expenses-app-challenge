@@ -45,53 +45,61 @@ class ExpensesList extends Component {
 		const { expenses } = this.props
 
 		return (
-			<div className='expenses-list'>
+			<div className="expenses-list">
 				{expenses.map((expense, index) => {
 					return (
 						<div
-							className='expense'
+							className="expense"
 							key={`expense-${index}`}
 							onClick={() => {
 								this.selectExpense(expense.id)
 								this.toggleExpenseModal()
 							}}
 						>
-							<div className='date'>
-								<Moment format='DD MMM YYYY'>{expense.date}</Moment>
+							<div className="date">
+								<Moment format="DD MMM YYYY">{expense.date}</Moment>
 							</div>
 
-							<div className='merchant'>{expense.merchant}</div>
+							<div className="merchant">{expense.merchant}</div>
 
-							<div className='user'>
+							<div className="user">
 								{expense.user.first} {expense.user.last}
 							</div>
 
-							<div className='comment'>
-								{expense.comment !== '' && (
-									<Fragment>
-										<span>{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}</span>
-										<div className='info-tip'>
-											<div>{expense.comment}</div>
-										</div>
-									</Fragment>
-								)}
+							<div className="comment">
+								{/* NOTE: the API doesn't update if a blank string is sent so I'm mocking a comment removal by allowing a single space to be read as if there's no comment */}
+								{expense.comment !== ''
+									? expense.comment !== ' ' && (
+											<Fragment>
+												<span>
+													{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}
+												</span>
+												<div className="info-tip">
+													<div>{expense.comment}</div>
+												</div>
+											</Fragment>
+									  )
+									: ''}
 							</div>
 
-							<div className='images'>
+							<div className="images">
 								{expense.receipts.length > 0 && (
 									<Fragment>
-										<span>{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}</span>
-										<div className='info-tip'>
+										<span>
+											{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}
+										</span>
+										<div className="info-tip">
 											<div>
-												{expense.receipts.length} image{expense.receipts.length > 1 && 's'}
+												{expense.receipts.length} image
+												{expense.receipts.length > 1 && 's'}
 											</div>
 										</div>
 									</Fragment>
 								)}
 							</div>
 
-							<div className='amount'>{expense.amount.value}</div>
-							<div className='currency'>{expense.amount.currency}</div>
+							<div className="amount">{expense.amount.value}</div>
+							<div className="currency">{expense.amount.currency}</div>
 						</div>
 					)
 				})}
