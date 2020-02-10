@@ -20,7 +20,7 @@ class ExpensesPage extends Component {
 		this.fetchData = this.fetchData.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
-		this.filterByUser = this.filterByUser.bind(this)
+		this.filterBy = this.filterBy.bind(this)
 	}
 
 	initialFetch() {
@@ -33,26 +33,21 @@ class ExpensesPage extends Component {
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number)
-	fetchData(pageNrModifier, cb) {
+	fetchData(pageNrModifier) {
 		const { entriesTotal, limit, page } = this.state
 
-		const howManyEntries = () => {
-			if (limit === 'All') {
-				return entriesTotal
-			} else {
-				return parseInt(limit)
-			}
+		let howManyEntries
+		let pageNr
+
+		if (limit === 'All') {
+			howManyEntries = entriesTotal
+			pageNr = ''
+		} else {
+			howManyEntries = parseInt(limit)
+			pageNr = `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
 		}
 
-		const onWhichPage = () => {
-			if (limit === 'All') {
-				return ''
-			} else {
-				return `&offset=${parseInt(limit) * (pageNrModifier ? page - 1 + pageNrModifier : page - 1)}`
-			}
-		}
-
-		fetch(`http://localhost:3000/expenses?limit=${howManyEntries()}${onWhichPage()}}`)
+		fetch(`http://localhost:3000/expenses?limit=${howManyEntries}${pageNr}}`)
 			.then(response => response.json())
 			.then(expenses =>
 				this.setState({
@@ -60,7 +55,6 @@ class ExpensesPage extends Component {
 					visibleEntries: limit === 'All' ? expenses.entriesTotal : parseInt(limit)
 				})
 			)
-			.then(cb)
 			.catch(err => {
 				console.log(err)
 			})
@@ -80,52 +74,10 @@ class ExpensesPage extends Component {
 		this.fetchData(1)
 	}
 
+	filterBy() {}
+
 	componentDidMount() {
 		this.initialFetch()
-	}
-
-	setUserFilter() {
-		this.setState(
-			{
-				limit: 'All',
-				page: 1
-			},
-			() => {
-				this.fetchData(0, () => {
-					// console.log(this.state.expenses)
-					// this.state.expenses.forEach(expense => {
-					// 	expense.userName = `${expense.user.first} ${expense.user.last}`
-					// })
-					// console.log(this.state.expenses)
-				})
-			}
-		)
-	}
-
-	filterByUser() {
-		this.setState(
-			{
-				limit: 'All',
-				page: 1
-			},
-			() => {
-				this.fetchData(0, () => {
-					console.log('original expenses')
-					console.log(this.state.expenses)
-
-					this.setState(prevState => ({
-						expenses: prevState.expenses.map(expense => ({
-							...expense,
-							userName: `${expense.user.first} ${expense.user.last}`
-						}))
-					}))
-
-					// console.log(this.state.expenses)
-					console.log('unique by')
-					console.log(_.uniqBy(this.state.expenses, 'userName'))
-				})
-			}
-		)
 	}
 
 	render() {
@@ -156,7 +108,7 @@ class ExpensesPage extends Component {
 					</div>
 
 					<div className="filter">
-						Filter by user: <button onClick={this.filterByUser}>test</button>
+						Filter by: <button onClick={this.filterBy}>test</button>
 					</div>
 
 					{limit === 'All' ? (
