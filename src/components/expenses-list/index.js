@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import Moment from 'react-moment'
+import moment from 'moment'
 import ExpenseModal from 'components/expense-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
@@ -56,9 +56,7 @@ class ExpensesList extends Component {
 								this.toggleExpenseModal()
 							}}
 						>
-							<div className="date">
-								<Moment format="DD MMM YYYY">{expense.date}</Moment>
-							</div>
+							<div className="date">{moment(expense.date).format('DD MMM YYYY')}</div>
 
 							<div className="merchant">{expense.merchant}</div>
 
@@ -71,9 +69,7 @@ class ExpensesList extends Component {
 								{expense.comment !== ''
 									? expense.comment !== ' ' && (
 											<Fragment>
-												<span>
-													{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}
-												</span>
+												<span>{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}</span>
 												<div className="info-tip">
 													<div>{expense.comment}</div>
 												</div>
@@ -85,9 +81,7 @@ class ExpensesList extends Component {
 							<div className="images">
 								{expense.receipts.length > 0 && (
 									<Fragment>
-										<span>
-											{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}
-										</span>
+										<span>{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}</span>
 										<div className="info-tip">
 											<div>
 												{expense.receipts.length} image

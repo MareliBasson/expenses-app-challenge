@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
+import moment from 'moment'
 import ExpensesList from 'components/expenses-list'
 import Pagination from 'components/pagination'
 import './expenses.css'
@@ -85,6 +86,28 @@ class ExpensesPage extends Component {
 
 		const limits = ['25', '50', 'All']
 
+		if (!_.isEmpty(expenses)) {
+			const months = () => {
+				const monthsArr = []
+				const lastEntryDate = moment(new Date(expenses[expenses.length - 1].date)).format()
+				const todaysDate = moment()._d
+				const dateStart = moment(lastEntryDate)
+				const dateEnd = moment(todaysDate)
+
+				console.log(dateStart)
+				console.log(lastEntryDate)
+				console.log(dateEnd.diff(dateStart, 'months'))
+
+				while (dateEnd.diff(dateStart, 'months') >= 0) {
+					monthsArr.push(dateStart.format('MMMM YYYY'))
+					dateStart.add(1, 'month')
+				}
+				return monthsArr
+			}
+
+			console.log(months())
+		}
+
 		return (
 			<div className="expenses-page">
 				<div className="actions">
@@ -116,13 +139,7 @@ class ExpensesPage extends Component {
 							<strong>{expenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<Pagination
-							page={page}
-							total={entriesTotal}
-							limit={limit}
-							handleNext={this.goToNext}
-							handlePrev={this.goToPrev}
-						/>
+						<Pagination page={page} total={entriesTotal} limit={limit} handleNext={this.goToNext} handlePrev={this.goToPrev} />
 					)}
 				</div>
 

@@ -61,6 +61,7 @@
 
 			.info-tip {
 				display: none;
+				z-index: 1;
 				position: absolute;
 				top: calc(100% + 10px);
 				background-color: white;
