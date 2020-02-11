@@ -30,6 +30,8 @@ A list of links or people I consulted while building the project on topics i'm n
     -   https://muffinman.io/uploading-files-using-fetch-multipart-form-data/
 -   Image Loader
     -   https://codeburst.io/react-image-upload-with-kittens-cc96430eaece
+-   By Month filter
+    -   https://medium.com/better-programming/how-to-generate-an-array-of-months-years-or-days-in-javascript-add4b8419ff9
 
 ## What I've learnt
 

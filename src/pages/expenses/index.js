@@ -91,12 +91,9 @@ class ExpensesPage extends Component {
 				const monthsArr = []
 				const lastEntryDate = moment(new Date(expenses[expenses.length - 1].date)).format()
 				const todaysDate = moment()._d
+
 				const dateStart = moment(lastEntryDate)
 				const dateEnd = moment(todaysDate)
-
-				console.log(dateStart)
-				console.log(lastEntryDate)
-				console.log(dateEnd.diff(dateStart, 'months'))
 
 				while (dateEnd.diff(dateStart, 'months') >= 0) {
 					monthsArr.push(dateStart.format('MMMM YYYY'))
