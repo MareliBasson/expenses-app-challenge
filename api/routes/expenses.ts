@@ -50,6 +50,8 @@ router.post('/:id', (req, res) => {
 
 	if (expense) {
 		expense.comment = req.body.comment || expense.comment
+		expense.category = req.body.category || expense.category
+
 		res.status(200).send(expense)
 	} else {
 		res.status(404)
