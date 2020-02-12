@@ -4,9 +4,11 @@ import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import ExpensesList from 'components/expenses-list'
 import Pagination from 'components/pagination'
-import './expenses.css'
 
+import './expenses.css'
 import 'react-datepicker/dist/react-datepicker.css'
+
+const ExpensesContext = React.createContext()
 
 class ExpensesPage extends Component {
 	constructor(props) {
@@ -19,7 +21,8 @@ class ExpensesPage extends Component {
 			page: 1,
 			startDate: new Date(),
 			endDate: new Date(),
-			filterActive: false
+			filterActive: false,
+			fetchData: this.fetchData()
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -129,78 +132,96 @@ class ExpensesPage extends Component {
 		const limits = ['25', '50', 'All']
 
 		return (
-			<div className="expenses-page">
-				<div className="actions">
-					{!filterActive && (
-						<div className="number-of-entries">
-							Show:
-							{limits.map((limit, index) => {
-								return (
-									<button
-										key={`limit-${index}`}
-										onClick={() => {
-											this.setState({ limit: limit, page: 1 }, () => {
-												this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-											})
-										}}
-										className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
-									>
-										{limit}
-									</button>
-								)
-							})}
-						</div>
-					)}
+			<ExpensesContext.Provider value={this.state.visibleExpenses}>
+				<div className="expenses-page">
+					<div className="actions">
+						{!filterActive && (
+							<div className="number-of-entries">
+								Show:
+								{limits.map((limit, index) => {
+									return (
+										<button
+											key={`limit-${index}`}
+											onClick={() => {
+												this.setState({ limit: limit, page: 1 }, () => {
+													this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+												})
+											}}
+											className={`btn ${
+												limit === this.state.limit ? 'btn-primary' : 'btn-outline'
+											}`}
+										>
+											{limit}
+										</button>
+									)
+								})}
+							</div>
+						)}
 
-					<div className="filter text-center">
-						Filter by:
-						<DatePicker
-							dateFormat="dd/MM/yyyy"
-							selected={startDate}
-							onChange={date => this.setState({ startDate: date })}
-							selectsStart
-							startDate={startDate}
-							endDate={endDate}
-							maxDate={new Date()}
-						/>
-						<DatePicker
-							dateFormat="dd/MM/yyyy"
-							selected={endDate}
-							onChange={date => this.setState({ endDate: date })}
-							selectsEnd
-							startDate={startDate}
-							endDate={endDate}
-							maxDate={new Date()}
-							minDate={startDate}
-						/>
-						<button onClick={this.handleFilter}>Filter</button>
-						<button onClick={this.handleFilterReset}>Reset</button>
+						<div className="filter text-center">
+							Filter by:
+							<DatePicker
+								dateFormat="dd/MM/yyyy"
+								selected={startDate}
+								onChange={date => this.setState({ startDate: date })}
+								selectsStart
+								startDate={startDate}
+								endDate={endDate}
+								maxDate={new Date()}
+							/>
+							<DatePicker
+								dateFormat="dd/MM/yyyy"
+								selected={endDate}
+								onChange={date => this.setState({ endDate: date })}
+								selectsEnd
+								startDate={startDate}
+								endDate={endDate}
+								maxDate={new Date()}
+								minDate={startDate}
+							/>
+							<button onClick={this.handleFilter}>Filter</button>
+							<button onClick={this.handleFilterReset}>Reset</button>
+						</div>
+
+						{limit === 'All' || filterActive ? (
+							<div className="entries-visible text-right">
+								<strong>{visibleExpenses.length}</strong>&nbsp; entries
+							</div>
+						) : (
+							<Pagination
+								page={page}
+								total={entriesTotal}
+								limit={limit}
+								handleNext={this.goToNext}
+								handlePrev={this.goToPrev}
+							/>
+						)}
 					</div>
 
-					{limit === 'All' || filterActive ? (
-						<div className="entries-visible text-right">
-							<strong>{visibleExpenses.length}</strong>&nbsp; entries
-						</div>
-					) : (
-						<Pagination
-							page={page}
-							total={entriesTotal}
-							limit={limit}
-							handleNext={this.goToNext}
-							handlePrev={this.goToPrev}
-						/>
-					)}
+					{/* <ExpensesList
+						expenses={visibleExpenses}
+						fetchData={() => {
+							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+						}}
+					/> */}
+					<ExpensesListWrapper />
 				</div>
-
-				<ExpensesList
-					expenses={visibleExpenses}
-					fetchData={() => {
-						this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-					}}
-				/>
-			</div>
+			</ExpensesContext.Provider>
 		)
 	}
 }
+
+const ExpensesListWrapper = () => (
+	<ExpensesContext.Consumer>
+		{expenses => (
+			<ExpensesList
+				expenses={expenses}
+				fetchData={() => {
+					// this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+				}}
+			/>
+		)}
+	</ExpensesContext.Consumer>
+)
 
 export default ExpensesPage
