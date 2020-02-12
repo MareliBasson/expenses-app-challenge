@@ -38,28 +38,29 @@ class ExpensesPage extends Component {
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
-	fetchData(customPage, customLimit = 0) {
-		const { entriesTotal, limit, page } = this.state
-		console.log(customPage)
-		console.log(customLimit)
-
+	fetchData(page, limit, prop, cb = () => {}) {
 		let entriesLimit
 		let limitOffset
 
 		if (limit === 'All') {
-			entriesLimit = entriesTotal
+			entriesLimit = this.state.entriesTotal
 			limitOffset = ''
 		} else {
-			entriesLimit = customLimit > 0 ? customLimit : parseInt(limit)
-			limitOffset = parseInt(limit) * (customPage ? customPage - 1 : page - 1)
+			entriesLimit = parseInt(limit)
+			limitOffset = parseInt(limit) * (page - 1)
 		}
 
 		fetch(`http://localhost:3000/expenses?limit=${entriesLimit}${limitOffset > 0 ? `&offset=${limitOffset}` : ''}`)
 			.then(response => response.json())
 			.then(expenses =>
-				this.setState({
-					visibleExpenses: expenses.expenses
-				})
+				this.setState(
+					{
+						[prop]: expenses.expenses
+					},
+					() => {
+						cb()
+					}
+				)
 			)
 			.catch(err => {
 				console.log(err)
@@ -72,7 +73,7 @@ class ExpensesPage extends Component {
 				page: this.state.page - 1
 			},
 			() => {
-				this.fetchData(this.state.page)
+				this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 			}
 		)
 	}
@@ -83,7 +84,7 @@ class ExpensesPage extends Component {
 				page: this.state.page + 1
 			},
 			() => {
-				this.fetchData(this.state.page)
+				this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 			}
 		)
 	}
@@ -101,21 +102,9 @@ class ExpensesPage extends Component {
 			})
 		}
 
-		fetch(`http://localhost:3000/expenses?limit=${entriesTotal}`)
-			.then(response => response.json())
-			.then(expenses =>
-				this.setState(
-					{
-						entriesToFilter: expenses.expenses
-					},
-					() => {
-						filterEntriesByRange(this.state.entriesToFilter)
-					}
-				)
-			)
-			.catch(err => {
-				console.log(err)
-			})
+		this.fetchData(this.state.page, this.state.limit, 'entriesToFilter', () =>
+			filterEntriesByRange(this.state.entriesToFilter)
+		)
 	}
 
 	componentDidMount() {
@@ -138,7 +127,7 @@ class ExpensesPage extends Component {
 									key={`limit-${index}`}
 									onClick={() => {
 										this.setState({ limit: limit, page: 1 }, () => {
-											this.fetchData()
+											this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 										})
 									}}
 									className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
@@ -178,14 +167,20 @@ class ExpensesPage extends Component {
 							<strong>{visibleExpenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<Pagination page={page} total={entriesTotal} limit={limit} handleNext={this.goToNext} handlePrev={this.goToPrev} />
+						<Pagination
+							page={page}
+							total={entriesTotal}
+							limit={limit}
+							handleNext={this.goToNext}
+							handlePrev={this.goToPrev}
+						/>
 					)}
 				</div>
 
 				<ExpensesList
 					expenses={visibleExpenses}
 					fetchData={() => {
-						this.fetchData()
+						this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 					}}
 				/>
 			</div>
