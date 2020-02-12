@@ -18,7 +18,8 @@ class ExpensesPage extends Component {
 			limit: '25',
 			page: 1,
 			startDate: new Date(),
-			endDate: new Date()
+			endDate: new Date(),
+			filterActive: false
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -26,6 +27,7 @@ class ExpensesPage extends Component {
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
 		this.handleFilter = this.handleFilter.bind(this)
+		this.handleFilterReset = this.handleFilterReset.bind(this)
 	}
 
 	initialFetch() {
@@ -90,15 +92,18 @@ class ExpensesPage extends Component {
 	}
 
 	handleFilter() {
-		const { entriesTotal, startDate, endDate } = this.state
+		const { startDate, endDate } = this.state
 
 		const filterEntriesByRange = allExpenses => {
 			const filterResult = _.filter(allExpenses, expense => {
-				return moment(moment(expense.date).format()).isBetween(startDate, endDate)
+				const expenseDate = moment(expense.date).format()
+
+				return moment(expenseDate).isBetween(startDate, endDate)
 			})
 
 			this.setState({
-				visibleExpenses: filterResult
+				visibleExpenses: filterResult,
+				filterActive: true
 			})
 		}
 
@@ -107,36 +112,45 @@ class ExpensesPage extends Component {
 		)
 	}
 
+	handleFilterReset() {
+		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+		this.setState({
+			filterActive: false
+		})
+	}
+
 	componentDidMount() {
 		this.initialFetch()
 	}
 
 	render() {
-		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate } = this.state
+		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive } = this.state
 
 		const limits = ['25', '50', 'All']
 
 		return (
 			<div className="expenses-page">
 				<div className="actions">
-					<div className="number-of-entries">
-						Show:
-						{limits.map((limit, index) => {
-							return (
-								<button
-									key={`limit-${index}`}
-									onClick={() => {
-										this.setState({ limit: limit, page: 1 }, () => {
-											this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-										})
-									}}
-									className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
-								>
-									{limit}
-								</button>
-							)
-						})}
-					</div>
+					{!filterActive && (
+						<div className="number-of-entries">
+							Show:
+							{limits.map((limit, index) => {
+								return (
+									<button
+										key={`limit-${index}`}
+										onClick={() => {
+											this.setState({ limit: limit, page: 1 }, () => {
+												this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+											})
+										}}
+										className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
+									>
+										{limit}
+									</button>
+								)
+							})}
+						</div>
+					)}
 
 					<div className="filter text-center">
 						Filter by:
@@ -160,9 +174,10 @@ class ExpensesPage extends Component {
 							minDate={startDate}
 						/>
 						<button onClick={this.handleFilter}>Filter</button>
+						<button onClick={this.handleFilterReset}>Reset</button>
 					</div>
 
-					{limit === 'All' ? (
+					{limit === 'All' || filterActive ? (
 						<div className="entries-visible text-right">
 							<strong>{visibleExpenses.length}</strong>&nbsp; entries
 						</div>
