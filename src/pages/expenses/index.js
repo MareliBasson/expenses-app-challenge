@@ -25,7 +25,7 @@ class ExpensesPage extends Component {
 		this.fetchData = this.fetchData.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
-		this.filterBy = this.filterBy.bind(this)
+		this.handleFilter = this.handleFilter.bind(this)
 	}
 
 	initialFetch() {
@@ -88,25 +88,12 @@ class ExpensesPage extends Component {
 		)
 	}
 
-	filterBy() {
-		const { entriesTotal } = this.state
-		// const months = () => {
-		// 	const monthsArr = []
-		// 	const lastEntryDate = moment(new Date(visibleExpenses[visibleExpenses.length - 1].date)).format()
-		// 	const todaysDate = moment()._d
-		// 	const dateStart = moment(lastEntryDate)
-		// 	const dateEnd = moment(todaysDate)
-		// 	while (dateEnd.diff(dateStart, 'months') >= 0) {
-		// 		monthsArr.push(dateStart.format('MMMM YYYY'))
-		// 		dateStart.add(1, 'month')
-		// 	}
-		// 	return monthsArr
-		// }
-		// console.log(months())
+	handleFilter() {
+		const { entriesTotal, startDate, endDate } = this.state
 
 		const filterEntriesByRange = allExpenses => {
 			const filterResult = _.filter(allExpenses, expense => {
-				return moment(moment(expense.date).format()).isBetween(this.state.startDate, this.state.endDate)
+				return moment(moment(expense.date).format()).isBetween(startDate, endDate)
 			})
 
 			this.setState({
@@ -139,25 +126,6 @@ class ExpensesPage extends Component {
 		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate } = this.state
 
 		const limits = ['25', '50', 'All']
-
-		// if (!_.isEmpty(visibleExpenses)) {
-		// 	const months = () => {
-		// 		const monthsArr = []
-		// 		const lastEntryDate = moment(new Date(visibleExpenses[visibleExpenses.length - 1].date)).format()
-		// 		const todaysDate = moment()._d
-
-		// 		const dateStart = moment(lastEntryDate)
-		// 		const dateEnd = moment(todaysDate)
-
-		// 		while (dateEnd.diff(dateStart, 'months') >= 0) {
-		// 			monthsArr.push(dateStart.format('MMMM YYYY'))
-		// 			dateStart.add(1, 'month')
-		// 		}
-		// 		return monthsArr
-		// 	}
-
-		// 	// console.log(months())
-		// }
 
 		return (
 			<div className="expenses-page">
@@ -202,7 +170,7 @@ class ExpensesPage extends Component {
 							maxDate={new Date()}
 							minDate={startDate}
 						/>
-						<button onClick={this.filterBy}>Filter</button>
+						<button onClick={this.handleFilter}>Filter</button>
 					</div>
 
 					{limit === 'All' ? (
