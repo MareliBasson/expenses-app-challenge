@@ -8,7 +8,7 @@ import Pagination from 'components/pagination'
 import './expenses.css'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const ExpensesContext = React.createContext()
+export const ExpensesContext = React.createContext()
 
 class ExpensesPage extends Component {
 	constructor(props) {
@@ -132,7 +132,12 @@ class ExpensesPage extends Component {
 		const limits = ['25', '50', 'All']
 
 		return (
-			<ExpensesContext.Provider value={this.state.visibleExpenses}>
+			<ExpensesContext.Provider
+				value={{
+					expenses: visibleExpenses,
+					fetchData: this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+				}}
+			>
 				<div className="expenses-page">
 					<div className="actions">
 						{!filterActive && (
@@ -198,30 +203,23 @@ class ExpensesPage extends Component {
 						)}
 					</div>
 
-					{/* <ExpensesList
+					<ExpensesList
 						expenses={visibleExpenses}
 						fetchData={() => {
 							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 						}}
-					/> */}
-					<ExpensesListWrapper />
+					/>
+					{/* <ExpensesListWrapper /> */}
 				</div>
 			</ExpensesContext.Provider>
 		)
 	}
 }
 
-const ExpensesListWrapper = () => (
-	<ExpensesContext.Consumer>
-		{expenses => (
-			<ExpensesList
-				expenses={expenses}
-				fetchData={() => {
-					// this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-				}}
-			/>
-		)}
-	</ExpensesContext.Consumer>
-)
+// const ExpensesListWrapper = () => (
+// 	<ExpensesContext.Consumer>
+// 		{data => <ExpensesList expenses={data.expenses} fetchData={data.fetchData} />}
+// 	</ExpensesContext.Consumer>
+// )
 
 export default ExpensesPage

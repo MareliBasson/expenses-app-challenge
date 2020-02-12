@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './comment-form.css'
 
+import { ExpensesContext } from 'pages/expenses'
+
 class CommentForm extends Component {
 	constructor(props) {
 		super(props)
@@ -68,25 +70,32 @@ class CommentForm extends Component {
 		const { comment } = this.state
 
 		return (
-			<div className="info-item">
-				<div className="info-label">Comment</div>
-				<form onSubmit={this.saveComment} className="comment-form">
-					<textarea
-						type="text"
-						placeholder="Add a comment about this expense..."
-						onChange={this.handleComment}
-						value={comment ? comment : ''}
-					/>
-					<div className="btn-wrap-center">
-						<button type="submit" className="btn btn-primary btn-feature">
-							Save Comment
-						</button>
-					</div>
-					<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
-						change category
-					</button>
-				</form>
-			</div>
+			<ExpensesContext.Consumer>
+				{data => {
+					console.log(data)
+					return (
+						<div className="info-item">
+							<div className="info-label">Comment</div>
+							<form onSubmit={this.saveComment} className="comment-form">
+								<textarea
+									type="text"
+									placeholder="Add a comment about this expense..."
+									onChange={this.handleComment}
+									value={comment ? comment : ''}
+								/>
+								<div className="btn-wrap-center">
+									<button type="submit" className="btn btn-primary btn-feature">
+										Save Comment
+									</button>
+								</div>
+								<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
+									change category
+								</button>
+							</form>
+						</div>
+					)
+				}}
+			</ExpensesContext.Consumer>
 		)
 	}
 }
