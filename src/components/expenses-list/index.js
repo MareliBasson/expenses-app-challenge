@@ -42,7 +42,7 @@ class ExpensesList extends Component {
 
 	render() {
 		const { selectedExpense, modalActive } = this.state
-		const { expenses } = this.props
+		const { expenses, fetchData } = this.props
 
 		return (
 			<div className="expenses-list">
@@ -117,6 +117,7 @@ class ExpensesList extends Component {
 						})}
 						toggleModal={this.toggleExpenseModal}
 						modalActive={modalActive}
+						fetchData={fetchData}
 					/>
 				)}
 			</div>

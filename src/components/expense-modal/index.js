@@ -13,10 +13,15 @@ class ExpenseModal extends Component {
 	}
 
 	render() {
-		const { expense, toggleModal, modalActive } = this.props
+		const { expense, toggleModal, modalActive, fetchData } = this.props
 
 		return (
-			<Modal className="expense-modal" toggleModal={toggleModal} title="Expense Information" modalActive={modalActive}>
+			<Modal
+				className="expense-modal"
+				toggleModal={toggleModal}
+				title="Expense Information"
+				modalActive={modalActive}
+			>
 				{expense && (
 					<Fragment>
 						<div className="row">
@@ -52,9 +57,14 @@ class ExpenseModal extends Component {
 							</div>
 						</div>
 
-						<CommentForm id={expense.id} comment={expense.comment} modalActive={modalActive} />
+						<CommentForm
+							id={expense.id}
+							comment={expense.comment}
+							modalActive={modalActive}
+							fetchData={fetchData}
+						/>
 
-						<ImageUpload id={expense.id} preview={expense && expense.receipts} />
+						<ImageUpload id={expense.id} preview={expense && expense.receipts} fetchData={fetchData} />
 					</Fragment>
 				)}
 			</Modal>

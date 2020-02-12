@@ -28,10 +28,14 @@ class ImageUpload extends Component {
 		})
 			.then(res => {
 				if (res.ok) {
-					console.log(res.data)
-					this.setState({
-						uploadSuccess: true
-					})
+					this.setState(
+						{
+							uploadSuccess: true
+						},
+						() => {
+							this.props.fetchData()
+						}
+					)
 				}
 			})
 			.catch(err => {

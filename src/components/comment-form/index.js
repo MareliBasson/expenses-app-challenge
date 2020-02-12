@@ -21,6 +21,7 @@ class CommentForm extends Component {
 
 	saveComment(event) {
 		event.preventDefault()
+		const { fetchData } = this.props
 
 		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
 			method: 'POST',
@@ -32,6 +33,12 @@ class CommentForm extends Component {
 				comment: this.state.comment
 			})
 		})
+			.then(() => {
+				fetchData()
+			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	changeCategory(event) {
