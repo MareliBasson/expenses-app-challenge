@@ -10,6 +10,7 @@ class CommentForm extends Component {
 
 		this.handleComment = this.handleComment.bind(this)
 		this.saveComment = this.saveComment.bind(this)
+		this.changeCategory = this.changeCategory.bind(this)
 	}
 
 	handleComment(event) {
@@ -33,6 +34,21 @@ class CommentForm extends Component {
 		})
 	}
 
+	changeCategory(event) {
+		event.preventDefault()
+
+		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				category: "i'm a new category"
+			})
+		})
+	}
+
 	componentDidMount() {
 		if (!this.state.comment) {
 			this.setState({
@@ -45,20 +61,23 @@ class CommentForm extends Component {
 		const { comment } = this.state
 
 		return (
-			<div className='info-item'>
-				<div className='info-label'>Comment</div>
-				<form onSubmit={this.saveComment} className='comment-form'>
+			<div className="info-item">
+				<div className="info-label">Comment</div>
+				<form onSubmit={this.saveComment} className="comment-form">
 					<textarea
-						type='text'
-						placeholder='Add a comment about this expense...'
+						type="text"
+						placeholder="Add a comment about this expense..."
 						onChange={this.handleComment}
 						value={comment ? comment : ''}
 					/>
-					<div className='btn-wrap-center'>
-						<button type='submit' className='btn btn-primary btn-feature'>
+					<div className="btn-wrap-center">
+						<button type="submit" className="btn btn-primary btn-feature">
 							Save Comment
 						</button>
 					</div>
+					<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
+						change category
+					</button>
 				</form>
 			</div>
 		)

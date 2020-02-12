@@ -65,6 +65,8 @@ class ExpensesList extends Component {
 									{expense.user.first} {expense.user.last}
 								</div>
 
+								<div className="category">{expense.category}</div>
+
 								<div className="comment">
 									{/* NOTE: the API doesn't update if a blank string is sent so I'm mocking a comment removal by allowing a single space to be read as if there's no comment */}
 									{expense.comment !== ''
