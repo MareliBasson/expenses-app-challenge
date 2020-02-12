@@ -46,7 +46,7 @@ A list of links or people I consulted while building the project on topics i'm n
 -   [Lodash](https://www.npmjs.com/package/lodash) - to speed up development by providing some handy methods for dealing with objects and arrays
 -   [FontAwesome](https://github.com/FortAwesome/react-fontawesome) - icons for the UI (might replace with IcoMoon if time allows)
 -   [Moment](https://www.npmjs.com/package/react-moment#formatting) - for easy date formatting
--   Currency convertor - TBD
+-   [React-Datepicker](https://www.npmjs.com/package/react-datepicker) - neat date picker component
 
 ## Thoughts
 
