@@ -10,8 +10,23 @@
 		font-size: 0.7rem;
 		margin-bottom: 10px;
 
+		> * {
+			flex: 1;
+		}
+
 		.btn {
 			margin-left: 10px;
+		}
+
+		.filter {
+			flex: 1;
+			white-space: nowrap;
+
+			.react-datepicker-wrapper {
+			}
+			.react-datepicker__tab-loop {
+				display: inline-block;
+			}
 		}
 	}
 }

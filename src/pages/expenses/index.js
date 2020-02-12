@@ -6,6 +6,8 @@ import ExpensesList from 'components/expenses-list'
 import Pagination from 'components/pagination'
 import './expenses.css'
 
+import 'react-datepicker/dist/react-datepicker.css'
+
 class ExpensesPage extends Component {
 	constructor(props) {
 		super(props)
@@ -15,8 +17,9 @@ class ExpensesPage extends Component {
 			entriesTotal: 0,
 			limit: '25',
 			page: 1,
-			// startDate: ,
-			endDate: new Date()
+			startDate: new Date(),
+			endDate: new Date(),
+			firstEntryDate: null
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -92,7 +95,7 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { visibleExpenses, entriesTotal, page, limit } = this.state
+		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate } = this.state
 
 		const limits = ['25', '50', 'All']
 
@@ -138,22 +141,29 @@ class ExpensesPage extends Component {
 					</div>
 
 					<div className="filter">
-						Filter by: <button onClick={this.filterBy}>test</button>
-						{/* <DatePicker
+						Filter by:
+						{/* <button onClick={this.filterBy}>test</button> */}
+						<DatePicker
+							dateFormat="dd/MM/yyyy"
 							selected={startDate}
 							onChange={date => this.setState({ startDate: date })}
 							selectsStart
 							startDate={startDate}
 							endDate={endDate}
+							maxDate={new Date()}
 						/>
 						<DatePicker
+							dateFormat="dd/MM/yyyy"
 							selected={endDate}
 							onChange={date => this.setState({ endDate: date })}
 							selectsEnd
 							startDate={startDate}
 							endDate={endDate}
+							maxDate={new Date()}
 							minDate={startDate}
-						/> */}
+						/>
+						Start: {moment(startDate).format('D MMM YY')} &nbsp;&nbsp;&nbsp; End:{' '}
+						{moment(endDate).format('D MMM YY')}
 					</div>
 
 					{limit === 'All' ? (
