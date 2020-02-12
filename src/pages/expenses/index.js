@@ -18,8 +18,7 @@ class ExpensesPage extends Component {
 			limit: '25',
 			page: 1,
 			startDate: new Date(),
-			endDate: new Date(),
-			firstEntryDate: null
+			endDate: new Date()
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -39,8 +38,10 @@ class ExpensesPage extends Component {
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
-	fetchData(pageNum) {
+	fetchData(customPage, customLimit = 0) {
 		const { entriesTotal, limit, page } = this.state
+		console.log(customPage)
+		console.log(customLimit)
 
 		let entriesLimit
 		let limitOffset
@@ -49,16 +50,15 @@ class ExpensesPage extends Component {
 			entriesLimit = entriesTotal
 			limitOffset = ''
 		} else {
-			entriesLimit = parseInt(limit)
-			limitOffset = `&offset=${parseInt(limit) * (pageNum ? pageNum - 1 : page - 1)}`
+			entriesLimit = customLimit > 0 ? customLimit : parseInt(limit)
+			limitOffset = parseInt(limit) * (customPage ? customPage - 1 : page - 1)
 		}
 
-		fetch(`http://localhost:3000/expenses?limit=${entriesLimit}${limitOffset}}`)
+		fetch(`http://localhost:3000/expenses?limit=${entriesLimit}${limitOffset > 0 ? `&offset=${limitOffset}` : ''}`)
 			.then(response => response.json())
 			.then(expenses =>
 				this.setState({
-					visibleExpenses: expenses.expenses,
-					visibleEntries: limit === 'All' ? expenses.entriesTotal : parseInt(limit)
+					visibleExpenses: expenses.expenses
 				})
 			)
 			.catch(err => {
@@ -88,7 +88,48 @@ class ExpensesPage extends Component {
 		)
 	}
 
-	filterBy() {}
+	filterBy() {
+		const { entriesTotal } = this.state
+		// const months = () => {
+		// 	const monthsArr = []
+		// 	const lastEntryDate = moment(new Date(visibleExpenses[visibleExpenses.length - 1].date)).format()
+		// 	const todaysDate = moment()._d
+		// 	const dateStart = moment(lastEntryDate)
+		// 	const dateEnd = moment(todaysDate)
+		// 	while (dateEnd.diff(dateStart, 'months') >= 0) {
+		// 		monthsArr.push(dateStart.format('MMMM YYYY'))
+		// 		dateStart.add(1, 'month')
+		// 	}
+		// 	return monthsArr
+		// }
+		// console.log(months())
+
+		const filterEntriesByRange = allExpenses => {
+			const filterResult = _.filter(allExpenses, expense => {
+				return moment(moment(expense.date).format()).isBetween(this.state.startDate, this.state.endDate)
+			})
+
+			this.setState({
+				visibleExpenses: filterResult
+			})
+		}
+
+		fetch(`http://localhost:3000/expenses?limit=${entriesTotal}`)
+			.then(response => response.json())
+			.then(expenses =>
+				this.setState(
+					{
+						entriesToFilter: expenses.expenses
+					},
+					() => {
+						filterEntriesByRange(this.state.entriesToFilter)
+					}
+				)
+			)
+			.catch(err => {
+				console.log(err)
+			})
+	}
 
 	componentDidMount() {
 		this.initialFetch()
@@ -99,24 +140,24 @@ class ExpensesPage extends Component {
 
 		const limits = ['25', '50', 'All']
 
-		if (!_.isEmpty(visibleExpenses)) {
-			const months = () => {
-				const monthsArr = []
-				const lastEntryDate = moment(new Date(visibleExpenses[visibleExpenses.length - 1].date)).format()
-				const todaysDate = moment()._d
+		// if (!_.isEmpty(visibleExpenses)) {
+		// 	const months = () => {
+		// 		const monthsArr = []
+		// 		const lastEntryDate = moment(new Date(visibleExpenses[visibleExpenses.length - 1].date)).format()
+		// 		const todaysDate = moment()._d
 
-				const dateStart = moment(lastEntryDate)
-				const dateEnd = moment(todaysDate)
+		// 		const dateStart = moment(lastEntryDate)
+		// 		const dateEnd = moment(todaysDate)
 
-				while (dateEnd.diff(dateStart, 'months') >= 0) {
-					monthsArr.push(dateStart.format('MMMM YYYY'))
-					dateStart.add(1, 'month')
-				}
-				return monthsArr
-			}
+		// 		while (dateEnd.diff(dateStart, 'months') >= 0) {
+		// 			monthsArr.push(dateStart.format('MMMM YYYY'))
+		// 			dateStart.add(1, 'month')
+		// 		}
+		// 		return monthsArr
+		// 	}
 
-			console.log(months())
-		}
+		// 	// console.log(months())
+		// }
 
 		return (
 			<div className="expenses-page">
@@ -140,9 +181,8 @@ class ExpensesPage extends Component {
 						})}
 					</div>
 
-					<div className="filter">
+					<div className="filter text-center">
 						Filter by:
-						{/* <button onClick={this.filterBy}>test</button> */}
 						<DatePicker
 							dateFormat="dd/MM/yyyy"
 							selected={startDate}
@@ -162,22 +202,15 @@ class ExpensesPage extends Component {
 							maxDate={new Date()}
 							minDate={startDate}
 						/>
-						Start: {moment(startDate).format('D MMM YY')} &nbsp;&nbsp;&nbsp; End:{' '}
-						{moment(endDate).format('D MMM YY')}
+						<button onClick={this.filterBy}>Filter</button>
 					</div>
 
 					{limit === 'All' ? (
-						<div className="entries-visible">
+						<div className="entries-visible text-right">
 							<strong>{visibleExpenses.length}</strong>&nbsp; entries
 						</div>
 					) : (
-						<Pagination
-							page={page}
-							total={entriesTotal}
-							limit={limit}
-							handleNext={this.goToNext}
-							handlePrev={this.goToPrev}
-						/>
+						<Pagination page={page} total={entriesTotal} limit={limit} handleNext={this.goToNext} handlePrev={this.goToPrev} />
 					)}
 				</div>
 

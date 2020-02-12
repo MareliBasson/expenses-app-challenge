@@ -12,11 +12,11 @@ class Pagination extends Component {
 		const { page, total, limit, handlePrev, handleNext } = this.props
 
 		return (
-			<div className='pagination'>
+			<div className="pagination text-right">
 				<button onClick={handlePrev} disabled={page === 1}>
 					Prev
 				</button>
-				<div className='page-count'>
+				<div className="page-count">
 					{page}/{Math.ceil(total / limit)}
 				</div>
 				<button onClick={handleNext} disabled={page === Math.ceil(total / limit)}>
