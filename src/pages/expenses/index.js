@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import _ from 'lodash'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
@@ -17,33 +17,21 @@ class ExpensesPage extends Component {
 		this.state = {
 			visibleExpenses: [],
 			entriesTotal: 0,
-			limit: '25',
+			limit: '10',
 			page: 1,
 			startDate: new Date(),
 			endDate: new Date(),
-			filterActive: false
+			filterActive: false,
+			allEntries: [],
+			entryDates: []
 		}
 
-		this.initialFetch = this.initialFetch.bind(this)
+		this.initialise = this.initialise.bind(this)
 		this.fetchData = this.fetchData.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
 		this.handleFilter = this.handleFilter.bind(this)
 		this.handleFilterReset = this.handleFilterReset.bind(this)
-	}
-
-	initialFetch() {
-		fetch('http://localhost:3000/expenses')
-			.then(response => response.json())
-			.then(expenses => this.setState({ visibleExpenses: expenses.expenses, entriesTotal: expenses.total }))
-			.catch(err => {
-				console.log(err)
-				if (err) {
-					this.setState({
-						fetchError: true
-					})
-				}
-			})
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
@@ -59,18 +47,23 @@ class ExpensesPage extends Component {
 			limitOffset = parseInt(limit) * (page - 1)
 		}
 
-		fetch(`http://localhost:3000/expenses?limit=${entriesLimit}${limitOffset > 0 ? `&offset=${limitOffset}` : ''}`)
+		fetch(
+			`http://localhost:3000/expenses${entriesLimit > 0 ? `?limit=${entriesLimit}` : ''}${
+				entriesLimit > 0 && limitOffset > 0 ? `&offset=${limitOffset}` : ''
+			}`
+		)
 			.then(response => response.json())
-			.then(expenses =>
+			.then(expenses => {
 				this.setState(
 					{
-						[prop]: expenses.expenses
+						[prop]: expenses.expenses,
+						entriesTotal: expenses.total
 					},
 					() => {
 						cb()
 					}
 				)
-			)
+			})
 			.catch(err => {
 				console.log(err)
 				if (err) {
@@ -119,7 +112,7 @@ class ExpensesPage extends Component {
 			})
 		}
 
-		this.fetchData(this.state.page, this.state.limit, 'entriesToFilter', () => filterEntriesByRange(this.state.entriesToFilter))
+		this.fetchData(1, this.state.entriesTotal, 'allEntries', () => filterEntriesByRange(this.state.allEntries))
 	}
 
 	handleFilterReset() {
@@ -129,14 +122,25 @@ class ExpensesPage extends Component {
 		})
 	}
 
+	initialise() {
+		this.fetchData(1, this.state.limit, 'visibleExpenses')
+		this.fetchData(1, null, 'allEntries', () => {
+			const entryDates = this.state.allEntries.map(expense => Date.parse(expense.date))
+
+			this.setState({
+				entryDates: [{ 'date-highlight': entryDates }]
+			})
+		})
+	}
+
 	componentDidMount() {
-		this.initialFetch()
+		this.initialise()
 	}
 
 	render() {
 		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive, fetchError } = this.state
 
-		const limits = ['25', '50', 'All']
+		const limits = ['10', '25', '50', 'All']
 
 		return (
 			<ExpensesContext.Provider
@@ -160,7 +164,7 @@ class ExpensesPage extends Component {
 													this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 												})
 											}}
-											className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
+											className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-inverse'}`}
 										>
 											{limit}
 										</button>
@@ -171,27 +175,37 @@ class ExpensesPage extends Component {
 
 						<div className="filter text-center">
 							Filter by:
-							<DatePicker
-								dateFormat="dd/MM/yyyy"
-								selected={startDate}
-								onChange={date => this.setState({ startDate: date })}
-								selectsStart
-								startDate={startDate}
-								endDate={endDate}
-								maxDate={new Date()}
-							/>
-							<DatePicker
-								dateFormat="dd/MM/yyyy"
-								selected={endDate}
-								onChange={date => this.setState({ endDate: date })}
-								selectsEnd
-								startDate={startDate}
-								endDate={endDate}
-								maxDate={new Date()}
-								minDate={startDate}
-							/>
-							<button onClick={this.handleFilter}>Filter</button>
-							<button onClick={this.handleFilterReset}>Reset</button>
+							{this.state.entryDates && (
+								<Fragment>
+									<DatePicker
+										dateFormat="dd/MM/yyyy"
+										selected={startDate}
+										onChange={date => this.setState({ startDate: date })}
+										selectsStart
+										highlightDates={this.state.entryDates}
+										startDate={startDate}
+										endDate={endDate}
+										maxDate={new Date()}
+									/>
+									<DatePicker
+										dateFormat="dd/MM/yyyy"
+										selected={endDate}
+										onChange={date => this.setState({ endDate: date })}
+										selectsEnd
+										highlightDates={this.state.entryDates}
+										startDate={startDate}
+										endDate={endDate}
+										maxDate={new Date()}
+										minDate={startDate}
+									/>
+								</Fragment>
+							)}
+							<button onClick={this.handleFilter} className="btn btn-primary">
+								Filter
+							</button>
+							<button onClick={this.handleFilterReset} className="btn btn-primary">
+								Reset
+							</button>
 						</div>
 
 						{limit === 'All' || filterActive ? (
