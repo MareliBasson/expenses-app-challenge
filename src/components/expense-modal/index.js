@@ -4,6 +4,7 @@ import moment from 'moment'
 import Modal from 'components/modal'
 import CommentForm from 'components/comment-form'
 import ImageUpload from 'components/image-upload'
+import CategorySelect from 'components/category-select'
 import './expense-modal.css'
 
 class ExpenseModal extends Component {
@@ -13,7 +14,7 @@ class ExpenseModal extends Component {
 	}
 
 	render() {
-		const { expense, toggleModal, modalActive, fetchData } = this.props
+		const { expense, toggleModal, modalActive } = this.props
 
 		return (
 			<Modal className="expense-modal" toggleModal={toggleModal} title="Expense Information" modalActive={modalActive}>
@@ -52,9 +53,11 @@ class ExpenseModal extends Component {
 							</div>
 						</div>
 
-						<CommentForm id={expense.id} comment={expense.comment} modalActive={modalActive} />
+						<CategorySelect id={expense.id} category={expense.category} />
 
-						<ImageUpload id={expense.id} preview={expense && expense.receipts} fetchData={fetchData} />
+						<CommentForm id={expense.id} comment={expense.comment} />
+
+						<ImageUpload id={expense.id} preview={expense && expense.receipts} />
 					</Fragment>
 				)}
 			</Modal>

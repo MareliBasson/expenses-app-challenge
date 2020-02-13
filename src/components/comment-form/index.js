@@ -12,7 +12,6 @@ class CommentForm extends Component {
 
 		this.handleComment = this.handleComment.bind(this)
 		this.saveComment = this.saveComment.bind(this)
-		this.changeCategory = this.changeCategory.bind(this)
 	}
 
 	handleComment(event) {
@@ -40,21 +39,6 @@ class CommentForm extends Component {
 			.catch(err => {
 				console.log(err)
 			})
-	}
-
-	changeCategory(event) {
-		event.preventDefault()
-
-		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				category: "i'm a new category"
-			})
-		})
 	}
 
 	componentDidMount() {
@@ -92,9 +76,6 @@ class CommentForm extends Component {
 									</button>
 								</div>
 							</form>
-							<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
-								change category
-							</button>
 						</div>
 					)
 				}}

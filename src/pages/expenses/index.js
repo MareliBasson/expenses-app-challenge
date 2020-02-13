@@ -216,17 +216,10 @@ class ExpensesPage extends Component {
 						}}
 						fetchError={fetchError}
 					/>
-					{/* <ExpensesListWrapper /> */}
 				</div>
 			</ExpensesContext.Provider>
 		)
 	}
 }
-
-// const ExpensesListWrapper = () => (
-// 	<ExpensesContext.Consumer>
-// 		{data => <ExpensesList expenses={data.expenses} fetchData={data.fetchData} />}
-// 	</ExpensesContext.Consumer>
-// )
 
 export default ExpensesPage

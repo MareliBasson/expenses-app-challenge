@@ -1,0 +1,18 @@
+.comment-form {
+	textarea {
+		display: block;
+		width: 100%;
+		margin-bottom: 10px;
+		min-height: 80px;
+		background-color: white;
+		border: 0.075rem solid #ddd;
+		border-radius: 0.25rem;
+		padding: 10px;
+		font-size: 0.8rem;
+		font-weight: 300;
+	}
+
+	.btn {
+		width: 100%;
+	}
+}
