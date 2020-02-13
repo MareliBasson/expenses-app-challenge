@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
@@ -140,6 +141,10 @@ class ExpensesPage extends Component {
 	render() {
 		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive, fetchError } = this.state
 
+		const { posts } = this.props
+
+		console.log(posts)
+
 		const limits = ['10', '25', '50', 'All']
 
 		return (
@@ -151,6 +156,22 @@ class ExpensesPage extends Component {
 				}}
 			>
 				<div className="expenses-page">
+					<ul>
+						{posts.map(post => (
+							<li key={post.id}>{post.title}</li>
+						))}
+					</ul>
+					<button
+						onClick={() => {
+							event.preventDefault()
+							this.props.dispatch({
+								type: 'ADD_POST',
+								payload: { id: this.state.postId, title: this.state.value }
+							})
+						}}
+					>
+						test
+					</button>
 					<div className="actions">
 						{!filterActive && (
 							<div className="number-of-entries">
@@ -236,4 +257,15 @@ class ExpensesPage extends Component {
 	}
 }
 
-export default ExpensesPage
+// export default ExpensesPage
+
+const mapStateToProps = state => {
+	return { posts: state.posts }
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		dispatch
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesPage)
