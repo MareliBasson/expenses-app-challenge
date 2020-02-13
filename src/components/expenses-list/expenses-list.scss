@@ -73,6 +73,8 @@
 				position: absolute;
 				top: calc(100% + 10px);
 				background-color: white;
+				left: 50%;
+				transform: translateX(-50%);
 				padding: 10px;
 				box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2);
 				border: 2px solid lighten($colorTextDark, 70%);
@@ -106,7 +108,6 @@
 		.comment {
 			.info-tip {
 				width: 200px;
-				left: -80px;
 
 				> div {
 					$infoTipHeight: 160px;
@@ -131,7 +132,6 @@
 		.images {
 			.info-tip {
 				width: 80px;
-				left: -20px;
 
 				> div {
 					text-align: center;
