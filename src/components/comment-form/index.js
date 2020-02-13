@@ -21,9 +21,8 @@ class CommentForm extends Component {
 		})
 	}
 
-	saveComment(event) {
+	saveComment(event, cb) {
 		event.preventDefault()
-		const { fetchData } = this.props
 
 		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
 			method: 'POST',
@@ -36,7 +35,7 @@ class CommentForm extends Component {
 			})
 		})
 			.then(() => {
-				fetchData()
+				cb()
 			})
 			.catch(err => {
 				console.log(err)
@@ -72,11 +71,15 @@ class CommentForm extends Component {
 		return (
 			<ExpensesContext.Consumer>
 				{data => {
-					console.log(data)
 					return (
 						<div className="info-item">
 							<div className="info-label">Comment</div>
-							<form onSubmit={this.saveComment} className="comment-form">
+							<form
+								onSubmit={e => {
+									this.saveComment(e, data.fetchData)
+								}}
+								className="comment-form"
+							>
 								<textarea
 									type="text"
 									placeholder="Add a comment about this expense..."
@@ -88,10 +91,10 @@ class CommentForm extends Component {
 										Save Comment
 									</button>
 								</div>
-								<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
-									change category
-								</button>
 							</form>
+							<button onClick={this.changeCategory} className="btn btn-primary btn-feature">
+								change category
+							</button>
 						</div>
 					)
 				}}

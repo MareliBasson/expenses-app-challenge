@@ -141,7 +141,6 @@ class ExpensesPage extends Component {
 		return (
 			<ExpensesContext.Provider
 				value={{
-					expenses: visibleExpenses,
 					fetchData: () => {
 						return this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 					}
