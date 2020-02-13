@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import _ from 'lodash'
 import moment from 'moment'
-import DatePicker from 'react-datepicker'
 import ExpensesList from 'components/expenses-list'
+import FilterDateRange from 'components/filter-date-range'
 import Pagination from 'components/pagination'
 
 import './expenses.css'
@@ -31,7 +31,8 @@ class ExpensesPage extends Component {
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
 		this.handleFilter = this.handleFilter.bind(this)
-		this.handleFilterReset = this.handleFilterReset.bind(this)
+		this.resetFilter = this.resetFilter.bind(this)
+		this.setDate = this.setDate.bind(this)
 	}
 
 	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
@@ -112,10 +113,14 @@ class ExpensesPage extends Component {
 			})
 		}
 
-		this.fetchData(1, this.state.entriesTotal, 'allEntries', () => filterEntriesByRange(this.state.allEntries))
+		this.fetchData(0, this.state.entriesTotal, 'allEntries', () => filterEntriesByRange(this.state.allEntries))
 	}
 
-	handleFilterReset() {
+	setDate(date, prop) {
+		this.setState({ [prop]: date })
+	}
+
+	resetFilter() {
 		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 		this.setState({
 			filterActive: false
@@ -138,7 +143,7 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive, fetchError } = this.state
+		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, entryDates, filterActive, fetchError } = this.state
 
 		const limits = ['10', '25', '50', 'All']
 
@@ -173,40 +178,16 @@ class ExpensesPage extends Component {
 							</div>
 						)}
 
-						<div className="filter text-center">
-							Filter by:
-							{this.state.entryDates && (
-								<Fragment>
-									<DatePicker
-										dateFormat="dd/MM/yyyy"
-										selected={startDate}
-										onChange={date => this.setState({ startDate: date })}
-										selectsStart
-										highlightDates={this.state.entryDates}
-										startDate={startDate}
-										endDate={endDate}
-										maxDate={new Date()}
-									/>
-									<DatePicker
-										dateFormat="dd/MM/yyyy"
-										selected={endDate}
-										onChange={date => this.setState({ endDate: date })}
-										selectsEnd
-										highlightDates={this.state.entryDates}
-										startDate={startDate}
-										endDate={endDate}
-										maxDate={new Date()}
-										minDate={startDate}
-									/>
-								</Fragment>
-							)}
-							<button onClick={this.handleFilter} className="btn btn-primary">
-								Filter
-							</button>
-							<button onClick={this.handleFilterReset} className="btn btn-primary">
-								Reset
-							</button>
-						</div>
+						{this.state.entryDates && (
+							<FilterDateRange
+								entryDates={entryDates}
+								resetFilter={this.resetFilter}
+								handleFilter={this.handleFilter}
+								setDate={this.setDate}
+								startDate={startDate}
+								endDate={endDate}
+							/>
+						)}
 
 						{limit === 'All' || filterActive ? (
 							<div className="entries-visible text-right">

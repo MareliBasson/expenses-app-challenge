@@ -1,0 +1,27 @@
+@import './styles/variables';
+
+.filter-date-range {
+	flex: 1;
+	white-space: nowrap;
+
+	.react-datepicker-wrapper {
+		width: auto;
+		margin-left: 10px;
+
+		input {
+			width: 90px;
+		}
+	}
+	.react-datepicker__tab-loop {
+		display: inline-block;
+	}
+
+	.date-highlight {
+		font-weight: 600;
+		color: $colorSecondary;
+	}
+
+	.btn {
+		margin-left: 10px;
+	}
+}
