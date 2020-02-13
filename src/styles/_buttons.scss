@@ -18,9 +18,10 @@
 		color: white;
 	}
 
-	&.btn-outline {
-		border-color: 2px solid $colorPrimary;
+	&.btn-inverse {
+		border-color: white;
 		background-color: white;
+		color: $colorPrimary;
 	}
 
 	&.btn-feature {
@@ -33,6 +34,14 @@
 		width: 26px;
 		height: 26px;
 		font-size: 1rem;
+	}
+
+	&[disabled] {
+		border-color: white;
+		background-color: white;
+		color: $colorPrimary;
+		opacity: 0.4;
+		cursor: default;
 	}
 }
 

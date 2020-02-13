@@ -13,13 +13,13 @@ class Pagination extends Component {
 
 		return (
 			<div className="pagination text-right">
-				<button onClick={handlePrev} disabled={page === 1}>
+				<button className="btn btn-primary" onClick={handlePrev} disabled={page === 1}>
 					Prev
 				</button>
 				<div className="page-count">
 					{page}/{Math.ceil(total / limit)}
 				</div>
-				<button onClick={handleNext} disabled={page === Math.ceil(total / limit)}>
+				<button className="btn btn-primary" onClick={handleNext} disabled={page === Math.ceil(total / limit)}>
 					Next
 				</button>
 			</div>
