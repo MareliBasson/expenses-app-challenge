@@ -21,8 +21,7 @@ class ExpensesPage extends Component {
 			page: 1,
 			startDate: new Date(),
 			endDate: new Date(),
-			filterActive: false,
-			fetchData: this.fetchData()
+			filterActive: false
 		}
 
 		this.initialFetch = this.initialFetch.bind(this)
@@ -39,6 +38,11 @@ class ExpensesPage extends Component {
 			.then(expenses => this.setState({ visibleExpenses: expenses.expenses, entriesTotal: expenses.total }))
 			.catch(err => {
 				console.log(err)
+				if (err) {
+					this.setState({
+						fetchError: true
+					})
+				}
 			})
 	}
 
@@ -69,6 +73,11 @@ class ExpensesPage extends Component {
 			)
 			.catch(err => {
 				console.log(err)
+				if (err) {
+					this.setState({
+						fetchError: true
+					})
+				}
 			})
 	}
 
@@ -110,9 +119,7 @@ class ExpensesPage extends Component {
 			})
 		}
 
-		this.fetchData(this.state.page, this.state.limit, 'entriesToFilter', () =>
-			filterEntriesByRange(this.state.entriesToFilter)
-		)
+		this.fetchData(this.state.page, this.state.limit, 'entriesToFilter', () => filterEntriesByRange(this.state.entriesToFilter))
 	}
 
 	handleFilterReset() {
@@ -127,7 +134,7 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive } = this.state
+		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, filterActive, fetchError } = this.state
 
 		const limits = ['25', '50', 'All']
 
@@ -154,9 +161,7 @@ class ExpensesPage extends Component {
 													this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 												})
 											}}
-											className={`btn ${
-												limit === this.state.limit ? 'btn-primary' : 'btn-outline'
-											}`}
+											className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-outline'}`}
 										>
 											{limit}
 										</button>
@@ -210,6 +215,7 @@ class ExpensesPage extends Component {
 						fetchData={() => {
 							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 						}}
+						fetchError={fetchError}
 					/>
 					{/* <ExpensesListWrapper /> */}
 				</div>
