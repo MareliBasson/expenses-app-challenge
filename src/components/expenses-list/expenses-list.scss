@@ -14,6 +14,11 @@
 		height: 34px;
 		transition: background-color 0.3s ease;
 
+		@media (max-width: 768px) {
+			display: block;
+			height: auto;
+		}
+
 		&:hover {
 			background-color: darken($colorBg, 5%);
 			transition: background-color 0.2s ease;
@@ -38,6 +43,9 @@
 
 		.date {
 			min-width: 100px;
+
+			@media (max-width: 768px) {
+			}
 		}
 
 		.currency {

@@ -25,6 +25,7 @@ $bp-mobile: 768px;
 $bp-desktop: 1024px;
 
 // Z-index
-$z-index-sidebar: 10;
-$z-index-modal: 9;
-$z-index-overlay: 8;
+$z-index-modal: 10;
+$z-index-modal-overlay: 9;
+$z-index-sidebar: 8;
+$z-index-sidebar-overlay: 7;
