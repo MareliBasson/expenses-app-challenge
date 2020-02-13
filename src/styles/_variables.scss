@@ -5,6 +5,7 @@ $colorSecondary: #55d6be;
 $colorBg: #f9f2e8;
 $colorWarning: #f95738;
 $colorSuccess: #4daa57;
+$colorOverlay: rgba(0, 0, 0, 0.4);
 
 $colorTextDark: #201921;
 $colorTextLight: $colorBg;
@@ -22,3 +23,8 @@ $sidebarWidthMobile: 150px;
 // Breakpoints
 $bp-mobile: 768px;
 $bp-desktop: 1024px;
+
+// Z-index
+$z-index-sidebar: 10;
+$z-index-modal: 9;
+$z-index-overlay: 8;

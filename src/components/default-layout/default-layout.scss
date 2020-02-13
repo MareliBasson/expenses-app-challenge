@@ -7,5 +7,9 @@
 		min-height: 100%;
 		background-color: $colorBg;
 		padding-left: $sidebarWidth;
+
+		@media (max-width: 768px) {
+			padding-left: 0;
+		}
 	}
 }

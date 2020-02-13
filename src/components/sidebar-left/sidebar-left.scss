@@ -1,47 +1,96 @@
 @import './styles/variables';
 
-.sidebar-left {
-	background-color: $colorPrimary;
-	grid-area: sidebar;
-	height: 100%;
-	position: fixed;
-	width: $sidebarWidth;
-	color: $colorTextLight;
+.sidebar-wrapper {
+	.sidebar-left {
+		background-color: $colorPrimary;
+		grid-area: sidebar;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: $sidebarWidth;
+		color: $colorTextLight;
+		z-index: $z-index-sidebar;
 
-	.logo {
-		padding: 20px;
-		position: relative;
-
-		img {
-			max-width: 100px;
-		}
-
-		&:before {
-			content: '';
-			background-color: $colorSecondary;
-			width: 0px;
-			height: 2px;
+		.close-btn {
+			display: none;
 			position: absolute;
-			bottom: 22px;
-			right: 0;
-			transition: width 0.4s ease-out;
+			right: 16px;
+			top: 10px;
+			font-size: 20px;
+			z-index: 1;
+
+			@media (max-width: 768px) {
+				display: block;
+			}
 		}
 
-		&:hover {
+		.logo {
+			padding: 20px;
+			position: relative;
+
+			img {
+				max-width: 100px;
+			}
+
 			&:before {
-				transition: width 0.3s ease-in;
-				width: 170px;
+				content: '';
+				background-color: $colorSecondary;
+				width: 0px;
+				height: 2px;
+				position: absolute;
+				bottom: 22px;
+				right: 0;
+				transition: width 0.4s ease-out;
+			}
+
+			&:hover {
+				&:before {
+					transition: width 0.3s ease-in;
+					width: 170px;
+				}
+			}
+		}
+
+		.navigation {
+			a {
+				display: block;
+				padding: 10px 20px;
+
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.5);
+				}
 			}
 		}
 	}
 
-	.navigation {
-		a {
-			display: block;
-			padding: 10px 20px;
+	.sidebar-overlay {
+		position: fixed;
+		z-index: $z-index-overlay;
+		width: 0vw;
+		height: 100vh;
+		opacity: 0;
+		background-color: $colorOverlay;
+		transition: 0.2s 0.2s ease width, 0.2s ease opacity;
+	}
 
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.5);
+	@media (max-width: 768px) {
+		.sidebar-left {
+			left: -$sidebarWidth;
+			transition: 0.3s ease left;
+		}
+
+		&.open {
+			.sidebar-left {
+				left: 0;
+				transition: 0.3s ease left;
+			}
+
+			.sidebar-overlay {
+				display: block;
+				width: 100vw;
+				opacity: 1;
+				transition: 0.3s ease opacity;
 			}
 		}
 	}

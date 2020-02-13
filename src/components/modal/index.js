@@ -15,17 +15,17 @@ class Modal extends Component {
 
 		return (
 			<div className={`modal ${className && className} ${modalActive && 'active'}`}>
-				<div className='modal-overlay' onClick={toggleModal}></div>
-				<div className='modal-container'>
-					<div className='modal-header'>
+				<div className="modal-container">
+					<div className="modal-header">
 						<h3>{title}</h3>
-						<button className='btn btn-primary btn-icon' onClick={toggleModal}>
+						<button className="btn btn-primary btn-icon" onClick={toggleModal}>
 							<FontAwesomeIcon icon={faTimes} />
 						</button>
 					</div>
 
-					<div className='modal-content'>{children}</div>
+					<div className="modal-content">{children}</div>
 				</div>
+				<div className="modal-overlay" onClick={toggleModal}></div>
 			</div>
 		)
 	}

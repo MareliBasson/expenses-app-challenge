@@ -2,7 +2,6 @@
 
 .modal {
 	position: fixed;
-	z-index: 10;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -17,19 +16,19 @@
 
 	.modal-overlay {
 		position: fixed;
-		z-index: 1;
+		z-index: $z-index-overlay;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.4);
+		background-color: $colorOverlay;
 	}
 
 	.modal-container {
 		width: 400px;
 		background-color: $colorBg;
 		padding: 20px;
-		z-index: 2;
+		z-index: $z-index-modal;
 		position: relative;
 
 		.modal-header {
