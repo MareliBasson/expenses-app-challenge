@@ -162,11 +162,11 @@ class ExpensesPage extends Component {
 						))}
 					</ul>
 					<button
-						onClick={() => {
+						onClick={event => {
 							event.preventDefault()
 							this.props.dispatch({
 								type: 'ADD_POST',
-								payload: { id: this.state.postId, title: this.state.value }
+								payload: { id: 'test', title: 'this is a enw post' }
 							})
 						}}
 					>
