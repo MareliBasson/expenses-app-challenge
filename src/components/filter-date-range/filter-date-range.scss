@@ -20,6 +20,7 @@
 
 		.react-datepicker-popper {
 			transform: translate3d(-175px, 9px, 0px) !important;
+			z-index: 10;
 
 			.react-datepicker__triangle {
 				left: calc(50% - 8px);

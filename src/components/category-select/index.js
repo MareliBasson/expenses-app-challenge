@@ -62,7 +62,7 @@ class CategorySelect extends Component {
 								onSubmit={e => {
 									this.saveCategory(e, data.fetchData)
 								}}
-								className="comment-form"
+								className="category-select"
 							>
 								<textarea
 									type="text"

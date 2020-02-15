@@ -13,7 +13,6 @@ class FilterDateRange extends Component {
 
 		return (
 			<div className="filter-date-range ">
-				Date:
 				<DatePicker
 					dateFormat="dd MMM yyyy"
 					selected={startDate}
