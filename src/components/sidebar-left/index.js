@@ -19,7 +19,7 @@ class SidebarLeftt extends Component {
 						<img src={logo} alt="" />
 					</div>
 					<div className="navigation">
-						<Menu />
+						<Menu toggleSidebar={toggleSidebar} />
 					</div>
 				</div>
 				<div className="sidebar-overlay" onClick={toggleSidebar}></div>

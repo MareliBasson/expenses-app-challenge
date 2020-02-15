@@ -1,13 +1,17 @@
 @import './styles/variables';
 
 .expenses-page {
+	.actions,
+	.footer {
+		font-size: 0.8rem;
+	}
+
 	.actions {
 		background-color: darken($colorBg, 10%);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 6px 20px;
-		font-size: 0.7rem;
+		padding: 8px 20px;
 		margin-bottom: 10px;
 
 		@media (max-width: 768px) {
@@ -32,7 +36,9 @@
 
 	.number-of-entries {
 		.btn {
-			margin-left: 10px;
+			&:not(:first-child) {
+				margin-left: 10px;
+			}
 		}
 	}
 
@@ -44,7 +50,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		padding: 20px 20px 20px $sidebarWidth + 20px;
+		padding: 14px 20px 14px $sidebarWidth + 20px;
 		background-color: darken($colorBg, 10%);
 
 		@media (max-width: 768px) {

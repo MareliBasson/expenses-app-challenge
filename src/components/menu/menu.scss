@@ -2,14 +2,20 @@
 
 .menu {
 	a {
+		font-size: 0.9rem;
+		display: block;
+		padding: 12px 20px;
+
 		span {
 			display: inline-block;
 			width: 18px;
-			margin-right: 10px;
+			margin-right: 14px;
 			text-align: center;
+			font-size: 1rem;
 		}
 
 		&:hover {
+			background-color: rgba(0, 0, 0, 0.5);
 			span {
 				color: $colorSecondary;
 			}
