@@ -9,36 +9,39 @@ class FilterDateRange extends Component {
 	}
 
 	render() {
-		const { entryDates, startDate, endDate, handleFilter, resetFilter, setDate } = this.props
+		const { entryDates, startDate, endDate, resetFilter, setDate } = this.props
 
 		return (
-			<div className="filter-date-range text-center">
-				Filter by:
+			<div className="filter-date-range ">
+				Date:
 				<DatePicker
 					dateFormat="dd MMM yyyy"
 					selected={startDate}
-					onChange={date => setDate(date, 'startDate')}
+					onChange={date => {
+						setDate(date, 'startDate')
+					}}
 					selectsStart
 					highlightDates={entryDates}
 					startDate={startDate}
 					endDate={endDate}
-					maxDate={new Date()}
+					maxDate={endDate ? endDate : new Date()}
+					placeholderText={'From:'}
 				/>
 				<DatePicker
 					dateFormat="dd MMM yyyy"
 					selected={endDate}
-					onChange={date => setDate(date, 'endDate')}
+					onChange={date => {
+						setDate(date, 'endDate')
+					}}
 					selectsEnd
 					highlightDates={entryDates}
 					startDate={startDate}
 					endDate={endDate}
 					maxDate={new Date()}
 					minDate={startDate}
+					placeholderText={'To:'}
 				/>
-				<button onClick={handleFilter} className="btn btn-primary">
-					Filter
-				</button>
-				<button onClick={resetFilter} className="btn btn-primary">
+				<button onClick={resetFilter} className="btn btn-primary" disabled={!(startDate || endDate)}>
 					Reset
 				</button>
 			</div>

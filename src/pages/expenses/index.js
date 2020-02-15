@@ -117,12 +117,18 @@ class ExpensesPage extends Component {
 	}
 
 	setDate(date, prop) {
-		this.setState({ [prop]: date })
+		this.setState({ [prop]: date }, () => {
+			if (this.state.startDate && this.state.endDate) {
+				this.handleFilter()
+			}
+		})
 	}
 
 	resetFilter() {
 		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 		this.setState({
+			startDate: null,
+			endDate: null,
 			filterActive: false
 		})
 	}

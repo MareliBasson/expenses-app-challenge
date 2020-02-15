@@ -9,11 +9,22 @@
 		margin-left: 10px;
 
 		input {
-			width: 90px;
+			width: 120px;
+			font-size: 0.8rem;
+			padding: 5px;
 		}
 	}
 	.react-datepicker__tab-loop {
 		display: inline-block;
+		position: relative;
+
+		.react-datepicker-popper {
+			transform: translate3d(-175px, 9px, 0px) !important;
+
+			.react-datepicker__triangle {
+				left: calc(50% - 8px);
+			}
+		}
 	}
 
 	.date-highlight {
