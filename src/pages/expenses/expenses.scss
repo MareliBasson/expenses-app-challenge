@@ -9,30 +9,15 @@
 
 	.actions {
 		background-color: darken($colorBg, 10%);
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		text-align: right;
 		padding: 8px 20px;
-		margin-bottom: 10px;
+		position: fixed;
+		top: 60px;
+		width: calc(100% - #{$sidebarWidth});
 
 		@media (max-width: 768px) {
-			flex-direction: column;
-			align-items: flex-start;
-			position: fixed;
-			top: 60px;
 			width: 100%;
 		}
-
-		// > * {
-		// 	flex: 1;
-
-		// 	&:last-child {
-		// 		text-align: right;
-		// 	}
-		// 	@media (max-width: 768px) {
-		// 		margin: 10px 0px;
-		// 	}
-		// }
 	}
 
 	.number-of-entries {

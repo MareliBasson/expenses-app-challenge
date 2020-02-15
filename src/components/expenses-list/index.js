@@ -56,6 +56,7 @@ class ExpensesList extends Component {
 					<div className="amount">Amount</div>
 					<div className="currency"></div>
 				</div>
+				<div className="legend-buffer"></div>
 				{fetchError ? (
 					<div className="expense">
 						There's been an error retrieving your expenses, please try refreshing or contact support.

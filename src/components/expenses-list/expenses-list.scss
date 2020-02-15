@@ -1,7 +1,10 @@
 @import './styles/variables';
 
 .expenses-list {
-	padding-bottom: 80px;
+	padding-top: 106px;
+	padding-bottom: 100px;
+	background-color: white;
+	min-height: 100vh;
 
 	.legend,
 	.expense {
@@ -49,7 +52,20 @@
 
 	.legend {
 		font-weight: 600;
-		margin: 15px 0px 10px;
+		position: absolute;
+		background-color: $colorBg;
+		padding: 15px 20px 10px;
+		width: calc(100% - #{$sidebarWidth});
+
+		// box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+		z-index: $z-index-legend;
+
+		@media (max-width: 768px) {
+			display: none;
+		}
+	}
+	.legend-buffer {
+		height: 46px;
 
 		@media (max-width: 768px) {
 			display: none;
@@ -62,6 +78,10 @@
 		border-bottom: 1px solid $colorDivider;
 		height: 34px;
 		transition: background-color 0.3s ease;
+
+		&:last-child {
+			border: none;
+		}
 
 		&:hover {
 			background-color: darken($colorBg, 5%);
@@ -153,6 +173,7 @@
 
 	@media (max-width: 768px) {
 		display: block;
+		padding-top: 10px;
 
 		.expense {
 			height: auto;
