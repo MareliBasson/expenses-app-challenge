@@ -17,7 +17,12 @@ class ExpenseModal extends Component {
 		const { expense, toggleModal, modalActive } = this.props
 
 		return (
-			<Modal className="expense-modal" toggleModal={toggleModal} title="Expense Information" modalActive={modalActive}>
+			<Modal
+				className="expense-modal"
+				toggleModal={toggleModal}
+				title="Expense Information"
+				modalActive={modalActive}
+			>
 				{expense && (
 					<Fragment>
 						<div className="row">
@@ -53,7 +58,7 @@ class ExpenseModal extends Component {
 							</div>
 						</div>
 
-						<CategorySelect id={expense.id} category={expense.category} />
+						{/* <CategorySelect id={expense.id} category={expense.category} /> */}
 
 						<CommentForm id={expense.id} comment={expense.comment} />
 

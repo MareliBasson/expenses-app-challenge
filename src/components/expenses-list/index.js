@@ -50,7 +50,7 @@ class ExpensesList extends Component {
 					<div className="date">Date</div>
 					<div className="merchant">Merchant</div>
 					<div className="user">User</div>
-					<div className="category">Category</div>
+					{/* <div className="category">Category</div> */}
 					<div className="comment"></div>
 					<div className="images"></div>
 					<div className="amount">Amount</div>
@@ -80,7 +80,7 @@ class ExpensesList extends Component {
 									{expense.user.first} {expense.user.last}
 								</div>
 
-								<div className="category">{expense.category}</div>
+								{/* <div className="category">{expense.category}</div> */}
 
 								<div className="comment">
 									{/* NOTE: the API doesn't update if a blank string is sent so I'm mocking a comment removal by allowing a single space to be read as if there's no comment */}
