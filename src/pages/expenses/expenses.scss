@@ -20,15 +20,35 @@
 
 		> * {
 			flex: 1;
+
+			&:last-child {
+				text-align: right;
+			}
 			@media (max-width: 768px) {
 				margin: 10px 0px;
 			}
 		}
+	}
 
-		.number-of-entries {
-			.btn {
-				margin-left: 10px;
-			}
+	.number-of-entries {
+		.btn {
+			margin-left: 10px;
+		}
+	}
+
+	.footer {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 20px 20px 20px $sidebarWidth + 20px;
+		background-color: darken($colorBg, 10%);
+
+		@media (max-width: 768px) {
+			padding-left: 20px;
 		}
 	}
 }

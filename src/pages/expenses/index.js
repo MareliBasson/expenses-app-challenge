@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import _ from 'lodash'
 import moment from 'moment'
 import ExpensesList from 'components/expenses-list'
@@ -19,8 +19,8 @@ class ExpensesPage extends Component {
 			entriesTotal: 0,
 			limit: '10',
 			page: 1,
-			startDate: new Date(),
-			endDate: new Date(),
+			startDate: null,
+			endDate: null,
 			filterActive: false,
 			allEntries: [],
 			entryDates: []
@@ -143,7 +143,17 @@ class ExpensesPage extends Component {
 	}
 
 	render() {
-		const { visibleExpenses, entriesTotal, page, limit, endDate, startDate, entryDates, filterActive, fetchError } = this.state
+		const {
+			visibleExpenses,
+			entriesTotal,
+			page,
+			limit,
+			endDate,
+			startDate,
+			entryDates,
+			filterActive,
+			fetchError
+		} = this.state
 
 		const limits = ['10', '25', '50', 'All']
 
@@ -157,27 +167,6 @@ class ExpensesPage extends Component {
 			>
 				<div className="expenses-page">
 					<div className="actions">
-						{!filterActive && (
-							<div className="number-of-entries">
-								Show:
-								{limits.map((limit, index) => {
-									return (
-										<button
-											key={`limit-${index}`}
-											onClick={() => {
-												this.setState({ limit: limit, page: 1 }, () => {
-													this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-												})
-											}}
-											className={`btn ${limit === this.state.limit ? 'btn-primary' : 'btn-inverse'}`}
-										>
-											{limit}
-										</button>
-									)
-								})}
-							</div>
-						)}
-
 						{this.state.entryDates && (
 							<FilterDateRange
 								entryDates={entryDates}
@@ -188,7 +177,45 @@ class ExpensesPage extends Component {
 								endDate={endDate}
 							/>
 						)}
+					</div>
 
+					<ExpensesList
+						expenses={visibleExpenses}
+						fetchData={() => {
+							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+						}}
+						fetchError={fetchError}
+					/>
+
+					<div className="footer">
+						<div className="number-of-entries">
+							{!filterActive && (
+								<Fragment>
+									<span>Show:</span>
+									{limits.map((limit, index) => {
+										return (
+											<button
+												key={`limit-${index}`}
+												onClick={() => {
+													this.setState({ limit: limit, page: 1 }, () => {
+														this.fetchData(
+															this.state.page,
+															this.state.limit,
+															'visibleExpenses'
+														)
+													})
+												}}
+												className={`btn ${
+													limit === this.state.limit ? 'btn-primary' : 'btn-inverse'
+												}`}
+											>
+												{limit}
+											</button>
+										)
+									})}
+								</Fragment>
+							)}
+						</div>
 						{limit === 'All' || filterActive ? (
 							<div className="entries-visible text-right">
 								<strong>{visibleExpenses.length}</strong>&nbsp; entries
@@ -203,14 +230,6 @@ class ExpensesPage extends Component {
 							/>
 						)}
 					</div>
-
-					<ExpensesList
-						expenses={visibleExpenses}
-						fetchData={() => {
-							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-						}}
-						fetchError={fetchError}
-					/>
 				</div>
 			</ExpensesContext.Provider>
 		)

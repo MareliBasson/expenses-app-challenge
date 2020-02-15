@@ -3,26 +3,12 @@
 .expenses-list {
 	padding-bottom: 80px;
 
+	.legend,
 	.expense {
-		font-size: 1em;
-		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid $colorDivider;
 		padding: 0px 20px;
-		height: 34px;
-		transition: background-color 0.3s ease;
-
-		@media (max-width: 768px) {
-			display: block;
-			height: auto;
-		}
-
-		&:hover {
-			background-color: darken($colorBg, 5%);
-			transition: background-color 0.2s ease;
-		}
 
 		*:last-child,
 		*:nth-last-child(2) {
@@ -40,7 +26,6 @@
 		.amount {
 			flex: 0;
 		}
-
 		.date {
 			min-width: 100px;
 
@@ -58,8 +43,35 @@
 
 		.comment,
 		.images {
-			font-size: 14px;
 			min-width: 40px;
+		}
+	}
+
+	.legend {
+		font-weight: 600;
+		margin: 15px 0px 10px;
+	}
+
+	.expense {
+		font-size: 1em;
+		width: 100%;
+		border-bottom: 1px solid $colorDivider;
+		height: 34px;
+		transition: background-color 0.3s ease;
+
+		@media (max-width: 768px) {
+			display: block;
+			height: auto;
+		}
+
+		&:hover {
+			background-color: darken($colorBg, 5%);
+			transition: background-color 0.2s ease;
+		}
+
+		.comment,
+		.images {
+			font-size: 14px;
 			text-align: center;
 			position: relative;
 

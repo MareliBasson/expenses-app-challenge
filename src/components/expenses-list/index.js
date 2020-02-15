@@ -46,8 +46,20 @@ class ExpensesList extends Component {
 
 		return (
 			<div className="expenses-list">
+				<div className="legend">
+					<div className="date">Date</div>
+					<div className="merchant">Merchant</div>
+					<div className="user">User</div>
+					<div className="category">Category</div>
+					<div className="comment"></div>
+					<div className="images"></div>
+					<div className="amount">Amount</div>
+					<div className="currency"></div>
+				</div>
 				{fetchError ? (
-					<div className="expense">There's been an error retrieving your expenses, please try refreshing or contact support.</div>
+					<div className="expense">
+						There's been an error retrieving your expenses, please try refreshing or contact support.
+					</div>
 				) : expenses.length > 0 ? (
 					expenses.map((expense, index) => {
 						return (
@@ -74,7 +86,11 @@ class ExpensesList extends Component {
 									{expense.comment !== ''
 										? expense.comment !== ' ' && (
 												<Fragment>
-													<span>{expense.comment !== '' && <FontAwesomeIcon icon={faCommentAlt} />}</span>
+													<span>
+														{expense.comment !== '' && (
+															<FontAwesomeIcon icon={faCommentAlt} />
+														)}
+													</span>
 													<div className="info-tip">
 														<div>{expense.comment}</div>
 													</div>
@@ -86,7 +102,9 @@ class ExpensesList extends Component {
 								<div className="images">
 									{expense.receipts.length > 0 && (
 										<Fragment>
-											<span>{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}</span>
+											<span>
+												{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}
+											</span>
 											<div className="info-tip">
 												<div>
 													{expense.receipts.length} image
