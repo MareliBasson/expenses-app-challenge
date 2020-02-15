@@ -145,7 +145,9 @@ class ExpensesPage extends Component {
 	}
 
 	componentDidMount() {
-		this.initialise()
+		setTimeout(() => {
+			this.initialise()
+		}, 2000)
 	}
 
 	render() {

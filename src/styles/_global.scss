@@ -59,6 +59,11 @@ a {
 	text-decoration: none;
 }
 
+input,
+textarea {
+	font-family: $fontPrimary;
+}
+
 strong {
 	font-weight: 700;
 }

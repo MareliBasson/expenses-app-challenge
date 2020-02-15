@@ -23,16 +23,16 @@
 			width: 100%;
 		}
 
-		> * {
-			flex: 1;
+		// > * {
+		// 	flex: 1;
 
-			&:last-child {
-				text-align: right;
-			}
-			@media (max-width: 768px) {
-				margin: 10px 0px;
-			}
-		}
+		// 	&:last-child {
+		// 		text-align: right;
+		// 	}
+		// 	@media (max-width: 768px) {
+		// 		margin: 10px 0px;
+		// 	}
+		// }
 	}
 
 	.number-of-entries {
