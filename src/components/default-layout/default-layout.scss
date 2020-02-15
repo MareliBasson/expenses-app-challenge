@@ -13,4 +13,13 @@
 			padding-left: 0;
 		}
 	}
+
+	.content {
+		min-height: 100vh;
+		padding: 60px 0px 55px;
+
+		@media (max-width: 768px) {
+			padding-top: 0;
+		}
+	}
 }

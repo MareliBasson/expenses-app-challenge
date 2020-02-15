@@ -3,7 +3,11 @@ import './settings.css'
 
 class SettingsPage extends Component {
 	render() {
-		return <div className="settings"></div>
+		return (
+			<div className="settings">
+				<p>A potential settings page</p>
+			</div>
+		)
 	}
 }
 
