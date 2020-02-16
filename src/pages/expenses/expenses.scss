@@ -8,11 +8,15 @@
 	}
 
 	.filter-bar {
-		background-color: darken($colorBg, 10%);
-		text-align: right;
-		padding: 8px 20px;
+		height: $expense-toolbar-height;
 		position: fixed;
 		top: 60px;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		background-color: darken($colorBg, 10%);
+		text-align: right;
+		padding: 0px 20px;
 		width: calc(100% - #{$sidebarWidth});
 
 		@media (max-width: 768px) {
@@ -25,8 +29,17 @@
 			margin-left: 10px;
 		}
 	}
+	.loader {
+		width: 100%;
+		text-align: center;
+
+		img {
+			width: 80px;
+		}
+	}
 
 	.expenses-footer {
+		height: $expense-footer-height;
 		position: absolute;
 		bottom: 0;
 		right: 0;

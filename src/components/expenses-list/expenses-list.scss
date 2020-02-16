@@ -1,10 +1,10 @@
 @import './styles/variables';
 
 .expenses-list {
-	padding-top: 46px;
+	padding-top: $expense-toolbar-height;
 	padding-bottom: 100px;
 	background-color: white;
-	min-height: 100vh;
+	min-height: calc(100vh - (#{$header-height} + #{$expense-footer-height}));
 
 	.legend,
 	.expense {
@@ -51,8 +51,8 @@
 	}
 
 	.legend {
-		font-weight: 600;
 		position: absolute;
+		font-weight: 600;
 		background-color: $colorBg;
 		padding: 15px 20px 10px;
 		width: calc(100% - #{$sidebarWidth});
