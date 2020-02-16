@@ -5,7 +5,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 ## To run this project
 
 -   Clone this repo - the api has been included in this project.
--   Change to `/api` and start the API locally - instructions can be found in it's [README](https://github.com/MareliBasson/expenses-app-challenge/tree/master/api))
+-   Change directory to `/api` and start the API locally - instructions can be found in it's [README](https://github.com/MareliBasson/expenses-app-challenge/tree/master/api)
 -   Make a copy of the .env-example file found in the root of this repo and rename it to .env
 -   Run `npm install`
 -   Run `npm start`
@@ -43,7 +43,6 @@ A list of links or people I consulted while building the project on topics i'm n
 -   How to setup a image uploader using Firebase (my first attempt at image uploading before I realised the API includes an Express server)
 -   Debugging an Internal Server Error - the cause was the content-type header I'd set on the form-data call for receipts
 -   How to add new properties to an array of nested objects using this.setState and prevState - I used this to create a userName property and then confirm there were no repeat usernames with \_.uniqBy - the idea was to allow users to filter by username, but since all the usernames were unique I abandoned this feature.
--
 
 ## Packages used
 
