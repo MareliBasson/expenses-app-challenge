@@ -5,6 +5,8 @@ import moment from 'moment'
 import ExpenseModal from 'components/expense-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
+
+import loader from 'images/loader.svg'
 import './expenses-list.css'
 
 class ExpensesList extends Component {
@@ -42,7 +44,7 @@ class ExpensesList extends Component {
 
 	render() {
 		const { selectedExpense, modalActive } = this.state
-		const { expenses, fetchError } = this.props
+		const { expenses, fetchError, busyFetching } = this.props
 
 		return (
 			<div className="expenses-list">
@@ -57,6 +59,9 @@ class ExpensesList extends Component {
 					<div className="currency"></div>
 				</div>
 				<div className="legend-buffer"></div>
+
+				{busyFetching && <img src={loader} alt="" />}
+
 				{fetchError ? (
 					<div className="expense">
 						There's been an error retrieving your expenses, please try refreshing or contact support.

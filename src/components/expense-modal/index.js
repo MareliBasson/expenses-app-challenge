@@ -4,7 +4,7 @@ import moment from 'moment'
 import Modal from 'components/modal'
 import CommentForm from 'components/comment-form'
 import ImageUpload from 'components/image-upload'
-import CategorySelect from 'components/category-select'
+// import CategorySelect from 'components/category-select'
 import './expense-modal.css'
 
 class ExpenseModal extends Component {

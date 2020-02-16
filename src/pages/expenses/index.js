@@ -4,6 +4,7 @@ import moment from 'moment'
 import ExpensesList from 'components/expenses-list'
 import FilterDateRange from 'components/filter-date-range'
 import Pagination from 'components/pagination'
+import { fetchData } from 'utils/helpers'
 
 import './expenses.css'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -23,11 +24,13 @@ class ExpensesPage extends Component {
 			endDate: null,
 			filterActive: false,
 			allEntries: [],
-			entryDates: []
+			entryDates: [],
+			fetchError: false,
+			busyFetching: false
 		}
 
 		this.initialise = this.initialise.bind(this)
-		this.fetchData = this.fetchData.bind(this)
+		this.fetchData = fetchData.bind(this)
 		this.goToNext = this.goToNext.bind(this)
 		this.goToPrev = this.goToPrev.bind(this)
 		this.handleFilter = this.handleFilter.bind(this)
@@ -35,46 +38,7 @@ class ExpensesPage extends Component {
 		this.setDate = this.setDate.bind(this)
 	}
 
-	// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
-	fetchData(page, limit, prop, cb = () => {}) {
-		let entriesLimit
-		let limitOffset
-
-		if (limit === 'All') {
-			entriesLimit = this.state.entriesTotal
-			limitOffset = ''
-		} else {
-			entriesLimit = parseInt(limit)
-			limitOffset = parseInt(limit) * (page - 1)
-		}
-
-		fetch(
-			`http://localhost:3000/expenses${entriesLimit > 0 ? `?limit=${entriesLimit}` : ''}${
-				entriesLimit > 0 && limitOffset > 0 ? `&offset=${limitOffset}` : ''
-			}`
-		)
-			.then(response => response.json())
-			.then(expenses => {
-				this.setState(
-					{
-						[prop]: expenses.expenses,
-						entriesTotal: expenses.total
-					},
-					() => {
-						cb()
-					}
-				)
-			})
-			.catch(err => {
-				console.log(err)
-				if (err) {
-					this.setState({
-						fetchError: true
-					})
-				}
-			})
-	}
-
+	// Pagination Functions
 	goToPrev() {
 		this.setState(
 			{
@@ -97,6 +61,7 @@ class ExpensesPage extends Component {
 		)
 	}
 
+	// Filter functions
 	handleFilter() {
 		const { startDate, endDate } = this.state
 
@@ -135,6 +100,8 @@ class ExpensesPage extends Component {
 
 	initialise() {
 		this.fetchData(1, this.state.limit, 'visibleExpenses')
+
+		// Set Calendar Highlights
 		this.fetchData(1, null, 'allEntries', () => {
 			const entryDates = this.state.allEntries.map(expense => Date.parse(expense.date))
 
@@ -145,9 +112,7 @@ class ExpensesPage extends Component {
 	}
 
 	componentDidMount() {
-		setTimeout(() => {
-			this.initialise()
-		}, 2000)
+		this.initialise()
 	}
 
 	render() {
@@ -160,10 +125,13 @@ class ExpensesPage extends Component {
 			startDate,
 			entryDates,
 			filterActive,
-			fetchError
+			fetchError,
+			busyFetching
 		} = this.state
 
 		const limits = ['10', '25', '50', 'All']
+
+		console.log('busyFetching: ' + busyFetching)
 
 		return (
 			<ExpensesContext.Provider
@@ -193,6 +161,7 @@ class ExpensesPage extends Component {
 							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 						}}
 						fetchError={fetchError}
+						busyFetching={busyFetching}
 					/>
 
 					<div className="footer">
@@ -223,6 +192,7 @@ class ExpensesPage extends Component {
 								</Fragment>
 							)}
 						</div>
+
 						{limit === 'All' || filterActive ? (
 							<div className="entries-visible text-right">
 								<strong>{visibleExpenses.length}</strong>&nbsp; entries
