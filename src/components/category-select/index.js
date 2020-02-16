@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './category-select.css'
 
 import { ExpensesContext } from 'pages/expenses'
@@ -82,6 +83,11 @@ class CategorySelect extends Component {
 			</ExpensesContext.Consumer>
 		)
 	}
+}
+
+CategorySelect.propTypes = {
+	id: PropTypes.string,
+	category: PropTypes.string
 }
 
 export default CategorySelect

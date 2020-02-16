@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import sitemap from 'data/sitemap'
+import navigation from 'data/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import './header.css'
 
-class Header extends Component {
-	render() {
-		const { location, toggleSidebar } = this.props
-
-		return (
-			<div className="header">
-				<h2>
-					<div className="sidebar-toggle" onClick={toggleSidebar}>
-						<FontAwesomeIcon icon={faEllipsisV} />
-					</div>
-					{sitemap[location.pathname]}
-				</h2>
+const Header = ({ location, toggleSidebar }) => (
+	<div className="header">
+		<h2>
+			<div className="sidebar-toggle" onClick={toggleSidebar}>
+				<FontAwesomeIcon icon={faEllipsisV} />
 			</div>
-		)
-	}
+			{navigation[location.pathname]}
+		</h2>
+	</div>
+)
+
+Header.propTypes = {
+	location: PropTypes.object,
+	toggleSidebar: PropTypes.func
 }
 
 export default withRouter(Header)

@@ -145,7 +145,9 @@ class ExpensesList extends Component {
 }
 
 ExpensesList.propTypes = {
-	expenses: PropTypes.array
+	expenses: PropTypes.array,
+	fetchError: PropTypes.bool,
+	busyFetching: PropTypes.bool
 }
 
 export default ExpensesList

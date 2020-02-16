@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './image-upload.css'
 
 import { ExpensesContext } from 'pages/expenses'
@@ -48,7 +49,7 @@ class ImageUpload extends Component {
 	render() {
 		const { image, uploadSuccess } = this.state
 
-		const { preview } = this.props
+		const { previews } = this.props
 
 		return (
 			<ExpensesContext.Consumer>
@@ -76,8 +77,8 @@ class ImageUpload extends Component {
 							{uploadSuccess && <div className="text-right">Image uploaded successfully</div>}
 
 							<div className="previews">
-								{preview &&
-									preview.map((img, index) => {
+								{previews &&
+									previews.map((img, index) => {
 										return (
 											<div className="preview-img" key={`image-preview-${index}`}>
 												<img src={`http://localhost:3000${img.url}`} alt="" width="100" />
@@ -91,6 +92,11 @@ class ImageUpload extends Component {
 			</ExpensesContext.Consumer>
 		)
 	}
+}
+
+ImageUpload.propTypes = {
+	id: PropTypes.string,
+	previews: PropTypes.array
 }
 
 export default ImageUpload

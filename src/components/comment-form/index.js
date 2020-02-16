@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './comment-form.css'
 
 import { ExpensesContext } from 'pages/expenses'
@@ -82,6 +83,11 @@ class CommentForm extends Component {
 			</ExpensesContext.Consumer>
 		)
 	}
+}
+
+CommentForm.propTypes = {
+	id: PropTypes.string,
+	comment: PropTypes.string
 }
 
 export default CommentForm
