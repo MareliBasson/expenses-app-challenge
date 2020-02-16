@@ -104,9 +104,9 @@ class ExpensesPage extends Component {
 
 					<div className="expenses-footer">
 						<div className="entry-limit">
-							Show:
 							{!filterActive && (
 								<Fragment>
+									Show:
 									{limits.map((limit, index) => {
 										return (
 											<button

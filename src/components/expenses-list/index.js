@@ -1,10 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import moment from 'moment'
+import ListItem from './list-item'
 import ExpenseModal from 'components/expense-modal'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
 
 import loader from 'images/loader.svg'
 import './expenses-list.css'
@@ -60,72 +58,25 @@ class ExpensesList extends Component {
 				</div>
 				<div className="legend-buffer"></div>
 
-				{busyFetching && <img src={loader} alt="" />}
-
-				{fetchError ? (
-					<div className="expense">
-						There's been an error retrieving your expenses, please try refreshing or contact support.
+				{busyFetching ? (
+					<div className="loader">
+						<img src={loader} alt="" />
 					</div>
 				) : expenses.length > 0 ? (
 					expenses.map((expense, index) => {
 						return (
-							<div
-								className="expense"
+							<ListItem
+								expense={expense}
 								key={`expense-${index}`}
-								onClick={() => {
-									this.selectExpense(expense.id)
-									this.toggleExpenseModal()
-								}}
-							>
-								<div className="date">{moment(expense.date).format('DD MMM YYYY')}</div>
-
-								<div className="merchant">{expense.merchant}</div>
-
-								<div className="user">
-									{expense.user.first} {expense.user.last}
-								</div>
-
-								{/* <div className="category">{expense.category}</div> */}
-
-								<div className="comment">
-									{/* NOTE: the API doesn't update if a blank string is sent so I'm mocking a comment removal by allowing a single space to be read as if there's no comment */}
-									{expense.comment !== ''
-										? expense.comment !== ' ' && (
-												<Fragment>
-													<span>
-														{expense.comment !== '' && (
-															<FontAwesomeIcon icon={faCommentAlt} />
-														)}
-													</span>
-													<div className="info-tip">
-														<div>{expense.comment}</div>
-													</div>
-												</Fragment>
-										  )
-										: ''}
-								</div>
-
-								<div className="images">
-									{expense.receipts.length > 0 && (
-										<Fragment>
-											<span>
-												{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}
-											</span>
-											<div className="info-tip">
-												<div>
-													{expense.receipts.length} image
-													{expense.receipts.length > 1 && 's'}
-												</div>
-											</div>
-										</Fragment>
-									)}
-								</div>
-
-								<div className="amount">{expense.amount.value}</div>
-								<div className="currency">{expense.amount.currency}</div>
-							</div>
+								selectExpense={this.selectExpense}
+								toggleExpenseModal={this.toggleExpenseModal}
+							/>
 						)
 					})
+				) : fetchError ? (
+					<div className="expense">
+						There's been an error retrieving your expenses, please try refreshing or contact support.
+					</div>
 				) : (
 					<div className="expense">No expenses match your request</div>
 				)}

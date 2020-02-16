@@ -10,9 +10,9 @@ const Pagination = ({ page, total, limit, handlePrev, handleNext }) => (
 			<FontAwesomeIcon icon={faChevronLeft} />
 		</button>
 		<div className="page-count">
-			{page}/{Math.ceil(total / limit)}
+			{page}/{Math.ceil(total / limit) === 0 ? 1 : Math.ceil(total / limit)}
 		</div>
-		<button className="btn btn-primary" onClick={handleNext} disabled={page === Math.ceil(total / limit)}>
+		<button className="btn btn-primary" onClick={handleNext} disabled={page >= Math.ceil(total / limit)}>
 			<FontAwesomeIcon icon={faChevronRight} />
 		</button>
 	</div>

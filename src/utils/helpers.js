@@ -25,27 +25,30 @@ export function fetchData(page, limit, prop, cb = () => {}) {
 	)
 		.then(response => response.json())
 		.then(expenses => {
-			setTimeout(() => {
-				this.setState(
-					{
-						[prop]: expenses.expenses,
-						entriesTotal: expenses.total,
-						fetchError: false,
-						busyFetching: false
-					},
-					() => {
-						cb()
-					}
-				)
-			}, 1000)
+			// setTimeout(() => {
+			this.setState(
+				{
+					[prop]: expenses.expenses,
+					entriesTotal: expenses.total,
+					fetchError: false,
+					busyFetching: false
+				},
+				() => {
+					cb()
+				}
+			)
+			// }, 1000)
 		})
 		.catch(err => {
 			console.log(err)
 
 			if (err) {
+				// setTimeout(() => {
 				this.setState({
-					fetchError: true
+					fetchError: true,
+					busyFetching: false
 				})
+				// }, 1000)
 			}
 		})
 }
