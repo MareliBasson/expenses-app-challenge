@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import _ from 'lodash'
 import moment from 'moment'
 import ExpensesList from 'components/expenses-list'
-import FilterDateRange from 'components/filter-date-range'
+import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
 import { fetchData } from 'utils/helpers'
 
@@ -144,7 +144,7 @@ class ExpensesPage extends Component {
 				<div className="expenses-page">
 					<div className="actions">
 						{this.state.entryDates && (
-							<FilterDateRange
+							<DateRangeFilter
 								entryDates={entryDates}
 								resetFilter={this.resetFilter}
 								handleFilter={this.handleFilter}

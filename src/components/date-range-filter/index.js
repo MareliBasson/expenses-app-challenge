@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DatePicker from 'react-datepicker'
-import './filter-date-range.css'
+import './date-range-filter.css'
 
-const FilterDateRange = ({ entryDates, startDate, endDate, resetFilter, setDate }) => (
-	<div className="filter-date-range ">
+const DateRangeFilter = ({ entryDates, startDate, endDate, resetFilter, setDate }) => (
+	<div className="date-range-filter ">
 		<DatePicker
 			dateFormat="dd MMM yyyy"
 			selected={startDate}
@@ -38,12 +38,12 @@ const FilterDateRange = ({ entryDates, startDate, endDate, resetFilter, setDate 
 	</div>
 )
 
-FilterDateRange.propTypes = {
+DateRangeFilter.propTypes = {
 	entryDates: PropTypes.array,
-	startDate: PropTypes.string,
-	endDate: PropTypes.string,
+	startDate: PropTypes.instanceOf(Date),
+	endDate: PropTypes.instanceOf(Date),
 	resetFilter: PropTypes.func,
 	setDate: PropTypes.func
 }
 
-export default FilterDateRange
+export default DateRangeFilter
