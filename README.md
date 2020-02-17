@@ -37,8 +37,8 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   Accessibility - _TODO; expand on this_
     -
 -   **Hardest part to implement**
-    -   Working without a state management libary - I tried to keep my components neat and modular, keeping track of my state and limiting the prop-drilling as much as with the use of library. Using Context API helped with this, but I'm extra motivated now to properly learn how to setup Redux.
-    -   Getting the API endpoint calls to work and getting a better understanding of how to use an API as well as making basic updates to one.
+    -   Working without a state management libary - I tried to keep my components neat and modular, and limiting the prop-drilling as much as possible without the use of library. Using Context API helped with this, but I'm extra motivated now to properly learn how to setup Redux. Adding the helper.js file helped with simplifying the Expenses Page component - it was getting extremely bloated with methods since they all needed to update or use the states in that file.
+    -   Getting the API endpoint calls to work and getting a better understanding of how to use an API as well as making updates to one.
 -   **Functionalities I'm most proud of**
     -   Honestly the whole thing! Mostly because it gave me a chance to really apply what I've learnt in the last couple of years. But if I have to highlight some of my favourites:
     -   Figuring out how to make changes to the API.
@@ -61,7 +61,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 ## Final Thoughts
 
 -   **This challenge was a lot of fun to do! **
--   I got to implement much of what I've learnt about React and JS in the last 3 years. It was great seeing how much I've improved and also where I lack some fundamentals such as promises, async/await,hooks and how to setup Redux.
+-   I got to implement much of what I've learnt about React and JS in the last 3 years. It was great seeing how much I've improved and also where I need to brush up my knowledge and get some practical experience such as promises, async/await,hooks and how to setup Redux.
 -   There's definitely a point during this project where I got sidetracked by trying to implement all the things I didn't know - those things I felt I wasn't strong enough in and were expected in some way or where I felt my lack of knowledge would reflect badly on my assessment. But I realised quickly that all this will accomplish is an inconsistent implementation across my app, due to my inexperience in those areas and that I would be sacrificing the areas where I feel my strengths lay. So I refocussed - I researched the aspects I'm not as well-versed in to deepen my understanding, implement only that which would really add to my project without disrupting the parts I'm already proud of and rather focus on polishing and adding to the features I know I can add the most value to.
 -   I learnt a lot and got to dip into concepts I haven't had an opportunity to before. I now have a better understanding of Context API, hooks and ...
 -   Learnt more about what MomentJS is capable especially when it comes to filtering
@@ -70,8 +70,8 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 -   [Lodash](https://www.npmjs.com/package/lodash) - to speed up development by providing some handy methods for dealing with objects and arrays
 -   [FontAwesome](https://github.com/FortAwesome/react-fontawesome) - icons for the UI (might replace with IcoMoon if time allows)
--   [Moment](https://www.npmjs.com/package/react-moment#formatting) - for easy date formatting
--   [React-Datepicker](https://www.npmjs.com/package/react-datepicker) - neat date picker component
+-   [Moment](https://www.npmjs.com/package/react-moment#formatting) - for easy date formatting and manipulation
+-   [React-Datepicker](https://www.npmjs.com/package/react-datepicker) - neat date picker component with regular support
 
 ## Resources
 
