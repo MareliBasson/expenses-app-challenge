@@ -54,7 +54,6 @@ class ExpensesList extends Component {
 					<div className="comment"></div>
 					<div className="images"></div>
 					<div className="amount">Amount</div>
-					<div className="currency"></div>
 				</div>
 				<div className="list-buffer"></div>
 

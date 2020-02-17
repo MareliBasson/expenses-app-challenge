@@ -52,13 +52,10 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 			</div>
 
 			<div className="amount">
-				{/* {expense.amount.value}
-				<br /> */}
 				{new Intl.NumberFormat('da', { style: 'currency', currency: expense.amount.currency }).format(
 					expense.amount.value
 				)}
 			</div>
-			{/* <div className="currency">{expense.amount.currency}</div> */}
 		</div>
 	)
 }
