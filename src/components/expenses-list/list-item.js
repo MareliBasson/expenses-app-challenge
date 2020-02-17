@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
 
 const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
+	console.log(Intl.NumberFormat.supportedLocalesOf())
 	return (
 		<div
 			className="expense"
@@ -50,8 +51,14 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 				)}
 			</div>
 
-			<div className="amount">{expense.amount.value}</div>
-			<div className="currency">{expense.amount.currency}</div>
+			<div className="amount">
+				{/* {expense.amount.value}
+				<br /> */}
+				{new Intl.NumberFormat('de-DE', { style: 'currency', currency: expense.amount.currency }).format(
+					expense.amount.value
+				)}
+			</div>
+			{/* <div className="currency">{expense.amount.currency}</div> */}
 		</div>
 	)
 }

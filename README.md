@@ -76,3 +76,5 @@ A list of links or people I consulted while building the project on topics i'm n
     -   https://medium.com/better-programming/how-to-generate-an-array-of-months-years-or-days-in-javascript-add4b8419ff9
 -   React Context API
     -   https://daveceddia.com/context-api-vs-redux/
+-   Currency Formatting
+    -   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
