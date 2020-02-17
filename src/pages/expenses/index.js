@@ -107,7 +107,7 @@ class ExpensesPage extends Component {
 						<div className="entry-limit">
 							{!filterActive && (
 								<Fragment>
-									Show:
+									<span className="hidden-mobile">Show:</span>
 									{limits.map((limit, index) => {
 										return (
 											<button

@@ -56,7 +56,7 @@ class ExpensesList extends Component {
 					<div className="amount">Amount</div>
 					<div className="currency"></div>
 				</div>
-				<div className="legend-buffer"></div>
+				<div className="list-buffer"></div>
 
 				{busyFetching ? (
 					<div className="loader">

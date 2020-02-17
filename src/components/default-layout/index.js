@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import Header from 'components/header'
+import Header from './header'
 import SidebarLeft from 'components/sidebar-left'
-// import Footer from 'components/footer'
 import './default-layout.css'
 
 class DefaultLayout extends Component {
@@ -30,7 +29,6 @@ class DefaultLayout extends Component {
 				<div className={`page-body`}>
 					<Header toggleSidebar={this.toggleSidebar} />
 					<div className="content">{children}</div>
-					{/* <Footer /> */}
 				</div>
 			</div>
 		)

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import navigation from 'data/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons'
-import './header.css'
 
 const Header = ({ location, toggleSidebar }) => (
 	<div className="header">

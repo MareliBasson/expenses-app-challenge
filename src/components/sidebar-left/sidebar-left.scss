@@ -21,7 +21,7 @@
 			z-index: 1;
 			padding: 10px 16px;
 
-			@media (max-width: 768px) {
+			@media (max-width: $bp-mobile) {
 				display: block;
 			}
 		}
@@ -64,7 +64,7 @@
 		transition: 0.2s 0.2s ease width, 0.2s ease opacity;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: $bp-mobile) {
 		.sidebar-left {
 			padding-top: 20px;
 			left: -$sidebarWidth;

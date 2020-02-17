@@ -5,6 +5,7 @@
 		font-size: 0.9rem;
 		display: block;
 		padding: 12px 20px;
+		transition: all 0.2s ease;
 
 		span {
 			display: inline-block;
@@ -12,13 +13,21 @@
 			margin-right: 14px;
 			text-align: center;
 			font-size: 1rem;
+			transition: all 0.2s ease;
 		}
 
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.5);
+			transition: all 0.2s ease;
+
 			span {
 				color: $colorSecondary;
+				transition: all 0.2s ease;
 			}
+		}
+
+		&.active {
+			background-color: darken($colorSecondary, 30%);
 		}
 	}
 }

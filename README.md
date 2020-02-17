@@ -34,6 +34,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   I noticed that the API doesn't update a comment if it POSTs a blank string (""). So I've mocked it so that a user can "remove" a comment by just entering a single space.
 -   **UI Design**
     -   I used my favourite budget app as a rough guideline for the UI: [22Seven](https://www.22seven.com/)
+    -   Accessibility - _TODO; expand on this_
 -   **General thoughts**
 
 ## What I've learnt
@@ -48,7 +49,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 -   **This challenge was a lot of fun to do! **
 -   I got to implement much of what I've learnt about React and JS in the last 3 years. It was great seeing how much I've improved and also where I lack some fundamentals such as promises, async/await,hooks and how to setup Redux.
--   There's definitely a point during this project where I got sidetracked by trying to implement all the things I didn't know or felt I wasn't strong enough in - and which I felt on some level would make me seem too inexperienced. But I realised quickly that all this will accomplish is an in consistent implementation across my app (because I don't understand those patterns as well yet) and that I would be sacrificing the areas where I feel my strengths lay. So I refocussed - I researched the aspects I'm not as well-versed in to deepen my understanding, implement only that which would really add to my project without disrupting the parts I'm already proud of and rather focus on polishing and adding to the features I know I can add the most value to.
+-   There's definitely a point during this project where I got sidetracked by trying to implement all the things I didn't know - those things I felt I wasn't strong enough in and were expected in some way or where I felt my lack of knowledge would reflect badly on my assessment. But I realised quickly that all this will accomplish is an inconsistent implementation across my app, due to my inexperience in those areas and that I would be sacrificing the areas where I feel my strengths lay. So I refocussed - I researched the aspects I'm not as well-versed in to deepen my understanding, implement only that which would really add to my project without disrupting the parts I'm already proud of and rather focus on polishing and adding to the features I know I can add the most value to.
 -   I learnt a lot and got to dip into concepts I haven't had an opportunity to before. I now have a better understanding of Context API, hooks and ...
 -   Learnt more about what MomentJS is capable especially when it comes to filtering
 
