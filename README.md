@@ -35,7 +35,20 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   **UI Design**
     -   I used my favourite budget app as a rough guideline for the UI: [22Seven](https://www.22seven.com/)
     -   Accessibility - _TODO; expand on this_
--   **General thoughts**
+    -
+-   **Hardest part to implement**
+    -   Working without a state management libary - I tried to keep my components neat and modular, keeping track of my state and limiting the prop-drilling as much as with the use of library. Using Context API helped with this, but I'm extra motivated now to properly learn how to setup Redux.
+    -   Getting the API endpoint calls to work and getting a better understanding of how to use an API as well as making basic updates to one.
+-   **Functionalities I'm most proud of**
+    -   Honestly the whole thing! Mostly because it gave me a chance to really apply what I've learnt in the last couple of years. But if I have to highlight some of my favourites:
+    -   Figuring out how to make changes to the API.
+    -   I like my UI, it's usuable, neat and it's responsive design looks good along with being easy to use on small screens - I kept the user in mind and made sure to hide and reveal functionality as it's available to them. I tried to keep it as uncluttered as possible, without sacrificing it's usability - paying close attention to existing UI patterns for budgetting/financial apps, helped with this.
+    -   I love adding UI details such as the highlighted dates in the date-range filter to show which dates have expenses on them, or the comment and receipt icons with their onHovers to indicate that an expenses has extra info added to it and to give a small preview of what to expect.
+    -   The expense modal was a fun challenge because I really wanted the updates the user makes to reflect in the background on the expenses list.
+    -   The date range filter is one I really enjoyed building, since I got to use more of Moment.js's features instead of just the usual date formatting.
+-   **How long it took me**
+    -   Around 29 hours
+    -   I used my RescueTime logs to estimate how much time I've spent on the project
 
 ## What I've learnt
 
@@ -77,4 +90,4 @@ A list of links or people I consulted while building the project on topics i'm n
 -   React Context API
     -   https://daveceddia.com/context-api-vs-redux/
 -   Currency Formatting
-    -   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
+    -   I was considering using [this package](https://www.npmjs.com/package/currency-formatter), but it directed me to the [Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
