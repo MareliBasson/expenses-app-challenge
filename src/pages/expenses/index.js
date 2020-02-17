@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import ExpensesList from 'components/expenses-list'
 import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
-import entryLimits from 'data/entry-limits'
+import expenseLimits from 'data/expense-limits'
 import { fetchData, goToPrev, goToNext, filterExpenses, resetFilter, setDate } from 'utils/helpers'
 
 import './expenses.css'
@@ -23,7 +23,7 @@ class ExpensesPage extends Component {
 			endDate: null,
 			filterActive: false,
 			allEntries: [],
-			entryDates: [],
+			expenseDates: [],
 			fetchError: false,
 			busyFetching: false
 		}
@@ -44,10 +44,10 @@ class ExpensesPage extends Component {
 
 		// Set Calendar Highlights
 		this.fetchData(1, null, 'allEntries', () => {
-			const entryDates = this.state.allEntries.map(expense => Date.parse(expense.date))
+			const expenseDates = this.state.allEntries.map(expense => Date.parse(expense.date))
 
 			this.setState({
-				entryDates: [{ 'date-highlight': entryDates }]
+				expenseDates: [{ 'date-highlight': expenseDates }]
 			})
 		})
 	}
@@ -64,13 +64,13 @@ class ExpensesPage extends Component {
 			limit,
 			endDate,
 			startDate,
-			entryDates,
+			expenseDates,
 			filterActive,
 			fetchError,
 			busyFetching
 		} = this.state
 
-		const limits = entryLimits.limits
+		const limits = expenseLimits.limits
 
 		return (
 			<ExpensesContext.Provider
@@ -82,9 +82,9 @@ class ExpensesPage extends Component {
 			>
 				<div className="expenses-page">
 					<div className="filter-bar">
-						{this.state.entryDates && (
+						{this.state.expenseDates && (
 							<DateRangeFilter
-								entryDates={entryDates}
+								expenseDates={expenseDates}
 								resetFilter={this.resetFilter}
 								filterExpenses={this.filterExpenses}
 								setDate={this.setDate}
@@ -104,7 +104,7 @@ class ExpensesPage extends Component {
 					/>
 
 					<div className="expenses-footer">
-						<div className="entry-limit">
+						<div className="expense-limit">
 							{!filterActive && (
 								<Fragment>
 									<span className="hidden-mobile">Show:</span>

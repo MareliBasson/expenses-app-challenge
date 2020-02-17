@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 
-// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (entry limit and page number), unless custom values are assigned
+// Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (expense limit and page number), unless custom values are assigned
 export function fetchData(page, limit, prop, cb = () => {}) {
 	this.setState({
 		busyFetching: true

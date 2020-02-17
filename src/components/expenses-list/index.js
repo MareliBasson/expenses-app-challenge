@@ -78,7 +78,7 @@ class ExpensesList extends Component {
 						There's been an error retrieving your expenses, please try refreshing or contact support.
 					</div>
 				) : (
-					<div className="expense">No expenses match your request</div>
+					<div className="expense">No expenses match your filter request</div>
 				)}
 
 				{modalActive && (

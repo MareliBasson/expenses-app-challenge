@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import DatePicker from 'react-datepicker'
 import './date-range-filter.css'
 
-const DateRangeFilter = ({ entryDates, startDate, endDate, resetFilter, setDate }) => (
+const DateRangeFilter = ({ expenseDates, startDate, endDate, resetFilter, setDate }) => (
 	<div className="date-range-filter ">
 		<DatePicker
 			dateFormat="dd MMM yyyy"
@@ -12,7 +12,7 @@ const DateRangeFilter = ({ entryDates, startDate, endDate, resetFilter, setDate 
 				setDate(date, 'startDate')
 			}}
 			selectsStart
-			highlightDates={entryDates}
+			highlightDates={expenseDates}
 			startDate={startDate}
 			endDate={endDate}
 			maxDate={endDate ? endDate : new Date()}
@@ -25,7 +25,7 @@ const DateRangeFilter = ({ entryDates, startDate, endDate, resetFilter, setDate 
 				setDate(date, 'endDate')
 			}}
 			selectsEnd
-			highlightDates={entryDates}
+			highlightDates={expenseDates}
 			startDate={startDate}
 			endDate={endDate}
 			maxDate={new Date()}
@@ -39,7 +39,7 @@ const DateRangeFilter = ({ entryDates, startDate, endDate, resetFilter, setDate 
 )
 
 DateRangeFilter.propTypes = {
-	entryDates: PropTypes.array,
+	expenseDates: PropTypes.array,
 	startDate: PropTypes.instanceOf(Date),
 	endDate: PropTypes.instanceOf(Date),
 	resetFilter: PropTypes.func,
