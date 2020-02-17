@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import ExpensesList from 'components/expenses-list'
 import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
+import entryLimits from 'data/entry-limits'
 import { fetchData, goToPrev, goToNext, filterExpenses, resetFilter, setDate } from 'utils/helpers'
 
 import './expenses.css'
@@ -69,7 +70,7 @@ class ExpensesPage extends Component {
 			busyFetching
 		} = this.state
 
-		const limits = ['10', '25', '50', 'All']
+		const limits = entryLimits.limits
 
 		return (
 			<ExpensesContext.Provider
