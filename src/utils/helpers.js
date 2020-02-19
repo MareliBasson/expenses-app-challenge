@@ -2,7 +2,7 @@ import _ from 'lodash'
 import moment from 'moment'
 
 // Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (expense limit and page number), unless custom values are assigned
-export function fetchData(page, limit, prop, cb = () => {}) {
+export function fetchData(page, limit, prop, callback = () => {}) {
 	this.setState({
 		busyFetching: true
 	})
@@ -26,18 +26,16 @@ export function fetchData(page, limit, prop, cb = () => {}) {
 		.then(response => response.json())
 		.then(expenses => {
 			// setTimeout(() => {
-			this.setState(
-				{
-					[prop]: expenses.expenses,
-					entriesTotal: expenses.total,
-					fetchError: false,
-					busyFetching: false
-				},
-				() => {
-					cb()
-				}
-			)
+			this.setState({
+				[prop]: expenses.expenses,
+				entriesTotal: expenses.total,
+				fetchError: false,
+				busyFetching: false
+			})
 			// }, 1000)
+		})
+		.then(() => {
+			callback()
 		})
 		.catch(err => {
 			console.log(err)

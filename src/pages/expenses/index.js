@@ -50,10 +50,10 @@ class ExpensesPage extends Component {
 	}
 
 	initialise() {
-		this.fetchData(1, this.state.limit, 'visibleExpenses')
+		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 
 		// Set Calendar Highlights
-		this.fetchData(1, null, 'allEntries', () => {
+		this.fetchData(0, null, 'allEntries', () => {
 			const expenseDates = this.state.allEntries.map(expense => Date.parse(expense.date))
 
 			this.setState({
