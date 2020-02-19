@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
 
 const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
-	console.log(Intl.NumberFormat.supportedLocalesOf())
 	return (
 		<div
 			className="expense"
@@ -21,7 +20,7 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 				{expense.user.first} {expense.user.last}
 			</div>
 
-			{/* <div className="category">{expense.category}</div> */}
+			<div className="category">{expense.category && <span>{expense.category}</span>}</div>
 
 			<div className="comment">
 				{/* NOTE: the API doesn't update if a blank string is sent so I'm mocking a comment removal by allowing a single space to be read as if there's no comment */}
@@ -51,7 +50,7 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 				)}
 			</div>
 
-			<div className="amount">
+			<div className="amount text-right">
 				{new Intl.NumberFormat('da', { style: 'currency', currency: expense.amount.currency }).format(
 					expense.amount.value
 				)}

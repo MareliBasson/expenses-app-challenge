@@ -8,75 +8,76 @@ class CategorySelect extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			category: ''
+			selectedCategory: null
 		}
 
-		this.handleCategory = this.handleCategory.bind(this)
-		this.saveCategory = this.saveCategory.bind(this)
+		this.setCategory = this.setCategory.bind(this)
 	}
 
-	handleCategory(event) {
-		this.setState({
-			category: event.target.value
-		})
-	}
-
-	saveCategory(event, cb) {
+	setCategory(event, cb) {
 		event.preventDefault()
 
-		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
+		this.setState(
+			{
+				selectedCategory: event.target.value
 			},
-			body: JSON.stringify({
-				category: this.state.category
-			})
-		})
-			.then(() => {
-				cb()
-			})
-			.catch(err => {
-				console.log(err)
-			})
+			() => {
+				fetch(`http://localhost:3000/expenses/${this.props.id}`, {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						category: this.state.selectedCategory
+					})
+				})
+					.then(() => {
+						cb()
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			}
+		)
 	}
 
 	componentDidMount() {
-		if (!this.state.category) {
+		const { selectedCategory } = this.state
+
+		if (selectedCategory === null) {
 			this.setState({
-				category: this.props.category
+				selectedCategory: this.props.category
 			})
 		}
 	}
 
 	render() {
-		const { category } = this.state
+		const { selectedCategory } = this.state
 
 		return (
 			<ExpensesContext.Consumer>
 				{data => {
 					return (
-						<div className="info-item">
+						<div className="info-item category-select">
 							<div className="info-label">Category</div>
-							<form
-								onSubmit={e => {
-									this.saveCategory(e, data.fetchData)
+							<select
+								name="category"
+								className=""
+								onChange={e => {
+									this.setCategory(e, data.fetchData)
 								}}
-								className="category-select"
+								value={selectedCategory ? selectedCategory : ''}
 							>
-								<textarea
-									type="text"
-									placeholder="Set a category..."
-									onChange={this.handleCategory}
-									value={category ? category : ''}
-								/>
-								<div className="btn-wrap-center">
-									<button type="submit" className="btn btn-primary btn-feature">
-										Save Category
-									</button>
-								</div>
-							</form>
+								<option value="">Select a Category</option>
+								{data.categories.map((category, index) => {
+									return (
+										<option key={`category-option-${index}`} value={category}>
+											{category}
+										</option>
+									)
+								})}
+							</select>
 						</div>
 					)
 				}}

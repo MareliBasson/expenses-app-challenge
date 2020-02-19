@@ -50,7 +50,7 @@ class ExpensesList extends Component {
 					<div className="date">Date</div>
 					<div className="merchant">Merchant</div>
 					<div className="user">User</div>
-					{/* <div className="category">Category</div> */}
+					<div className="category">Category</div>
 					<div className="comment"></div>
 					<div className="images"></div>
 					<div className="amount">Amount</div>

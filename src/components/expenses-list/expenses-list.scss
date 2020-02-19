@@ -13,11 +13,6 @@
 		align-items: center;
 		padding: 5px 20px;
 
-		*:last-child,
-		*:nth-last-child(2) {
-			text-align: right;
-		}
-
 		> * {
 			flex: 1;
 		}
@@ -179,12 +174,13 @@
 			grid-template-columns: repeat(3, 3fr);
 			grid-template-rows: auto;
 			grid-template-areas:
-				'date  col2  .'
+				'date  .  .'
 				'merchant . amount'
-				'user col3 currency';
+				'user . category';
 
 			.date {
 				grid-area: date;
+				padding-bottom: 2px;
 			}
 			.merchant {
 				grid-area: merchant;
@@ -194,22 +190,37 @@
 			}
 			.user {
 				grid-area: user;
+				padding-top: 2px;
 			}
 
-			.category,
 			.comment,
 			.images {
 				display: none;
 				grid-area: col2;
 				background-color: red;
 			}
+
 			.amount {
 				grid-area: amount;
 				font-weight: 600;
 				font-size: 1rem;
+				text-align: right;
 			}
-			.currency {
-				grid-area: currency;
+
+			.category {
+				grid-area: category;
+				text-align: right;
+				padding-top: 2px;
+
+				span {
+					background-color: darken($colorSecondary, 20%);
+					color: white;
+					padding: 2px 7px 3px;
+					border-radius: 3px;
+					font-size: 0.6rem;
+					font-weight: 500;
+					font-style: italic;
+				}
 			}
 		}
 	}

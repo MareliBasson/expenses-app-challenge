@@ -25,7 +25,17 @@ class ExpensesPage extends Component {
 			allEntries: [],
 			expenseDates: [],
 			fetchError: false,
-			busyFetching: false
+			busyFetching: false,
+			categories: [
+				'Advertising',
+				'Vehicle',
+				'Payroll',
+				'Employee benefits',
+				'Meals',
+				'Entertainment',
+				'Office supplies',
+				'Travel'
+			]
 		}
 
 		this.initialise = this.initialise.bind(this)
@@ -67,17 +77,21 @@ class ExpensesPage extends Component {
 			expenseDates,
 			filterActive,
 			fetchError,
-			busyFetching
+			busyFetching,
+			categories
 		} = this.state
 
 		const limits = expenseLimits.limits
+
+		// console.log(this.state.categories)
 
 		return (
 			<ExpensesContext.Provider
 				value={{
 					fetchData: () => {
 						return this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-					}
+					},
+					categories: categories
 				}}
 			>
 				<div className="expenses-page">

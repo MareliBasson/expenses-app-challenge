@@ -4,7 +4,7 @@ import moment from 'moment'
 import Modal from 'components/modal'
 import CommentForm from 'components/comment-form'
 import ImageUpload from 'components/image-upload'
-// import CategorySelect from 'components/category-select'
+import CategorySelect from 'components/category-select'
 import './expense-modal.css'
 
 const ExpenseModal = ({ expense, toggleModal, modalActive }) => (
@@ -44,7 +44,7 @@ const ExpenseModal = ({ expense, toggleModal, modalActive }) => (
 					</div>
 				</div>
 
-				{/* <CategorySelect id={expense.id} category={expense.category} /> */}
+				<CategorySelect id={expense.id} category={expense.category} />
 
 				<CommentForm id={expense.id} comment={expense.comment} />
 
