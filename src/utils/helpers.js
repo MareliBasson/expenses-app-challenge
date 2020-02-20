@@ -51,23 +51,12 @@ export function fetchData(page, limit, prop, callback = () => {}) {
 		})
 }
 
-// Pagination functions
+// Pagination function
 
-export function goToPrev() {
+export function goToPage(modifier) {
 	this.setState(
 		{
-			page: this.state.page - 1
-		},
-		() => {
-			this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-		}
-	)
-}
-
-export function goToNext() {
-	this.setState(
-		{
-			page: this.state.page + 1
+			page: this.state.page + modifier
 		},
 		() => {
 			this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')

@@ -3,7 +3,7 @@ import ExpensesList from 'components/expenses-list'
 import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
 import expenseLimits from 'data/expense-limits'
-import { fetchData, goToPrev, goToNext, filterExpenses, resetFilter, setDate } from 'utils/helpers'
+import { fetchData, goToPage, filterExpenses, resetFilter, setDate } from 'utils/helpers'
 
 import './expenses.css'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -42,8 +42,8 @@ class ExpensesPage extends Component {
 
 		// Imported functions
 		this.fetchData = fetchData.bind(this)
-		this.goToNext = goToNext.bind(this)
-		this.goToPrev = goToPrev.bind(this)
+		// this.goToNext = goToNext.bind(this)
+		this.goToPage = goToPage.bind(this)
 		this.filterExpenses = filterExpenses.bind(this)
 		this.resetFilter = resetFilter.bind(this)
 		this.setDate = setDate.bind(this)
@@ -82,8 +82,6 @@ class ExpensesPage extends Component {
 		} = this.state
 
 		const limits = expenseLimits.limits
-
-		// console.log(this.state.categories)
 
 		return (
 			<ExpensesContext.Provider
@@ -157,8 +155,8 @@ class ExpensesPage extends Component {
 								page={page}
 								total={entriesTotal}
 								limit={limit}
-								handleNext={this.goToNext}
-								handlePrev={this.goToPrev}
+								handleNext={() => this.goToPage(+1)}
+								handlePrev={() => this.goToPage(-1)}
 							/>
 						)}
 					</div>
