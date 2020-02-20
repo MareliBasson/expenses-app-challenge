@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './date-range-filter.css'
 
-const DateRangeFilter = ({ expenseDates, startDate, endDate, resetFilter, setDate }) => (
+const DateRangeFilter = ({ expenseDates, setDate, startDate, endDate }) => (
 	<div className="date-range-filter ">
 		<DatePicker
 			dateFormat="dd MMM yyyy"
@@ -33,9 +33,6 @@ const DateRangeFilter = ({ expenseDates, startDate, endDate, resetFilter, setDat
 			minDate={startDate}
 			placeholderText={'To:'}
 		/>
-		<button onClick={resetFilter} className="btn btn-primary" disabled={!(startDate || endDate)}>
-			Reset
-		</button>
 	</div>
 )
 
@@ -43,7 +40,6 @@ DateRangeFilter.propTypes = {
 	expenseDates: PropTypes.array,
 	startDate: PropTypes.instanceOf(Date),
 	endDate: PropTypes.instanceOf(Date),
-	resetFilter: PropTypes.func,
 	setDate: PropTypes.func
 }
 

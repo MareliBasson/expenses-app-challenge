@@ -15,8 +15,6 @@ class CategorySelect extends Component {
 	}
 
 	setCategory(event, cb) {
-		event.preventDefault()
-
 		this.setState(
 			{
 				selectedCategory: event.target.value

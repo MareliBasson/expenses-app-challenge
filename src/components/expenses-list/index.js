@@ -53,7 +53,7 @@ class ExpensesList extends Component {
 					<div className="category">Category</div>
 					<div className="comment"></div>
 					<div className="images"></div>
-					<div className="amount">Amount</div>
+					<div className="amount text-right">Amount</div>
 				</div>
 				<div className="list-buffer"></div>
 

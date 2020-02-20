@@ -3,7 +3,15 @@ import ExpensesList from 'components/expenses-list'
 import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
 import PaginationLimit from 'components/pagination-limit'
-import { fetchData, setPaginationLimit, goToPage, filterExpenses, resetFilter, setDate } from 'utils/helpers'
+import {
+	fetchData,
+	setPaginationLimit,
+	goToPage,
+	filterExpenses,
+	resetFilter,
+	setCategory,
+	setDate
+} from 'utils/helpers'
 import ExpenseCategories from 'data/expense-categories'
 import './expenses.css'
 
@@ -15,14 +23,15 @@ class ExpensesPage extends Component {
 
 		this.state = {
 			visibleExpenses: [],
+			allExpenses: [],
+			expenseDates: [],
 			entriesTotal: 0,
 			limit: '10',
 			page: 1,
+			selectedCategory: '',
 			startDate: null,
 			endDate: null,
 			filterActive: false,
-			allEntries: [],
-			expenseDates: [],
 			fetchError: false,
 			busyFetching: false
 		}
@@ -34,16 +43,17 @@ class ExpensesPage extends Component {
 		this.setPaginationLimit = setPaginationLimit.bind(this)
 		this.goToPage = goToPage.bind(this)
 		this.filterExpenses = filterExpenses.bind(this)
-		this.resetFilter = resetFilter.bind(this)
 		this.setDate = setDate.bind(this)
+		this.setCategory = setCategory.bind(this)
+		this.resetFilter = resetFilter.bind(this)
 	}
 
 	initialise() {
 		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 
 		// Set Calendar Highlights
-		this.fetchData(0, null, 'allEntries', () => {
-			const expenseDates = this.state.allEntries.map(expense => Date.parse(expense.date))
+		this.fetchData(0, null, 'allExpenses', () => {
+			const expenseDates = this.state.allExpenses.map(expense => Date.parse(expense.date))
 
 			this.setState({
 				expenseDates: [{ 'date-highlight': expenseDates }]
@@ -63,6 +73,7 @@ class ExpensesPage extends Component {
 			limit,
 			endDate,
 			startDate,
+			selectedCategory,
 			expenseDates,
 			filterActive,
 			fetchError,
@@ -82,16 +93,42 @@ class ExpensesPage extends Component {
 			>
 				<div className="expenses-page">
 					<div className="filter-bar">
+						<div className="title">Filters:</div>
+						<div className="category-filter">
+							<select
+								name="category"
+								className=""
+								onChange={e => {
+									this.setCategory(e)
+								}}
+								value={selectedCategory ? selectedCategory : ''}
+							>
+								<option value="">Category:</option>
+								{categories.map((category, index) => {
+									return (
+										<option key={`category-option-${index}`} value={category}>
+											{category}
+										</option>
+									)
+								})}
+							</select>
+						</div>
 						{this.state.expenseDates && (
 							<DateRangeFilter
 								expenseDates={expenseDates}
-								resetFilter={this.resetFilter}
-								filterExpenses={this.filterExpenses}
 								setDate={this.setDate}
 								startDate={startDate}
 								endDate={endDate}
 							/>
 						)}
+
+						<button
+							onClick={this.resetFilter}
+							className="btn btn-primary"
+							disabled={!(startDate || endDate || selectedCategory)}
+						>
+							Clear
+						</button>
 					</div>
 
 					<ExpensesList

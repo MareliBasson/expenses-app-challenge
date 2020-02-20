@@ -1,7 +1,6 @@
 @import './styles/variables';
 
 .date-range-filter {
-	flex: 1;
 	white-space: nowrap;
 
 	@media (max-width: $bp-mobile) {

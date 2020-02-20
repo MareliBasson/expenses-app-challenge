@@ -82,3 +82,29 @@ strong {
 		display: none;
 	}
 }
+
+// Form elements
+
+select {
+	font-family: $fontPrimary;
+	font-weight: 300;
+	font-size: 0.8rem;
+	height: 30px;
+	padding: 0px 10px;
+	appearance: none;
+	background-image: url('./images/chevron-down.svg');
+	background-color: white;
+	background-position: 92% center;
+	background-size: 11px;
+	background-repeat: no-repeat;
+	border: 1px solid $colorDivider;
+	border-radius: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+select::-ms-expand {
+	display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+}

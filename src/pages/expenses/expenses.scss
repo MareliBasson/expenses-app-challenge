@@ -19,6 +19,14 @@
 		padding: 0px 20px;
 		width: calc(100% - #{$sidebarWidth});
 
+		select {
+			width: 120px;
+		}
+
+		.btn {
+			margin-left: 10px;
+		}
+
 		@media (max-width: $bp-mobile) {
 			width: 100%;
 		}

@@ -7,16 +7,8 @@ export function fetchData(page, limit, prop, callback = () => {}) {
 		busyFetching: true
 	})
 
-	let entriesLimit
-	let limitOffset
-
-	if (limit === 'All') {
-		entriesLimit = this.state.entriesTotal
-		limitOffset = ''
-	} else {
-		entriesLimit = parseInt(limit)
-		limitOffset = parseInt(limit) * (page - 1)
-	}
+	const entriesLimit = parseInt(limit)
+	const limitOffset = parseInt(limit) * (page - 1)
 
 	fetch(
 		`http://localhost:3000/expenses${entriesLimit > 0 ? `?limit=${entriesLimit}` : ''}${
@@ -71,30 +63,50 @@ export function goToPage(modifier) {
 }
 
 // Filter functions
-export function filterExpenses() {
-	const { startDate, endDate } = this.state
 
-	const filterEntriesByRange = allExpenses => {
-		const filterResult = _.filter(allExpenses, expense => {
+export function filterExpenses() {
+	const { startDate, endDate, selectedCategory, allExpenses } = this.state
+
+	let filteredExpenses = allExpenses
+
+	if (startDate && endDate) {
+		filteredExpenses = _.filter(filteredExpenses, expense => {
 			const expenseDate = moment(expense.date).format()
 
 			return moment(expenseDate).isBetween(startDate, endDate)
 		})
+	}
 
-		this.setState({
-			visibleExpenses: filterResult,
-			filterActive: true
+	if (selectedCategory) {
+		filteredExpenses = _.filter(filteredExpenses, expense => {
+			return expense.category === selectedCategory
 		})
 	}
 
-	this.fetchData(0, this.state.entriesTotal, 'allEntries', () => filterEntriesByRange(this.state.allEntries))
+	this.setState({
+		visibleExpenses: filteredExpenses,
+		filterActive: true
+	})
+}
+
+export function setCategory(event) {
+	this.setState(
+		{
+			selectedCategory: event.target.value
+		},
+		() => {
+			if (this.state.selectedCategory === '') {
+				this.resetFilter()
+			} else {
+				this.filterExpenses()
+			}
+		}
+	)
 }
 
 export function setDate(date, prop) {
 	this.setState({ [prop]: date }, () => {
-		if (this.state.startDate && this.state.endDate) {
-			this.filterExpenses()
-		}
+		this.filterExpenses()
 	})
 }
 
@@ -103,6 +115,7 @@ export function resetFilter() {
 	this.setState({
 		startDate: null,
 		endDate: null,
+		selectedCategory: '',
 		filterActive: false
 	})
 }
