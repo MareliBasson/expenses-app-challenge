@@ -1,12 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import ExpensesList from 'components/expenses-list'
 import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
-import expenseLimits from 'data/expense-limits'
-import { fetchData, goToPage, filterExpenses, resetFilter, setDate } from 'utils/helpers'
-
+import PaginationLimit from 'components/pagination-limit'
+import { fetchData, setPaginationLimit, goToPage, filterExpenses, resetFilter, setDate } from 'utils/helpers'
+import ExpenseCategories from 'data/expense-categories'
 import './expenses.css'
-import 'react-datepicker/dist/react-datepicker.css'
 
 export const ExpensesContext = React.createContext()
 
@@ -25,24 +24,14 @@ class ExpensesPage extends Component {
 			allEntries: [],
 			expenseDates: [],
 			fetchError: false,
-			busyFetching: false,
-			categories: [
-				'Advertising',
-				'Vehicle',
-				'Payroll',
-				'Employee benefits',
-				'Meals',
-				'Entertainment',
-				'Office supplies',
-				'Travel'
-			]
+			busyFetching: false
 		}
 
 		this.initialise = this.initialise.bind(this)
 
 		// Imported functions
 		this.fetchData = fetchData.bind(this)
-		// this.goToNext = goToNext.bind(this)
+		this.setPaginationLimit = setPaginationLimit.bind(this)
 		this.goToPage = goToPage.bind(this)
 		this.filterExpenses = filterExpenses.bind(this)
 		this.resetFilter = resetFilter.bind(this)
@@ -77,11 +66,10 @@ class ExpensesPage extends Component {
 			expenseDates,
 			filterActive,
 			fetchError,
-			busyFetching,
-			categories
+			busyFetching
 		} = this.state
 
-		const limits = expenseLimits.limits
+		const categories = ExpenseCategories.categories
 
 		return (
 			<ExpensesContext.Provider
@@ -116,49 +104,28 @@ class ExpensesPage extends Component {
 					/>
 
 					<div className="expenses-footer">
-						<div className="expense-limit">
+						<div>
 							{!filterActive && (
-								<Fragment>
-									<span className="hidden-mobile">Show:</span>
-									{limits.map((limit, index) => {
-										return (
-											<button
-												key={`limit-${index}`}
-												onClick={() => {
-													this.setState({ limit: limit, page: 1 }, () => {
-														this.fetchData(
-															this.state.page,
-															this.state.limit,
-															'visibleExpenses'
-														)
-													})
-												}}
-												className={`btn ${
-													limit === this.state.limit ? 'btn-primary' : 'btn-inverse'
-												}`}
-											>
-												{limit}
-											</button>
-										)
-									})}
-								</Fragment>
+								<PaginationLimit limitInState={limit} onClick={this.setPaginationLimit} />
 							)}
 						</div>
 
-						{/* Toggle between showing number of entries and pagination */}
-						{limit === 'All' || filterActive ? (
-							<div className="entries-visible text-right">
-								<strong>{visibleExpenses.length}</strong>&nbsp; entries
-							</div>
-						) : (
-							<Pagination
-								page={page}
-								total={entriesTotal}
-								limit={limit}
-								handleNext={() => this.goToPage(+1)}
-								handlePrev={() => this.goToPage(-1)}
-							/>
-						)}
+						<div className="text-right">
+							{/* Toggle between showing number of entries and pagination */}
+							{limit === 'All' || filterActive ? (
+								<div className="entries-visible text-right">
+									<strong>{visibleExpenses.length}</strong>&nbsp; entries
+								</div>
+							) : (
+								<Pagination
+									page={page}
+									total={entriesTotal}
+									limit={limit}
+									handleNext={() => this.goToPage(+1)}
+									handlePrev={() => this.goToPage(-1)}
+								/>
+							)}
+						</div>
 					</div>
 				</div>
 			</ExpensesContext.Provider>

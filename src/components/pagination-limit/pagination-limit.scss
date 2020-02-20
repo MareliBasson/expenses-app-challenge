@@ -1,0 +1,13 @@
+@import './styles/variables';
+
+.pagination-limit {
+	.btn {
+		margin-left: 10px;
+
+		@media (max-width: $bp-mobile) {
+			&:first-of-type {
+				margin-left: 0;
+			}
+		}
+	}
+}
