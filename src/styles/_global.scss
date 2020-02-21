@@ -78,12 +78,12 @@ strong {
 	text-align: right;
 }
 .hidden-desktop {
-	@media (min-width: 768px) {
+	@media (min-width: $bp-mobile + 1) {
 		display: none;
 	}
 }
 .hidden-mobile {
-	@media (max-width: 768px) {
+	@media (max-width: $bp-mobile) {
 		display: none;
 	}
 }
