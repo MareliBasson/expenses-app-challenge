@@ -44,6 +44,11 @@ function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 					close
 				</div>
 			</div>
+
+			<div
+				className={`filter-overlay hidden-desktop${dropdownExpanded ? ' visible' : ''}`}
+				onClick={toggleDropdown}
+			></div>
 		</div>
 	)
 }
