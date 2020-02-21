@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './date-range-filter.css'
@@ -8,9 +8,10 @@ const DateRangeFilter = () => {
 	return (
 		<ExpensesContext.Consumer>
 			{data => (
-				<div className="date-range-filter ">
+				<div className="filter date-range-filter">
+					<div className="filter-label">Date:</div>
 					{data.expenseDates && (
-						<Fragment>
+						<div className="filter-input">
 							<DatePicker
 								dateFormat="dd MMM yyyy"
 								selected={data.startDate}
@@ -38,7 +39,7 @@ const DateRangeFilter = () => {
 								minDate={data.startDate}
 								placeholderText={'To:'}
 							/>
-						</Fragment>
+						</div>
 					)}
 				</div>
 			)}

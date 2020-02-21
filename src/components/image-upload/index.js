@@ -49,7 +49,7 @@ class ImageUpload extends Component {
 	render() {
 		const { image, uploadSuccess } = this.state
 
-		const { previews } = this.props
+		const { images } = this.props
 
 		return (
 			<ExpensesContext.Consumer>
@@ -77,11 +77,11 @@ class ImageUpload extends Component {
 							{uploadSuccess && <div className="text-right">Image uploaded successfully</div>}
 
 							<div className="previews">
-								{previews &&
-									previews.map((img, index) => {
+								{images &&
+									images.map((image, index) => {
 										return (
 											<div className="preview-img" key={`image-preview-${index}`}>
-												<img src={`http://localhost:3000${img.url}`} alt="" width="100" />
+												<img src={`http://localhost:3000${image.url}`} alt="" width="100" />
 											</div>
 										)
 									})}
@@ -96,7 +96,7 @@ class ImageUpload extends Component {
 
 ImageUpload.propTypes = {
 	id: PropTypes.string,
-	previews: PropTypes.array
+	images: PropTypes.array
 }
 
 export default ImageUpload

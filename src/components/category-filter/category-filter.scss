@@ -3,5 +3,9 @@
 .category-filter {
 	select {
 		width: 120px;
+
+		@media (max-width: $bp-mobile) {
+			width: 100%;
+		}
 	}
 }

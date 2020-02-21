@@ -5,19 +5,22 @@ import './expense-filters.css'
 
 const ExpenseFilters = ({ selectedCategory, startDate, endDate, resetFilter }) => (
 	<div className="expense-filters">
-		<div className="title">Filters:</div>
+		<div className="filter-mobile-toggle">
+			<div className="title">Filter expenses:</div>
+			<button
+				onClick={resetFilter}
+				className="btn btn-primary"
+				disabled={!(startDate || endDate || selectedCategory)}
+			>
+				Clear
+			</button>
+		</div>
 
-		<CategoryFilter />
+		<div className="filter-dropdown">
+			<CategoryFilter />
 
-		<DateRangeFilter />
-
-		<button
-			onClick={resetFilter}
-			className="btn btn-primary"
-			disabled={!(startDate || endDate || selectedCategory)}
-		>
-			Clear
-		</button>
+			<DateRangeFilter />
+		</div>
 	</div>
 )
 

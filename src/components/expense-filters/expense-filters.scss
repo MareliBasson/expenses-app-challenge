@@ -22,7 +22,43 @@
 		margin-left: 10px;
 	}
 
+	.filter-label {
+		display: none;
+	}
+	.filter-dropdown {
+		display: block;
+	}
+
 	@media (max-width: $bp-mobile) {
 		width: 100%;
+		text-align: left;
+
+		.filter-dropdown {
+			// height: 0;
+			position: absolute;
+			width: 100%;
+			top: 100%;
+			left: 0;
+			background-color: darken($colorBg, 10%);
+			padding: 20px;
+		}
+
+		.filter {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			&:not(:last-child) {
+				margin-bottom: 20px;
+			}
+
+			.filter-label {
+				display: block;
+				width: 80px;
+			}
+			.filter-input {
+				width: calc(100% - 80px);
+			}
+		}
 	}
 }

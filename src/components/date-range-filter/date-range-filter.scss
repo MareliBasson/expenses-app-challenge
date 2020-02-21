@@ -5,12 +5,21 @@
 
 	@media (max-width: $bp-mobile) {
 		width: 100%;
-		text-align: center;
+	}
+
+	.filter-input {
 	}
 
 	.react-datepicker-wrapper {
-		width: auto;
 		margin-left: 10px;
+
+		@media (max-width: $bp-mobile) {
+			width: calc(50% - 4px);
+			margin: 0px;
+			&:first-child {
+				margin-right: 8px;
+			}
+		}
 
 		input {
 			width: 120px;
@@ -18,7 +27,7 @@
 			padding: 5px;
 
 			@media (max-width: $bp-mobile) {
-				width: 90px;
+				width: 100%;
 			}
 		}
 	}
@@ -26,12 +35,17 @@
 		display: inline-block;
 		position: relative;
 
+		@media (max-width: $bp-mobile) {
+			flex: 0;
+			max-width: 0;
+		}
+
 		.react-datepicker-popper {
 			transform: translate3d(-175px, 9px, 0px) !important;
 			z-index: 10;
 
 			@media (max-width: $bp-mobile) {
-				transform: translate3d(-155px, 12px, 0px) !important;
+				transform: translate3d(calc(-100% + 20px), 12px, 0px) !important;
 			}
 
 			.react-datepicker__triangle {
