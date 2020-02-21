@@ -48,7 +48,7 @@ const ExpenseModal = ({ expense, toggleModal, modalActive }) => (
 
 				<CommentForm id={expense.id} comment={expense.comment} />
 
-				<ImageUpload id={expense.id} previews={expense && expense.receipts} />
+				<ImageUpload id={expense.id} images={expense && expense.receipts} />
 			</Fragment>
 		)}
 	</Modal>

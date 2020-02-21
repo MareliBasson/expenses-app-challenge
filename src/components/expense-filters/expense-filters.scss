@@ -1,0 +1,28 @@
+@import './styles/variables';
+
+.expense-filters {
+	font-size: 0.8rem;
+	z-index: $z-index-toolbars;
+	height: $expense-toolbar-height;
+	position: fixed;
+	top: 60px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background-color: darken($colorBg, 10%);
+	text-align: right;
+	padding: 0px 20px;
+	width: calc(100% - #{$sidebarWidth});
+
+	.title {
+		margin-right: 10px;
+	}
+
+	.btn {
+		margin-left: 10px;
+	}
+
+	@media (max-width: $bp-mobile) {
+		width: 100%;
+	}
+}

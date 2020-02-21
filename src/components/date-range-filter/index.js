@@ -1,46 +1,49 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './date-range-filter.css'
+import { ExpensesContext } from 'pages/expenses'
 
-const DateRangeFilter = ({ expenseDates, setDate, startDate, endDate }) => (
-	<div className="date-range-filter ">
-		<DatePicker
-			dateFormat="dd MMM yyyy"
-			selected={startDate}
-			onChange={date => {
-				setDate(date, 'startDate')
-			}}
-			selectsStart
-			highlightDates={expenseDates}
-			startDate={startDate}
-			endDate={endDate}
-			maxDate={endDate ? endDate : new Date()}
-			placeholderText={'From:'}
-		/>
-		<DatePicker
-			dateFormat="dd MMM yyyy"
-			selected={endDate}
-			onChange={date => {
-				setDate(date, 'endDate')
-			}}
-			selectsEnd
-			highlightDates={expenseDates}
-			startDate={startDate}
-			endDate={endDate}
-			maxDate={new Date()}
-			minDate={startDate}
-			placeholderText={'To:'}
-		/>
-	</div>
-)
-
-DateRangeFilter.propTypes = {
-	expenseDates: PropTypes.array,
-	startDate: PropTypes.instanceOf(Date),
-	endDate: PropTypes.instanceOf(Date),
-	setDate: PropTypes.func
+const DateRangeFilter = () => {
+	return (
+		<ExpensesContext.Consumer>
+			{data => (
+				<div className="date-range-filter ">
+					{data.expenseDates && (
+						<Fragment>
+							<DatePicker
+								dateFormat="dd MMM yyyy"
+								selected={data.startDate}
+								onChange={date => {
+									data.setDate(date, 'startDate')
+								}}
+								selectsStart
+								highlightDates={data.expenseDates}
+								startDate={data.startDate}
+								endDate={data.endDate}
+								maxDate={data.endDate ? data.endDate : new Date()}
+								placeholderText={'From:'}
+							/>
+							<DatePicker
+								dateFormat="dd MMM yyyy"
+								selected={data.endDate}
+								onChange={date => {
+									data.setDate(date, 'endDate')
+								}}
+								selectsEnd
+								highlightDates={data.expenseDates}
+								startDate={data.startDate}
+								endDate={data.endDate}
+								maxDate={new Date()}
+								minDate={data.startDate}
+								placeholderText={'To:'}
+							/>
+						</Fragment>
+					)}
+				</div>
+			)}
+		</ExpensesContext.Consumer>
+	)
 }
 
 export default DateRangeFilter

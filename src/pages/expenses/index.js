@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ExpensesList from 'components/expenses-list'
-import DateRangeFilter from 'components/date-range-filter'
 import Pagination from 'components/pagination'
 import PaginationLimit from 'components/pagination-limit'
+import ExpenseFilters from 'components/expense-filters'
 import {
 	fetchData,
 	setPaginationLimit,
@@ -49,6 +49,7 @@ class ExpensesPage extends Component {
 	}
 
 	initialise() {
+		// Set visible list of expenses
 		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 
 		// Set Calendar Highlights
@@ -88,48 +89,22 @@ class ExpensesPage extends Component {
 					fetchData: () => {
 						return this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 					},
-					categories: categories
+					categories: categories,
+					setCategory: this.setCategory,
+					selectedCategory: selectedCategory,
+					expenseDates: expenseDates,
+					startDate: startDate,
+					endDate: endDate,
+					setDate: this.setDate
 				}}
 			>
 				<div className="expenses-page">
-					<div className="filter-bar">
-						<div className="title">Filters:</div>
-						<div className="category-filter">
-							<select
-								name="category"
-								className=""
-								onChange={e => {
-									this.setCategory(e)
-								}}
-								value={selectedCategory ? selectedCategory : ''}
-							>
-								<option value="">Category:</option>
-								{categories.map((category, index) => {
-									return (
-										<option key={`category-option-${index}`} value={category}>
-											{category}
-										</option>
-									)
-								})}
-							</select>
-						</div>
-						{this.state.expenseDates && (
-							<DateRangeFilter
-								expenseDates={expenseDates}
-								setDate={this.setDate}
-								startDate={startDate}
-								endDate={endDate}
-							/>
-						)}
-
-						<button
-							onClick={this.resetFilter}
-							className="btn btn-primary"
-							disabled={!(startDate || endDate || selectedCategory)}
-						>
-							Clear
-						</button>
-					</div>
+					<ExpenseFilters
+						selectedCategory={selectedCategory}
+						startDate={startDate}
+						endDate={endDate}
+						resetFilter={this.resetFilter}
+					/>
 
 					<ExpensesList
 						expenses={visibleExpenses}

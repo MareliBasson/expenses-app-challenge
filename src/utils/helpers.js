@@ -95,11 +95,7 @@ export function setCategory(event) {
 			selectedCategory: event.target.value
 		},
 		() => {
-			if (this.state.selectedCategory === '') {
-				this.resetFilter()
-			} else {
-				this.filterExpenses()
-			}
+			this.filterExpenses()
 		}
 	)
 }

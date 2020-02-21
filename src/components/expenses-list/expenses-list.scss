@@ -6,6 +6,15 @@
 	background-color: white;
 	min-height: calc(100vh - (#{$header-height} + #{$expense-footer-height}));
 
+	.loader {
+		width: 100%;
+		text-align: center;
+
+		img {
+			width: 80px;
+		}
+	}
+
 	.legend,
 	.expense {
 		display: flex;
