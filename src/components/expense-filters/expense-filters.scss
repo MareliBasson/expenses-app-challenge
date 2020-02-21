@@ -11,7 +11,6 @@
 	align-items: center;
 	background-color: darken($colorBg, 10%);
 	text-align: right;
-	padding: 0px 20px;
 	width: calc(100% - #{$sidebarWidth});
 
 	.title {
@@ -25,39 +24,66 @@
 	.filter-label {
 		display: none;
 	}
-	.filter-dropdown {
-		display: block;
+
+	.filter-content {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		padding: 0px 20px;
 	}
 
 	@media (max-width: $bp-mobile) {
 		width: 100%;
 		text-align: left;
 
-		.filter-dropdown {
-			// height: 0;
+		.filter-mobile-header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0px 20px;
+			height: 50px;
+			border-bottom: 1px solid darken($colorBg, 20%);
+		}
+
+		.filter-content {
+			display: none;
 			position: absolute;
 			width: 100%;
 			top: 100%;
 			left: 0;
+			padding: 30px 0px 0px;
 			background-color: darken($colorBg, 10%);
-			padding: 20px;
-		}
 
-		.filter {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			.filter {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0px 20px 0px;
 
-			&:not(:last-child) {
-				margin-bottom: 20px;
+				&:not(:last-of-type) {
+					margin-bottom: 20px;
+				}
+
+				.filter-label {
+					display: block;
+					width: 80px;
+				}
+
+				.filter-input {
+					width: calc(100% - 80px);
+				}
 			}
 
-			.filter-label {
+			.close-dropdown {
+				border-top: 1px solid darken($colorBg, 20%);
+				padding: 20px;
+				margin-top: 30px;
+				text-align: center;
+			}
+
+			&.active {
 				display: block;
-				width: 80px;
-			}
-			.filter-input {
-				width: calc(100% - 80px);
 			}
 		}
 	}

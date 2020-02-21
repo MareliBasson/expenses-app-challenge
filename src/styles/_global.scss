@@ -77,6 +77,11 @@ strong {
 .text-right {
 	text-align: right;
 }
+.hidden-desktop {
+	@media (min-width: 768px) {
+		display: none;
+	}
+}
 .hidden-mobile {
 	@media (max-width: 768px) {
 		display: none;
@@ -94,7 +99,7 @@ select {
 	appearance: none;
 	background-image: url('./images/chevron-down.svg');
 	background-color: white;
-	background-position: 92% center;
+	background-position: right 10px bottom 6px;
 	background-size: 11px;
 	background-repeat: no-repeat;
 	border: 1px solid $colorDivider;

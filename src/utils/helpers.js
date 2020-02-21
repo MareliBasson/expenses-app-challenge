@@ -83,10 +83,12 @@ export function filterExpenses() {
 		})
 	}
 
-	this.setState({
-		visibleExpenses: filteredExpenses,
-		filterActive: true
-	})
+	if (selectedCategory || (startDate && endDate)) {
+		this.setState({
+			visibleExpenses: filteredExpenses,
+			filterActive: true
+		})
+	}
 }
 
 export function setCategory(event) {
@@ -95,7 +97,11 @@ export function setCategory(event) {
 			selectedCategory: event.target.value
 		},
 		() => {
-			this.filterExpenses()
+			if (!this.state.selectedCategory && !this.state.startDate && !this.state.endDate) {
+				this.resetFilter(event)
+			} else {
+				this.filterExpenses()
+			}
 		}
 	)
 }
@@ -106,7 +112,8 @@ export function setDate(date, prop) {
 	})
 }
 
-export function resetFilter() {
+export function resetFilter(e) {
+	e.stopPropagation()
 	this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 	this.setState({
 		startDate: null,
