@@ -1,38 +1,43 @@
 import React, { useState } from 'react'
 import CategoryFilter from 'components/category-filter'
 import DateRangeFilter from 'components/date-range-filter'
-import { TweenMax, TimelineLite } from 'gsap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import './expense-filters.css'
 
 function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 	const [dropdownExpanded, setDropdownExpanded] = useState(false)
 
 	function toggleDropdown() {
-		if (!dropdownExpanded) {
-			setDropdownExpanded(true)
-			TweenMax.set('.filter-content', { overflow: 'visible' })
-		} else {
-			TweenMax.set('.filter-content', { overflow: 'hidden' })
-			setDropdownExpanded(false)
-		}
+		setDropdownExpanded(!dropdownExpanded)
 	}
 
 	return (
 		<div className="expense-filters">
 			<div className="filter-mobile-header hidden-desktop" onClick={toggleDropdown}>
-				<div className="title">Filters:</div>
+				<div className="title">
+					{dropdownExpanded ? (
+						<FontAwesomeIcon icon={faChevronUp} />
+					) : (
+						<FontAwesomeIcon icon={faChevronDown} />
+					)}
+					Filters:
+				</div>
 				<button
 					onClick={e => resetFilter(e)}
 					className="btn btn-primary"
 					disabled={!(startDate || endDate || selectedCategory)}
 				>
-					Clear
+					Clear Filters
 				</button>
 			</div>
 
-			<div className={`filter-content${dropdownExpanded ? ' active' : ''}`}>
+			<div
+				className={`filter-content${dropdownExpanded ? ' active' : ''}`}
+				style={{ overflow: dropdownExpanded ? 'visible' : 'hidden' }}
+			>
 				<div className="title hidden-mobile">
-					<div className="title">Filters:</div>
+					<div className="title">Filters</div>
 				</div>
 
 				<CategoryFilter />
@@ -48,7 +53,7 @@ function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 				</button>
 
 				<div className="close-dropdown hidden-desktop" onClick={toggleDropdown}>
-					close
+					<FontAwesomeIcon icon={faChevronUp} />
 				</div>
 			</div>
 
