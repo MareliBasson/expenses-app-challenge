@@ -9,7 +9,8 @@ class ImageUpload extends Component {
 		super(props)
 		this.state = {
 			image: null,
-			verificationMsg: ''
+			verificationMsg: '',
+			errorMsg: null
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -18,13 +19,18 @@ class ImageUpload extends Component {
 
 	handleChange = e => {
 		console.log('test')
-		this.setState({ image: e.target.files[0], uploadSuccess: false })
+		this.setState({ image: e.target.files[0], uploadSuccess: false, errorMsg: false })
 	}
 
 	saveImages(event, cb) {
 		event.preventDefault()
 
 		let formData = new FormData()
+		if (!this.state.image) {
+			this.setState({
+				errorMsg: true
+			})
+		}
 		formData.append('receipt', this.state.image)
 
 		fetch(`http://localhost:3000/expenses/${this.props.id}/receipts`, {
@@ -54,6 +60,8 @@ class ImageUpload extends Component {
 
 		const { images } = this.props
 
+		console.log(this.state.errorMsg)
+
 		return (
 			<ExpensesContext.Consumer>
 				{data => {
@@ -70,7 +78,7 @@ class ImageUpload extends Component {
 										disabled={images.length >= 3}
 									/>
 									<div className={`file-custom ${images.length >= 3 ? 'disabled' : ''}`}>
-										{image ? image.name : 'Choose a file...'}
+										{image ? image.name : 'Select a file...'}
 									</div>
 									<div className="file-limit">3 Image limit</div>
 								</label>
@@ -84,8 +92,14 @@ class ImageUpload extends Component {
 									>
 										Upload
 									</button>
+									{this.state.errorMsg && (
+										<span className="error-msg">
+											Please select a <br />
+											file first
+										</span>
+									)}
 
-									{uploadSuccess ? <span>Upload successful</span> : ''}
+									{uploadSuccess ? <span className="success-msg">Upload successful</span> : ''}
 								</div>
 							</div>
 
