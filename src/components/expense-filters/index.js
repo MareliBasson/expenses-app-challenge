@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import CategoryFilter from 'components/category-filter'
 import DateRangeFilter from 'components/date-range-filter'
+import { TweenMax, TimelineLite } from 'gsap'
 import './expense-filters.css'
 
 function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 	const [dropdownExpanded, setDropdownExpanded] = useState(false)
 
 	function toggleDropdown() {
-		setDropdownExpanded(prevDropdownExpanded => !prevDropdownExpanded)
+		if (!dropdownExpanded) {
+			setDropdownExpanded(true)
+			TweenMax.set('.filter-content', { overflow: 'visible' })
+		} else {
+			TweenMax.set('.filter-content', { overflow: 'hidden' })
+			setDropdownExpanded(false)
+		}
 	}
 
 	return (
