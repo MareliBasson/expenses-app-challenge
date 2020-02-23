@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import CategoryFilter from 'components/category-filter'
 import DateRangeFilter from 'components/date-range-filter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -63,6 +64,13 @@ function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 			></div>
 		</div>
 	)
+}
+
+ExpenseFilters.propTypes = {
+	selectedCategory: PropTypes.string,
+	startDate: PropTypes.instanceOf(Date),
+	endDate: PropTypes.instanceOf(Date),
+	resetFilter: PropTypes.func
 }
 
 export default ExpenseFilters

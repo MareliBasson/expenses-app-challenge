@@ -22,7 +22,10 @@ const ExpenseModal = ({ expense, toggleModal, modalActive }) => (
 						<div className="info-item amount">
 							<div className="info-label">Amount</div>
 							<div className="info-value">
-								{expense.amount.value} ({expense.amount.currency})
+								{new Intl.NumberFormat('da', {
+									style: 'currency',
+									currency: expense.amount.currency
+								}).format(expense.amount.value)}
 							</div>
 						</div>
 					</div>

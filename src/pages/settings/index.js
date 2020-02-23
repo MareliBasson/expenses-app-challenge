@@ -4,7 +4,7 @@ import './settings.css'
 const SettingsPage = () => {
 	return (
 		<div className="settings">
-			<p>A potential settings page</p>
+			<p>A mock settings page</p>
 		</div>
 	)
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentAlt, faReceipt } from '@fortawesome/free-solid-svg-icons'
@@ -57,6 +58,12 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 			</div>
 		</div>
 	)
+}
+
+ListItem.propTypes = {
+	expense: PropTypes.object,
+	selectExpense: PropTypes.func,
+	toggleExpenseModal: PropTypes.func
 }
 
 export default ListItem
