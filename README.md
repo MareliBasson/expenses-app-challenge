@@ -19,7 +19,8 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   Stylesheets - Currently I prefer using separate stylesheets as it's the format I work with most often. I've worked with Styled Components and CSS in JS as well before, but I'm not as experienced using them eventhough I definitely want to get more experience using them to full effect.
 -   **State management**
     -   I don't have experience setting up a state management library such as Redux. When prop-drilling became excessive in this project I compared Redux and Context API - I chose these two because Redux is the libary I have the most experience using and Context API, because I'm curious about how it's used and because it's a solution that doesn't require adding another dependency.
-        -I did attempt to setup Redux in a separate branch and got the basic example I was using to work, but then realised I'm not sure at all how to adapt the reducers for my own use case or how to go about structuring the global state, so I put that branch on pause to rather focus on my strengths.
+        -   I did attempt to setup Redux in a separate branch and got the basic example I was using to work, but then realised I'm not sure at all how to adapt the reducers for my own use case or how to go about structuring the global state, so I put that branch on pause to rather focus on my strengths.
+        -   I applied a React Hook to the ExpenseFilters component to try it out.
 -   **API Implementation**
     -   This is my first time setting up API calls.
     -   Async/await and promises is a gap in my JS knowledge that I haven't fully addressed. I'm aware of them as a requirement for working with API calls but as these were generally handled by backend developers on the teams I was on, I haven't gained experience in implementing either format or the pros/cons of using the one over the other.

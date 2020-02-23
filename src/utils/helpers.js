@@ -1,5 +1,9 @@
 import _ from 'lodash'
 import moment from 'moment'
+import {
+	TweenMax
+	// TimelineLite
+} from 'gsap'
 
 // Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (expense limit and page number), unless custom values are assigned
 export function fetchData(page, limit, prop, callback = () => {}) {
@@ -120,5 +124,44 @@ export function resetFilter(e) {
 		endDate: null,
 		selectedCategory: '',
 		filterActive: false
+	})
+}
+
+// Modal functions
+
+export function toggleExpenseModal() {
+	const { modalActive } = this.state
+
+	if (modalActive) {
+		modalAnimateOut(() => {
+			this.setState({
+				modalActive: false
+			})
+		})
+	} else {
+		this.setState(
+			{
+				modalActive: true
+			},
+			() => {
+				modalAnimateIn()
+			}
+		)
+	}
+}
+
+function modalAnimateIn() {
+	TweenMax.set('.modal', { display: 'flex' })
+	TweenMax.from('.modal-container', 0.3, { opacity: '0' })
+	TweenMax.from('.modal-overlay', 1, { opacity: '0' })
+}
+
+function modalAnimateOut(cb) {
+	TweenMax.to('.modal-container', 0.3, { opacity: '0' })
+	TweenMax.to('.modal-overlay', 0.3, {
+		opacity: '0',
+		onComplete: () => {
+			cb()
+		}
 	})
 }

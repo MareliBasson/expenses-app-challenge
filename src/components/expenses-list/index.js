@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import ListItem from './list-item'
 import ExpenseModal from 'components/expense-modal'
+import { toggleExpenseModal } from 'utils/helpers'
 
 import loader from 'images/loader.svg'
 import './expenses-list.css'
@@ -16,28 +17,15 @@ class ExpensesList extends Component {
 		}
 
 		this.selectExpense = this.selectExpense.bind(this)
-		this.toggleExpenseModal = this.toggleExpenseModal.bind(this)
+
+		// Helper functions
+		this.toggleExpenseModal = toggleExpenseModal.bind(this)
 	}
 
 	selectExpense(id) {
 		this.setState({
 			selectedExpense: id
 		})
-	}
-
-	toggleExpenseModal() {
-		const { fetchData } = this.props
-
-		this.setState(
-			{
-				modalActive: !this.state.modalActive
-			},
-			() => {
-				if (!this.state.modalActive) {
-					fetchData()
-				}
-			}
-		)
 	}
 
 	render() {

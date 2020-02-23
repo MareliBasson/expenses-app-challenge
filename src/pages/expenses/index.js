@@ -38,7 +38,7 @@ class ExpensesPage extends Component {
 
 		this.initialise = this.initialise.bind(this)
 
-		// Imported functions
+		// Helper functions
 		this.fetchData = fetchData.bind(this)
 		this.setPaginationLimit = setPaginationLimit.bind(this)
 		this.goToPage = goToPage.bind(this)
@@ -108,9 +108,9 @@ class ExpensesPage extends Component {
 
 					<ExpensesList
 						expenses={visibleExpenses}
-						fetchData={() => {
-							this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-						}}
+						// fetchData={() => {
+						// 	this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
+						// }}
 						fetchError={fetchError}
 						busyFetching={busyFetching}
 					/>
