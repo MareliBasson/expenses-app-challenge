@@ -18,8 +18,45 @@
 
 		.info-label {
 			font-size: 0.8rem;
-			margin-bottom: 8px;
+			margin-bottom: 10px;
 			font-weight: 400;
+		}
+
+		.info-value {
+			font-size: 0.9rem;
+		}
+	}
+
+	@media (max-width: $bp-mobile) {
+		.row {
+			display: block;
+
+			.col {
+				&:last-child {
+					text-align: left;
+				}
+			}
+		}
+
+		.info-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid $colorDivider;
+			padding: 15px 5px 15px 2px;
+
+			&.info-input {
+				display: block;
+
+				.info-label {
+					margin-bottom: 10px;
+				}
+			}
+
+			.info-label {
+				margin: 0;
+				font-size: 0.9rem;
+			}
 		}
 	}
 }

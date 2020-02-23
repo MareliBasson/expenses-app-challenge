@@ -8,5 +8,10 @@
 	select {
 		height: 34px;
 		width: 200px;
+
+		@media (max-width: $bp-mobile) {
+			width: calc(100% - 80px);
+			max-width: 200px;
+		}
 	}
 }

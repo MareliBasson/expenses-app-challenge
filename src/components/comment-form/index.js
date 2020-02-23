@@ -57,13 +57,12 @@ class CommentForm extends Component {
 			<ExpensesContext.Consumer>
 				{data => {
 					return (
-						<div className="info-item">
+						<div className="info-item info-input comment-form">
 							<div className="info-label">Comment</div>
 							<form
 								onSubmit={e => {
 									this.saveComment(e, data.fetchData)
 								}}
-								className="comment-form"
 							>
 								<textarea
 									type="text"

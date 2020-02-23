@@ -8,7 +8,7 @@ import CategorySelect from 'components/category-select'
 import './expense-modal.css'
 
 const ExpenseModal = ({ expense, toggleModal, modalActive }) => (
-	<Modal className="expense-modal" toggleModal={toggleModal} title="Expense Information" modalActive={modalActive}>
+	<Modal className="expense-modal" toggleModal={toggleModal} title="" modalActive={modalActive}>
 		{expense && (
 			<Fragment>
 				<div className="row">

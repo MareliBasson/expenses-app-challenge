@@ -8,7 +8,8 @@ class ImageUpload extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			image: null
+			image: null,
+			verificationMsg: ''
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -16,6 +17,7 @@ class ImageUpload extends Component {
 	}
 
 	handleChange = e => {
+		console.log('test')
 		this.setState({ image: e.target.files[0], uploadSuccess: false })
 	}
 
@@ -33,6 +35,7 @@ class ImageUpload extends Component {
 				if (res.ok) {
 					this.setState(
 						{
+							image: null,
 							uploadSuccess: true
 						},
 						() => {
@@ -55,13 +58,21 @@ class ImageUpload extends Component {
 			<ExpensesContext.Consumer>
 				{data => {
 					return (
-						<div className="info-item image-upload">
-							<div className="info-label">Receipt</div>
+						<div className="info-item info-input image-upload">
+							<div className="info-label">Receipts</div>
 
 							<div className="input-wrapper">
 								<label htmlFor="upload" className="file">
-									<input type="file" id="upload" onChange={this.handleChange} />
-									<div className="file-custom">{image ? image.name : 'Choose a file...'}</div>
+									<input
+										type="file"
+										id="upload"
+										onChange={this.handleChange}
+										disabled={images.length >= 3}
+									/>
+									<div className={`file-custom ${images.length >= 3 ? 'disabled' : ''}`}>
+										{image ? image.name : 'Choose a file...'}
+									</div>
+									<div className="file-limit">3 Image limit</div>
 								</label>
 								<div className="upload-btn">
 									<button
@@ -69,23 +80,33 @@ class ImageUpload extends Component {
 											this.saveImages(e, data.fetchData)
 										}}
 										className="btn btn-primary btn-feature"
+										disabled={images.length >= 3}
 									>
 										Upload
 									</button>
+
+									{uploadSuccess ? <span>Upload successful</span> : ''}
 								</div>
 							</div>
-							{uploadSuccess && <div className="text-right">Image uploaded successfully</div>}
 
-							<div className="previews">
-								{images &&
-									images.map((image, index) => {
+							{images.length > 0 && (
+								<div className="previews">
+									{images.map((image, index) => {
 										return (
-											<div className="preview-img" key={`image-preview-${index}`}>
-												<img src={`http://localhost:3000${image.url}`} alt="" width="100" />
-											</div>
+											<a
+												href={image.url}
+												download
+												className="preview-wrapper"
+												key={`image-preview-${index}`}
+											>
+												<div className="preview-image">
+													<img src={`http://localhost:3000${image.url}`} alt="" width="100" />
+												</div>
+											</a>
 										)
 									})}
-							</div>
+								</div>
+							)}
 						</div>
 					)
 				}}

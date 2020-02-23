@@ -28,7 +28,6 @@
 	.modal-container {
 		width: 400px;
 		background-color: $colorBg;
-		padding: 20px;
 		z-index: $z-index-modal;
 		position: relative;
 
@@ -36,12 +35,25 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			border-bottom: 1px solid $colorDivider;
-			padding-bottom: 20px;
+			padding: 10px 10px 0px;
 		}
 
 		.modal-content {
-			padding: 10px 0px 0px;
+			padding: 20px 20px 20px;
+		}
+	}
+
+	@media (max-width: 430px), (max-height: 630px) {
+		padding: 15px;
+
+		.modal-container {
+			width: 100%;
+			height: 100%;
+			max-width: 400px;
+			// max-height: 650px;
+			margin: 0 auto;
+			overflow-y: scroll;
+			overflow-x: hidden;
 		}
 	}
 }
