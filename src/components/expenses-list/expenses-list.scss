@@ -56,7 +56,7 @@
 
 	.legend {
 		position: absolute;
-		font-weight: 600;
+		font-weight: 400;
 		background-color: $colorBg;
 		padding: 15px 20px 10px;
 		width: calc(100% - #{$sidebarWidth});
@@ -180,12 +180,12 @@
 			padding-top: 10px;
 			padding-bottom: 10px;
 			display: grid;
-			grid-template-columns: repeat(3, 3fr);
+			grid-template-columns: 1fr auto 20px 20px;
 			grid-template-rows: auto;
 			grid-template-areas:
-				'date  .  .'
-				'merchant . amount'
-				'user . category';
+				'date . images comment'
+				'merchant amount amount amount'
+				'user user category category';
 
 			.date {
 				grid-area: date;
@@ -193,7 +193,7 @@
 			}
 			.merchant {
 				grid-area: merchant;
-				font-weight: 500;
+				font-weight: 400;
 				font-size: 0.8rem;
 				margin: 5px 0px;
 			}
@@ -202,16 +202,22 @@
 				padding-top: 2px;
 			}
 
-			.comment,
+			.images,
+			.comment {
+				min-width: 0;
+				text-align: right;
+			}
 			.images {
-				display: none;
-				grid-area: col2;
-				background-color: red;
+				grid-area: images;
+			}
+
+			.comment {
+				grid-area: comment;
 			}
 
 			.amount {
 				grid-area: amount;
-				font-weight: 600;
+				font-weight: 400;
 				font-size: 1rem;
 				text-align: right;
 			}
@@ -227,7 +233,7 @@
 					padding: 2px 7px 3px;
 					border-radius: 3px;
 					font-size: 0.6rem;
-					font-weight: 500;
+					font-weight: 400;
 					font-style: italic;
 				}
 			}

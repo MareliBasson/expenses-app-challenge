@@ -29,19 +29,6 @@ body {
 	font-size: 12px;
 }
 
-// .container {
-// 	margin: 0 auto;
-// 	@media (min-width: 768px) {
-// 		width: 750px;
-// 	}
-// 	@media (min-width: 992px) {
-// 		width: 970px;
-// 	}
-// 	@media (min-width: 1200px) {
-// 		width: 1170px;
-// 	}
-// }
-
 h1 {
 	font-size: 2rem;
 }
@@ -112,4 +99,14 @@ select {
 
 select::-ms-expand {
 	display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+}
+
+.error-msg {
+	color: $colorWarning;
+	font-weight: 400;
+}
+
+.success-msg {
+	color: $colorSuccess;
+	font-weight: 400;
 }

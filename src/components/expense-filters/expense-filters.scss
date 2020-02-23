@@ -30,6 +30,7 @@
 		justify-content: flex-end;
 		align-items: center;
 		padding: 0px 20px;
+		overflow: visible !important;
 	}
 
 	@media (max-width: $bp-mobile) {
@@ -45,7 +46,7 @@
 			height: 50px;
 			border-bottom: 1px solid darken($colorBg, 20%);
 			z-index: $z-index-toolbars;
-			font-weight: 600;
+			font-weight: 700;
 			font-size: 0.8rem;
 
 			svg {
