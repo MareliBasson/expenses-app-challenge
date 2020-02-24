@@ -10,7 +10,8 @@ class CommentForm extends Component {
 		this.state = {
 			comment: '',
 			commentSaved: false,
-			errorMsg: false
+			errorMsg: false,
+			hasChanged: false
 		}
 
 		this.handleComment = this.handleComment.bind(this)
@@ -22,37 +23,43 @@ class CommentForm extends Component {
 			comment: event.target.value,
 			commentSaved: false,
 			errorMsg: false
+		}, ()=>{
+			this.setState({
+				hasChanged: this.props.comment !== this.state.comment ? true : false
+			}) 
 		})
 	}
 
 	saveComment(event, cb) {
 		event.preventDefault()
 
-		fetch(`http://localhost:3000/expenses/${this.props.id}`, {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				comment: this.state.comment
-			})
-		})
-			.then(() => {
-				this.setState({
-					commentSaved: true
+		if (this.state.hasChanged) {
+			fetch(`http://localhost:3000/expenses/${this.props.id}`, {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					comment: this.state.comment
 				})
 			})
-			.then(() => {
-				cb()
-			})
-			.catch(err => {
-				console.log(err)
-				this.setState({
-					commentSaved: false,
-					errorMsg: true
+				.then(() => {
+					this.setState({
+						commentSaved: true
+					})
 				})
-			})
+				.then(() => {
+					cb()
+				})
+				.catch(err => {
+					console.log(err)
+					this.setState({
+						commentSaved: false,
+						errorMsg: true
+					})
+				})
+		}
 	}
 
 	componentDidMount() {
@@ -64,7 +71,9 @@ class CommentForm extends Component {
 	}
 
 	render() {
-		const { comment, commentSaved, errorMsg } = this.state
+		const { comment, commentSaved, errorMsg, hasChanged } = this.state
+
+		console.log(hasChanged)
 
 		return (
 			<ExpensesContext.Consumer>
@@ -85,7 +94,7 @@ class CommentForm extends Component {
 								/>
 								<div className="btn-wrap-center">
 									<button type="submit" className="btn btn-primary btn-feature">
-										{commentSaved ? 'Saved' : 'Save Comment'}
+										{commentSaved && hasChanged ? 'Saved' : 'Save Comment'}
 									</button>
 									{errorMsg && (
 										<div className="error-msg">
