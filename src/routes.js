@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ExpensesPage from 'pages/expenses'
 import SettingsPage from 'pages/settings'
 import DefaultLayout from 'components/default-layout'
 
-const Routes = () => {
+function Routes() {
+	const [themeActive, setThemeActive] = useState(false)
+
+	function toggleTheme(e) {
+		e.stopPropagation()
+		setThemeActive(!themeActive)
+	}
+
 	return (
 		<Router>
-			<DefaultLayout>
+			<DefaultLayout themed={themeActive}>
 				<Route exact path="/" component={ExpensesPage} />
-				<Route path="/settings" component={SettingsPage} />
+				<Route path="/settings" component={() => <SettingsPage setTheme={e => toggleTheme(e)} />} />
 			</DefaultLayout>
 		</Router>
 	)

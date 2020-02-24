@@ -22,10 +22,10 @@ class DefaultLayout extends Component {
 
 	render() {
 		const { sidebarVisible } = this.state
-		const { children } = this.props
+		const { children, themed } = this.props
 
 		return (
-			<div className="layout">
+			<div className={`layout${themed ? ' alt-theme' : ''}`}>
 				<SidebarLeft open={sidebarVisible} toggleSidebar={this.toggleSidebar} />
 				<div className={`page-body`}>
 					<Header toggleSidebar={this.toggleSidebar} />
@@ -37,7 +37,8 @@ class DefaultLayout extends Component {
 }
 
 DefaultLayout.propTypes = {
-	children: PropTypes.any
+	children: PropTypes.any,
+	themed: PropTypes.bool
 }
 
 export default DefaultLayout
