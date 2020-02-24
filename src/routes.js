@@ -8,15 +8,22 @@ function Routes() {
 	const [themeActive, setThemeActive] = useState(false)
 
 	function toggleTheme(e) {
-		e.stopPropagation()
-		setThemeActive(!themeActive)
+		// console.log(e.target.value)
+		if (e.target.value === 'themed') {
+			setThemeActive(true)
+		} else {
+			setThemeActive(false)
+		}
 	}
 
 	return (
 		<Router>
 			<DefaultLayout themed={themeActive}>
 				<Route exact path="/" component={ExpensesPage} />
-				<Route path="/settings" component={() => <SettingsPage setTheme={e => toggleTheme(e)} />} />
+				<Route
+					path="/settings"
+					component={() => <SettingsPage setTheme={e => toggleTheme(e)} selectedTheme={themeActive} />}
+				/>
 			</DefaultLayout>
 		</Router>
 	)

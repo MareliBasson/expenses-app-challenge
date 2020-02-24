@@ -1,3 +1,43 @@
+@import './styles/variables';
+
 .settings {
-	padding: 20px;
+	.section {
+		.section-heading {
+			border-bottom: 1px solid $colorDivider;
+			font-weight: 400;
+			background-color: darken($colorBg, 10%);
+			padding: 20px;
+		}
+
+		.section-content {
+			padding: 20px;
+
+			.setting-item {
+				width: 50%;
+				font-size: 1rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				select {
+					width: 200px;
+					height: 36px;
+				}
+
+				@media (max-width: $bp-mobile) {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+.alt-theme {
+	.settings {
+		.section {
+			.section-heading {
+				background-color: $colorBgLR;
+			}
+		}
+	}
 }

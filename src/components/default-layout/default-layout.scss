@@ -25,6 +25,7 @@
 			z-index: $z-index-toolbars;
 			padding: 0px 20px 0px (20px + $sidebarWidth);
 			width: 100%;
+			transition: all 0.5s ease;
 
 			@media (max-width: $bp-mobile) {
 				padding-left: 20px;
@@ -44,8 +45,77 @@
 		.content {
 			padding: 0px 0px 55px;
 			min-height: 100vh;
-			background-color: white;
+			background-color: $colorBg;
 			min-height: calc(100vh - #{$header-height});
+			transition: all 0.5s ease;
+		}
+	}
+
+	.easter-egg {
+		width: 0px;
+		height: 0px;
+		position: fixed;
+		bottom: -20px;
+		right: -20px;
+		overflow: hidden;
+		z-index: 20;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+		transition: height 0.5s ease, width 0.5s ease;
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+}
+
+.alt-theme {
+	.page-body {
+		.header {
+			background-color: $colorSecondaryLR;
+			transition: all 0.5s ease;
+		}
+		.content {
+			transition: all 0.5s ease;
+		}
+	}
+
+	.easter-egg {
+		height: 400px;
+		width: 400px;
+		transition: height 0.5s ease, width 0.5s ease;
+
+		&.work-time {
+			right: 160px;
+			transition: all 0.3s ease;
+			height: 300px;
+			width: 300px;
+		}
+
+		@media (max-width: $bp-mobile) {
+			width: 500px;
+			height: 500px;
+			right: 50%;
+			transform: translateX(50%);
+
+			&.work-time {
+				right: 50%;
+				transform: translateX(50%);
+				height: 250px;
+				width: 250px;
+			}
+		}
+
+		@media (max-width: 500px) {
+			width: 100%;
+			height: 400px;
+
+			&.work-time {
+				width: 150px;
+				height: 150px;
+			}
 		}
 	}
 }
