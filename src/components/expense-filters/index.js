@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import './expense-filters.css'
 
+// I set this component up using React Hooks so I could get an idea of how they work.
+
 function ExpenseFilters({ selectedCategory, startDate, endDate, resetFilter }) {
 	const [dropdownExpanded, setDropdownExpanded] = useState(false)
 

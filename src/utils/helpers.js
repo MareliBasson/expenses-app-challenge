@@ -1,9 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
-import {
-	TweenMax
-	// TimelineLite
-} from 'gsap'
+import { TweenMax } from 'gsap'
 
 // Used to refresh data after the user makes a change - it uses values from this.state to make sure view context is maintained (expense limit and page number), unless custom values are assigned
 export function fetchData(page, limit, prop, callback = () => {}) {
@@ -21,14 +18,12 @@ export function fetchData(page, limit, prop, callback = () => {}) {
 	)
 		.then(response => response.json())
 		.then(expenses => {
-			// setTimeout(() => {
 			this.setState({
 				[prop]: expenses.expenses,
 				entriesTotal: expenses.total,
 				fetchError: false,
 				busyFetching: false
 			})
-			// }, 1000)
 		})
 		.then(() => {
 			callback()
@@ -37,12 +32,10 @@ export function fetchData(page, limit, prop, callback = () => {}) {
 			console.log(err)
 
 			if (err) {
-				// setTimeout(() => {
 				this.setState({
 					fetchError: true,
 					busyFetching: false
 				})
-				// }, 1000)
 			}
 		})
 }
