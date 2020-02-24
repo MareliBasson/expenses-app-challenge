@@ -29,9 +29,9 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 **How long did it take?**
 
--   About 40 hours - I used RescueTime to get a rough estimate of my time
+-   About 40 hours spread across 2.5 weeks - I used RescueTime to get a rough estimate of my time
 
-## Project structure choices
+## Project choices
 
 -   **Architecture**
     -   This project is built using a [basic Create React App boilerplate](https://github.com/MareliBasson/react-boilerplate-site) I've created before and updated as required. I created this boilerplate to help me get simplistic apps up and running as quickly and as efficiently as possible.
@@ -55,6 +55,10 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   I noticed that the API doesn't update a comment if it sends a blank string (""). So I've mocked it so that a user can "remove" a comment by just entering a single space.
 -   **UI Design**
     -   I used my favourite budget app as a rough guideline for the UI: [22Seven](https://www.22seven.com/)
+    -   I attempted to keep things as minimal as possible while making information about the expenses as discoverable as possible. 
+        -   For instance the icons that appear if a comment or image has been added to an expense - on hover the user gets either a preview of the comment or an indication of how many images have been added. 
+        -   I realised tabbing through the date range filter can get frustration if a user doesn't know on which days expenses were logged, so I added the highlighted dates to show this information.
+
 -   **Version Control**
     -   My commits are most often phrased by completing this sentence snippet: "If this commit is applied it will..."
 
@@ -72,6 +76,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   Async/Await vs Promises - I've only touched on these in this project, but I'm using callbacks more and more frequently these days, mostly to gain more control over UI interactions and states. So understanding these better will be crucial.
 -   Hooks - I've been lax in exploring these and they're so useful!
 -   State management - I really need to take a deeper dive on the options available for state management in React. My knowledge has been enough to use Redux if someone else did the initial setup, but my lack of knowledge on this front really frustrated me during this project.
+-   Understanding Node and how to configure Webpack properly - Create React App has been a great learning tool, but the more I improve my skills the more often it ends up limiting my ability to set my project up the way I'd like. In the case of this project, it's compiling the all the stylesheets and inserting them as invidividual style tags directly in the DOM as it encounters them in my component files. This can lead to a number of issues but I was unable to find information on how to solve this without ejecting the app and I didn't want to take that risk this far into my project. 
 
 ## Final Thoughts
 
@@ -94,6 +99,7 @@ A list of links or people I consulted while building the project on topics i'm n
 -   Ralf Kistner - help with API call structure and debugging an image upload 500 error
 -   Leon van Niekerk - partner/rubber duck
 -   Peter Scott - general feedback on project
+-   Brendan Arries - frontend review
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
     -   https://muffinman.io/uploading-files-using-fetch-multipart-form-data/
