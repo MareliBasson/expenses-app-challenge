@@ -73,8 +73,6 @@ class CommentForm extends Component {
 	render() {
 		const { comment, commentSaved, errorMsg, hasChanged } = this.state
 
-		console.log(hasChanged)
-
 		return (
 			<ExpensesContext.Consumer>
 				{data => {

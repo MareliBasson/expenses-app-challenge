@@ -18,7 +18,6 @@ class ImageUpload extends Component {
 	}
 
 	handleChange = e => {
-		console.log('test')
 		this.setState({ image: e.target.files[0], uploadSuccess: false, errorMsg: false })
 	}
 
@@ -59,8 +58,6 @@ class ImageUpload extends Component {
 		const { image, uploadSuccess } = this.state
 
 		const { images } = this.props
-
-		console.log(this.state.errorMsg)
 
 		return (
 			<ExpensesContext.Consumer>
