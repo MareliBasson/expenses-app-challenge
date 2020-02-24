@@ -42,8 +42,8 @@ export function fetchData(page, limit, prop, callback = () => {}) {
 
 // Pagination functions
 
-export function setPaginationLimit(limit) {
-	this.setState({ limit: limit, page: 1 }, () => {
+export function setPaginationLimit(e) {
+	this.setState({ limit: e.target.value, page: 1 }, () => {
 		this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
 	})
 }

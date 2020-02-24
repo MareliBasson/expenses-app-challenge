@@ -108,9 +108,6 @@ class ExpensesPage extends Component {
 
 					<ExpensesList
 						expenses={visibleExpenses}
-						// fetchData={() => {
-						// 	this.fetchData(this.state.page, this.state.limit, 'visibleExpenses')
-						// }}
 						fetchError={fetchError}
 						busyFetching={busyFetching}
 					/>
@@ -118,7 +115,7 @@ class ExpensesPage extends Component {
 					<div className="expenses-footer">
 						<div>
 							{!filterActive && (
-								<PaginationLimit limitInState={limit} onClick={this.setPaginationLimit} />
+								<PaginationLimit limitInState={limit} setLimit={this.setPaginationLimit} />
 							)}
 						</div>
 
