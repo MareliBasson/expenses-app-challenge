@@ -24,6 +24,9 @@ const DateRangeFilter = () => {
 								endDate={data.endDate}
 								maxDate={data.endDate ? data.endDate : new Date()}
 								placeholderText={'From:'}
+								showMonthDropdown
+								showYearDropdown
+								dropdownMode="select"
 							/>
 							<DatePicker
 								dateFormat="dd MMM yyyy"
@@ -38,6 +41,9 @@ const DateRangeFilter = () => {
 								maxDate={new Date()}
 								minDate={data.startDate}
 								placeholderText={'To:'}
+								showMonthDropdown
+								showYearDropdown
+								dropdownMode="select"
 							/>
 						</div>
 					)}

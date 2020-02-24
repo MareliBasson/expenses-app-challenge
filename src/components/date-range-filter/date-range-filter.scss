@@ -44,6 +44,18 @@
 			transform: translate3d(-175px, 9px, 0px) !important;
 			z-index: 10;
 
+			.react-datepicker__header__dropdown--select{
+				margin: 15px auto 5px;
+
+				.react-datepicker__month-select {
+					width: 100px;
+				}
+
+				.react-datepicker__year-select {
+					width: 80px;
+				}
+			}
+
 			@media(max-width: $bp-mobile){
 				transform: translate3d(-115%, 12px, 0px) !important;
 
