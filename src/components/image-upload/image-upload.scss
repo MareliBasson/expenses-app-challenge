@@ -48,6 +48,7 @@
 
 			.file-limit {
 				padding-left: 3px;
+				margin-top: 3px;
 				font-style: italic;
 			}
 		}
@@ -68,7 +69,6 @@
 			}
 		}
 
-		/* Focus */
 		.file input:focus ~ .file-custom {
 			box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem $colorSecondary;
 		}

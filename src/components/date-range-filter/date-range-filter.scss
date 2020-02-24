@@ -44,8 +44,17 @@
 			transform: translate3d(-175px, 9px, 0px) !important;
 			z-index: 10;
 
-			@media (max-width: $bp-mobile) {
+			@media(max-width: $bp-mobile){
+				transform: translate3d(-115%, 12px, 0px) !important;
+
+			}
+
+			@media (max-width: 500px) {
 				transform: translate3d(calc(-100% + 20px), 12px, 0px) !important;
+			}
+
+			@media (max-width: 400px) {
+				transform: translate3d(calc(-100% + 30px), 12px, 0px) !important;
 			}
 
 			.react-datepicker__triangle {

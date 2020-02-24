@@ -30,7 +30,14 @@
 		justify-content: flex-end;
 		align-items: center;
 		padding: 0px 20px;
-		overflow: visible !important;
+
+		@media(min-width: 767px){
+			overflow: visible !important;
+		}
+	}
+
+	.filter-overlay {
+		display: none;
 	}
 
 	@media (max-width: $bp-mobile) {
@@ -45,12 +52,20 @@
 			padding: 0px 20px;
 			height: 50px;
 			border-bottom: 1px solid darken($colorBg, 20%);
-			z-index: $z-index-toolbars;
+			z-index: $z-index-filter-bar;
 			font-weight: 700;
 			font-size: 0.8rem;
 
 			svg {
 				margin-right: 15px;
+			}
+
+			.title {
+				flex:1;
+				height: 34px;
+				display: flex;;
+				justify-content: flex-start;
+				align-items: center;
 			}
 		}
 
@@ -63,7 +78,7 @@
 			left: 0;
 			padding: 0px;
 			background-color: darken($colorBg, 10%);
-			z-index: $z-index-toolbars;
+			z-index: $z-index-filter-content;
 			overflow: hidden;
 			transition: all 0.3s ease;
 
@@ -96,7 +111,6 @@
 			.close-dropdown {
 				border-top: 1px solid darken($colorBg, 20%);
 				padding: 10px;
-				margin-top: 30px;
 				text-align: center;
 				position: absolute;
 				width: 100%;
@@ -119,22 +133,21 @@
 		}
 
 		.filter-overlay {
-			height: 100vh;
+			display: block;
+			height: 0vh;
 			opacity: 0;
-			display: none;
 			width: 100%;
 			position: absolute;
-			z-index: $z-index-toolbars-overlay;
+			z-index: $z-index-filter-overlay;
 			top: 50px;
 			left: 0;
 			background-color: $colorOverlay;
-			// transition: opacity 0.3s ease, height 0s 0.5s ease;
+			transition: opacity 0.3s ease, height 0s 0.3s ease;
 
 			&.visible {
 				opacity: 1;
-				display: block;
-				// height: 100vh;
-				// transition: opacity 0.2s ease, height 0s ease;
+				height: 100vh;
+				transition: opacity 0.3s ease, height 0s ease;
 			}
 		}
 	}
