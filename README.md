@@ -5,31 +5,31 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 ## To run this project
 
 -   Clone this repo and make sure to have [NodeJS](https://nodejs.org/en/) installed.
--   Change directory to `/api` and start the API locally - instructions can be found in it's [README](https://github.com/MareliBasson/expenses-app-challenge/tree/master/api)
+-   Change directory to `/api` and start the API locally - instructions can be found in its [README](https://github.com/MareliBasson/expenses-app-challenge/tree/master/api)
 -   Make a copy of the .env-example file found in the root of this repo and rename it to .env
 -   Run `npm install`
 -   Run `npm start`
 
 ## The Basics
 
+**Functionalities I'm most proud of:**
+
+-   Honestly, the whole thing! Mostly because it gave me a chance to really apply what I've learnt in the last couple of years.
+    **But here are some of my favourites:**
+-   Figuring out how to make changes to the API.
+-   I like my UI, it's usuable, neat and its responsive design looks good along with being easy to use on small screens - I kept the user in mind and made sure to hide and reveal functionality as it's available to them. I tried to keep it as uncluttered as possible, without sacrificing it's usability.
+-   I love adding UI details such as the highlighted dates in the date-range filter to show which dates have expenses on them, or the comment and receipt icons with their onHovers to indicate that an expenses has extra info added to it and to give a small preview of what to expect.
+-   The expense modal was a fun challenge because I really wanted the updates the user makes to reflect in the background on the expenses list.
+-   I enjoyed creating the expense-filters - setting up the date-range filter gave me a deeper dive into what can be done with moment.js and how to manipulate date values. On the categories filter I got to refactor my filtering functions to account for the user combining date-ranges and specific categories.
+
 **Hardest part to implement:**
 
 -   Getting the API endpoint calls to work and getting a better understanding of how to use an API as well as making updates to one.
 -   Working without a state management libary - I tried to keep my components neat and modular, and limiting the prop-drilling as much as possible without the use of a library. Using Context API helped with this, but I'm extra motivated now to properly learn how to setup Redux. Adding the helper.js file helped with simplifying the Expenses Page component (it was getting extremely bloated with methods since they all needed to update or use the states in that file). I realise my use of the helper file is not best practice - those functions are very tightly coupled to the files they're being used in because they need those files' states. This is not ideal by a long shot, as I know it will prevent them being used in any other files and this is completely counter to what helper functions are intended to be. If I were using a state management library, they would be using the global state and updating that, instead of the individual files they're currently linked to. I got it to work but I'm not proud of this implementation as it's not scalable.
 
-**Functionalities I'm most proud of:**
-
--   Honestly, the whole thing! Mostly because it gave me a chance to really apply what I've learnt in the last couple of years.
-    **But here are some of my favourites:**
-    -   Figuring out how to make changes to the API.
-    -   I like my UI, it's usuable, neat and it's responsive design looks good along with being easy to use on small screens - I kept the user in mind and made sure to hide and reveal functionality as it's available to them. I tried to keep it as uncluttered as possible, without sacrificing it's usability.
-    -   I love adding UI details such as the highlighted dates in the date-range filter to show which dates have expenses on them, or the comment and receipt icons with their onHovers to indicate that an expenses has extra info added to it and to give a small preview of what to expect.
-    -   The expense modal was a fun challenge because I really wanted the updates the user makes to reflect in the background on the expenses list.
-    -   I enjoyed creating the expense-filters - setting up the date-range filter gave me a deeper dive into what can be done with moment.js and how to manipulate date values. On the categories filter I got to refactor my filtering functions to account for the user combining date-ranges and specific categories.
-
 **How long did it take?**
 
--   About 40 hours spread across 2.5 weeks - I used RescueTime to get a rough estimate of my time
+-   About 45 hours spread across 2.5 weeks - I used RescueTime to get a rough estimate of my time
 
 ## Project choices
 
@@ -37,13 +37,13 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   This project is built using a [basic Create React App boilerplate](https://github.com/MareliBasson/react-boilerplate-site) I've created before and updated as required. I created this boilerplate to help me get simplistic apps up and running as quickly and as efficiently as possible.
     -   Modular file structure - I prefer grouping all files that are relevant to a component together. If the project included tests, these would also be grouped in their relevant component folder as well.
     -   Absolute paths - I've found using absolute paths when possible makes for much neater imports and saves a lot of time if components need to be moved around.
-    -   Stylesheets - Currently I prefer using separate stylesheets as it's the format I work with most often. I've worked with Styled Components and CSS in JS as well before, but I'm not as experienced using them eventhough I definitely want to get more experience using them to full effect.
+    -   Stylesheets - Currently I prefer using separate stylesheets as it's the format I work with most often. I've worked with Styled Components and CSS in JS as well before, but I'm not as experienced using them even though I definitely want to get more experience using them to full effect.
 -   **State management**
-    -   I don't have experience setting up a state management library such as Redux. When prop-drilling became excessive in this project I compared Redux and Context API - I chose these two because Redux is the libary I have the most experience using and Context API, because I'm curious about how it's used and because it's a solution that doesn't require adding another dependency.
+    -   I don't have experience setting up a state management library such as Redux. When prop-drilling became excessive in this project I compared Redux and Context API - I chose these two because Redux is the libary I have the most experience using, and Context API because I'm curious about how it's used and because it's a solution that doesn't require adding another dependency.
         -   I did attempt to setup Redux in a separate branch and got the basic example I was using to work, but then realised I'm not sure at all how to adapt the reducers for my own use case or how to go about structuring the global state, so I put that branch on pause to rather focus on my strengths.
         -   I applied a React Hook to the ExpenseFilters component to try it out (and at the end for the theming) - Very Useful! Definitely want to start using it more often.
 -   **API Implementation**
-    -   This is my first time setting up API calls.
+    -   This is my first time setting up API calls - I've done API implementation before where I had to integrate the results from the call with existing components and communicate needed changes to the backend developer, but I haven't setup the fetch methods before.
     -   Async/await and promises is a gap in my JS knowledge that I haven't fully addressed. I haven't gained experience in implementing either format or the pros/cons of using the one over the other. By chance all the tutorials I used to setup the API calls used a promise structure.
     -   I changed the API to return all expenses when using the `GET /expenses` endpoint. I felt it made more sense to have it return everything when there's no limit or offset set, however I definitely understand the need to implement a limitation if the dataset was returning thousands of entries.
     -   I updated the `POST /expenses/:id` endpoint to also accept a change to category. Now a user can set a category on an expense and then filter by those categories.

@@ -8,7 +8,6 @@ function Routes() {
 	const [themeActive, setThemeActive] = useState(false)
 
 	function toggleTheme(e) {
-		// console.log(e.target.value)
 		if (e.target.value === 'themed') {
 			setThemeActive(true)
 		} else {
