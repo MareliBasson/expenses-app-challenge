@@ -8,7 +8,9 @@ class CommentForm extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			comment: ''
+			comment: '',
+			commentSaved: false,
+			errorMsg: false
 		}
 
 		this.handleComment = this.handleComment.bind(this)
@@ -17,7 +19,9 @@ class CommentForm extends Component {
 
 	handleComment(event) {
 		this.setState({
-			comment: event.target.value
+			comment: event.target.value,
+			commentSaved: false,
+			errorMsg: false
 		})
 	}
 
@@ -35,10 +39,19 @@ class CommentForm extends Component {
 			})
 		})
 			.then(() => {
+				this.setState({
+					commentSaved: true
+				})
+			})
+			.then(() => {
 				cb()
 			})
 			.catch(err => {
 				console.log(err)
+				this.setState({
+					commentSaved: false,
+					errorMsg: true
+				})
 			})
 	}
 
@@ -51,7 +64,7 @@ class CommentForm extends Component {
 	}
 
 	render() {
-		const { comment } = this.state
+		const { comment, commentSaved, errorMsg } = this.state
 
 		return (
 			<ExpensesContext.Consumer>
@@ -72,8 +85,13 @@ class CommentForm extends Component {
 								/>
 								<div className="btn-wrap-center">
 									<button type="submit" className="btn btn-primary btn-feature">
-										Save Comment
+										{commentSaved ? 'Saved' : 'Save Comment'}
 									</button>
+									{errorMsg && (
+										<div className="error-msg">
+											Your comment can't be saved right now, please try again later.
+										</div>
+									)}
 								</div>
 							</form>
 						</div>
