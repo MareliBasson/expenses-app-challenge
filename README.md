@@ -55,12 +55,13 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
     -   I noticed that the API doesn't update a comment if it sends a blank string (""). So I've mocked it so that a user can "remove" a comment by just entering a single space.
 -   **UI Design**
     -   I used my favourite budget app as a rough guideline for the UI: [22Seven](https://www.22seven.com/)
-    -   I attempted to keep things as minimal as possible while making information about the expenses as discoverable as possible. 
-        -   For instance the icons that appear if a comment or image has been added to an expense - on hover the user gets either a preview of the comment or an indication of how many images have been added. 
+    -   I attempted to keep things as minimal as possible while making information about the expenses as discoverable as possible.
+        -   For instance the icons that appear if a comment or image has been added to an expense - on hover the user gets either a preview of the comment or an indication of how many images have been added.
         -   I realised tabbing through the date range filter can get frustration if a user doesn't know on which days expenses were logged, so I added the highlighted dates to show this information.
-
 -   **Version Control**
     -   My commits are most often phrased by completing this sentence snippet: "If this commit is applied it will..."
+-   **Theming**
+    -   Just something fun ;)
 
 ## What I've learnt
 
@@ -68,7 +69,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   How to setup a image uploader using Firebase (my first attempt at image uploading before I realised the API includes an Express server)
 -   Debugging an Internal Server Error - the cause was the content-type header I'd set on the form-data call for receipts
 -   How to add new properties to an array of nested objects using this.setState and prevState - I used this to create a userName property and then confirm there were no repeat usernames with \_.uniqBy - the idea was to allow users to filter by username, but since all the usernames were unique I abandoned this feature.
--   Working with React's Context API
+-   Working with React's Context API and Hooks
 
 ## What I need to improve on
 
@@ -76,7 +77,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   Async/Await vs Promises - I've only touched on these in this project, but I'm using callbacks more and more frequently these days, mostly to gain more control over UI interactions and states. So understanding these better will be crucial.
 -   Hooks - I've been lax in exploring these and they're so useful!
 -   State management - I really need to take a deeper dive on the options available for state management in React. My knowledge has been enough to use Redux if someone else did the initial setup, but my lack of knowledge on this front really frustrated me during this project.
--   Understanding Node and how to configure Webpack properly - Create React App has been a great learning tool, but the more I improve my skills the more often it ends up limiting my ability to set my project up the way I'd like. In the case of this project, it's compiling the all the stylesheets and inserting them as invidividual style tags directly in the DOM as it encounters them in my component files. This can lead to a number of issues but I was unable to find information on how to solve this without ejecting the app and I didn't want to take that risk this far into my project. 
+-   Understanding Node and how to configure Webpack properly - Create React App has been a great learning tool, but the more I improve my skills the more often it ends up limiting my ability to set my project up the way I'd like. In the case of this project, it's compiling the all the stylesheets and inserting them as invidividual style tags directly in the DOM as it encounters them in my component files. This can lead to a number of issues but I was unable to find information on how to solve this without ejecting the app and I didn't want to take that risk this far into my project.
 
 ## Final Thoughts
 
@@ -99,7 +100,7 @@ A list of links or people I consulted while building the project on topics i'm n
 -   Ralf Kistner - help with API call structure and debugging an image upload 500 error
 -   Leon van Niekerk - partner/rubber duck
 -   Peter Scott - general feedback on project
--   Brendan Arries - frontend review
+-   Brendan Arries - UI review
 -   API Calls setup
     -   https://stackoverflow.com/questions/38510640/how-to-make-a-rest-post-call-from-reactjs-code
     -   https://muffinman.io/uploading-files-using-fetch-multipart-form-data/
