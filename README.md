@@ -4,7 +4,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 
 ## To run this project
 
--   Clone this repo - the api has been included in this project.
+-   Clone this repo and make sure to have [NodeJS](https://nodejs.org/en/) installed.
 -   Change directory to `/api` and start the API locally - instructions can be found in it's [README](https://github.com/MareliBasson/expenses-app-challenge/tree/master/api)
 -   Make a copy of the .env-example file found in the root of this repo and rename it to .env
 -   Run `npm install`
@@ -41,7 +41,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   **State management**
     -   I don't have experience setting up a state management library such as Redux. When prop-drilling became excessive in this project I compared Redux and Context API - I chose these two because Redux is the libary I have the most experience using and Context API, because I'm curious about how it's used and because it's a solution that doesn't require adding another dependency.
         -   I did attempt to setup Redux in a separate branch and got the basic example I was using to work, but then realised I'm not sure at all how to adapt the reducers for my own use case or how to go about structuring the global state, so I put that branch on pause to rather focus on my strengths.
-        -   I applied a React Hook to the ExpenseFilters component to try it out - Very Useful! Definitely want to start using it more often.
+        -   I applied a React Hook to the ExpenseFilters component to try it out (and at the end for the theming) - Very Useful! Definitely want to start using it more often.
 -   **API Implementation**
     -   This is my first time setting up API calls.
     -   Async/await and promises is a gap in my JS knowledge that I haven't fully addressed. I haven't gained experience in implementing either format or the pros/cons of using the one over the other. By chance all the tutorials I used to setup the API calls used a promise structure.
@@ -61,7 +61,7 @@ This project makes use of this [API](https://github.com/pleo-io/frontend-challen
 -   **Version Control**
     -   My commits are most often phrased by completing this sentence snippet: "If this commit is applied it will..."
 -   **Theming**
-    -   Just something fun ;)
+    -   Just something for the fun of it ;)
 
 ## What I've learnt
 

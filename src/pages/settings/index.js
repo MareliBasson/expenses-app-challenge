@@ -2,9 +2,6 @@ import React from 'react'
 import './settings.css'
 
 const SettingsPage = ({ setTheme, selectedTheme }) => {
-	console.log(setTheme)
-	console.log(selectedTheme)
-
 	return (
 		<div className="settings">
 			<div className="section">
