@@ -96,7 +96,7 @@ class ImageUpload extends Component {
 										</span>
 									)}
 
-									{uploadSuccess ? <span className="success-msg">Upload successful</span> : ''}
+									{uploadSuccess ? <span className="success-msg">Uploaded and saved successfully</span> : ''}
 								</div>
 							</div>
 
@@ -111,7 +111,7 @@ class ImageUpload extends Component {
 												key={`image-preview-${index}`}
 											>
 												<div className="preview-image">
-													<img src={`http://localhost:3000${image.url}`} alt="" width="100" />
+													<img src={`http://localhost:3000${image.url}`} alt={`receipt-${index}`} />
 												</div>
 											</a>
 										)

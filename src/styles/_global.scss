@@ -64,7 +64,7 @@ strong {
 	text-align: right;
 }
 .hidden-desktop {
-	@media (min-width: $bp-mobile + 1) {
+	@media (min-width: 769px) {
 		display: none;
 	}
 }

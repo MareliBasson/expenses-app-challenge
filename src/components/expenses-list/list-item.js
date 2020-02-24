@@ -43,7 +43,7 @@ const ListItem = ({ expense, selectExpense, toggleExpenseModal }) => {
 						<span>{expense.receipts.length > 0 && <FontAwesomeIcon icon={faReceipt} />}</span>
 						<div className="info-tip">
 							<div>
-								{expense.receipts.length} image
+								{expense.receipts.length} receipt
 								{expense.receipts.length > 1 && 's'}
 							</div>
 						</div>
